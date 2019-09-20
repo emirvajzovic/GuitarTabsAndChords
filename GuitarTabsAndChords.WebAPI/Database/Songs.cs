@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GuitarTabsAndChords.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,6 +17,6 @@ namespace GuitarTabsAndChords.WebAPI.Database
         public Artists Artist { get; set; }
         public int GenreId { get; set; }
         public Genres Genre { get; set; }
-        public bool Approved { get; set; }
+        public ReviewStatus Status { get; set; }
     }
 }

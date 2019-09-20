@@ -9,5 +9,6 @@ namespace GuitarTabsAndChords.Model.Requests
     {
         [Required]
         public string Name { get; set; }
+        public Model.ReviewStatus Status { get; set; }
     }
 }

@@ -14,30 +14,15 @@ namespace GuitarTabsAndChords.Model
 
         public int ArtistId { get; set; }
         public Artists Artist { get; set; }
+        
+        public List<Genres> Genres  { get; set; }
 
-        public ICollection<Songs> Songs { get; set; }
-        public List<Genres> Genres
+        public ReviewStatus Status { get; set; }
+
+        public override string ToString()
         {
-            get
-            {
-                var temp = new List<Genres>();
-                foreach (var song in Songs)
-                {
-                    bool add = true;
-                    foreach (var genre in temp)
-                    {
-                        if (genre.Id == song.GenreId)
-                            add = false;
-
-                    }
-                    if(add)
-                    temp.Add(song.Genre);
-                }
-                return temp;
-            }
+            return Name;
         }
-
-        public bool Approved { get; set; }
 
     }
 

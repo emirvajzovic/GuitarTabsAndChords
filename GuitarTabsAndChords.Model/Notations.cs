@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace GuitarTabsAndChords.WebAPI.Database
+namespace GuitarTabsAndChords.Model
 {
-    public class Tabs
+    public class Notations
     {
         public int Id { get; set; }
-        public string Notation { get; set; }
+        public string NotationContent { get; set; }
+        public NotationType Type { get; set; }
         public DateTime DateAdded { get; set; }
         public DateTime LastEditted { get; set; }
         public int UserId { get; set; }
@@ -19,6 +20,8 @@ namespace GuitarTabsAndChords.WebAPI.Database
         public Songs Song { get; set; }
         public int TuningId { get; set; }
         public Tunings Tuning { get; set; }
-        public bool Approved { get; set; }
+        public ReviewStatus Status { get; set; }
     }
+
+    public enum NotationType { Tab, Chord }
 }

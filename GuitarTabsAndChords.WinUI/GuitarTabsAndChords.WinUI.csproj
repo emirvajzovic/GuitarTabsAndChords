@@ -1,0 +1,213 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7D13CB7E-281D-4FD9-9BBE-A0E0F1005BA9}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>GuitarTabsAndChords.WinUI</RootNamespace>
+    <AssemblyName>GuitarTabsAndChords.WinUI</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Flurl, Version=2.8.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Flurl.2.8.2\lib\net40\Flurl.dll</HintPath>
+    </Reference>
+    <Reference Include="Flurl.Http, Version=2.4.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Flurl.Http.2.4.2\lib\net46\Flurl.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Annotations.4.5.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="FilterItem.cs" />
+    <Compile Include="Notations\frmNotationDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Notations\frmNotationDetails.Designer.cs">
+      <DependentUpon>frmNotationDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Songs\frmSongDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Songs\frmSongDetails.Designer.cs">
+      <DependentUpon>frmSongDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Songs\frmSongs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Songs\frmSongs.Designer.cs">
+      <DependentUpon>frmSongs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="APIService.cs" />
+    <Compile Include="Albums\frmAlbumDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Albums\frmAlbumDetails.Designer.cs">
+      <DependentUpon>frmAlbumDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Albums\frmAlbums.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Albums\frmAlbums.Designer.cs">
+      <DependentUpon>frmAlbums.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Artists\frmArtistDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Artists\frmArtistDetails.Designer.cs">
+      <DependentUpon>frmArtistDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Artists\frmArtists.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Artists\frmArtists.Designer.cs">
+      <DependentUpon>frmArtists.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Genres\frmGenreDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Genres\frmGenreDetails.Designer.cs">
+      <DependentUpon>frmGenreDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Genres\frmGenres.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Genres\frmGenres.Designer.cs">
+      <DependentUpon>frmGenres.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\ImageHelper.cs" />
+    <Compile Include="Users\frmUserDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Users\frmUserDetails.Designer.cs">
+      <DependentUpon>frmUserDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Users\frmUsers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Users\frmUsers.Designer.cs">
+      <DependentUpon>frmUsers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmIndex.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmIndex.Designer.cs">
+      <DependentUpon>frmIndex.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Notations\frmNotationDetails.resx">
+      <DependentUpon>frmNotationDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Songs\frmSongDetails.resx">
+      <DependentUpon>frmSongDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Songs\frmSongs.resx">
+      <DependentUpon>frmSongs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Albums\frmAlbumDetails.resx">
+      <DependentUpon>frmAlbumDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Albums\frmAlbums.resx">
+      <DependentUpon>frmAlbums.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Artists\frmArtistDetails.resx">
+      <DependentUpon>frmArtistDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Artists\frmArtists.resx">
+      <DependentUpon>frmArtists.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Genres\frmGenreDetails.resx">
+      <DependentUpon>frmGenreDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Genres\frmGenres.resx">
+      <DependentUpon>frmGenres.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Users\frmUserDetails.resx">
+      <DependentUpon>frmUserDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Users\frmUsers.resx">
+      <DependentUpon>frmUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmIndex.resx">
+      <DependentUpon>frmIndex.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GuitarTabsAndChords.Model\GuitarTabsAndChords.Model.csproj">
+      <Project>{79c90dc5-bc85-41ab-a333-c34054543f2a}</Project>
+      <Name>GuitarTabsAndChords.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DefaultProfilePicture.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DefaultAlbumArt.png" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

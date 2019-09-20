@@ -12,7 +12,7 @@ namespace GuitarTabsAndChords.Model
         public int UserId { get; set; }
         public Users User { get; set; }
         public int TabId { get; set; }
-        public Tabs Tab { get; set; }
+        public Notations Tab { get; set; }
 
     }
 }

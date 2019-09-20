@@ -41,8 +41,12 @@ namespace GuitarTabsAndChords.WebAPI
             });
 
             services.AddScoped<IArtistsService, ArtistsService>();
+            services.AddScoped<IAlbumsService, AlbumsService>();
+            services.AddScoped<ISongsService, SongsService>();
+            services.AddScoped<IGenresService, GenresService>();
+            services.AddScoped<IUsersService, UsersService>();
 
-            var connection = @"Server=NEONYZIEE-PC\NEONYZIEE;Database=GuitarTabs;Trusted_Connection=True;ConnectRetryCount=0";
+            var connection = Configuration.GetConnectionString("lokalni");
             services.AddDbContext<GuitarTabsContext>(options => options.UseSqlServer(connection));
         }
 

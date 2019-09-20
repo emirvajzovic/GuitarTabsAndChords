@@ -13,18 +13,6 @@ namespace GuitarTabsAndChords.WebAPI.Database
         {
         }
 
-        protected GuitarTabsContext()
-        {
-        }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-                optionsBuilder.UseSqlServer("Server=NEONYZIEE-PC\\NEONYZIEE;Database=GuitarTabs;Trusted_Connection=True;");
-            }
-        }
-
         public DbSet<Albums> Albums { get; set; }
         public DbSet<Artists> Artists { get; set; }
         public DbSet<Favorites> Favorites { get; set; }
@@ -32,8 +20,8 @@ namespace GuitarTabsAndChords.WebAPI.Database
         public DbSet<Ratings> Ratings { get; set; }
         public DbSet<Roles> Roles { get; set; }
         public DbSet<Songs> Songs { get; set; }
-        public DbSet<TabCorrections> TabCorrections { get; set; }
-        public DbSet<Tabs> Tabs { get; set; }
+        public DbSet<NotationCorrections> NotationCorrections { get; set; }
+        public DbSet<Notations> Notations { get; set; }
         public DbSet<Tunings> Tunings { get; set; }
         public DbSet<Users> Users { get; set; }
 

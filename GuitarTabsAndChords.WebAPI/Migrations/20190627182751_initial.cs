@@ -14,7 +14,8 @@ namespace GuitarTabsAndChords.WebAPI.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(nullable: true),
+                    Approved = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -41,7 +42,8 @@ namespace GuitarTabsAndChords.WebAPI.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true)
+                    Description = table.Column<string>(nullable: true),
+                    Approved = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -57,7 +59,8 @@ namespace GuitarTabsAndChords.WebAPI.Migrations
                     Name = table.Column<string>(nullable: true),
                     AlbumCover = table.Column<byte[]>(nullable: true),
                     Year = table.Column<int>(nullable: false),
-                    ArtistId = table.Column<int>(nullable: false)
+                    ArtistId = table.Column<int>(nullable: false),
+                    Approved = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -105,6 +108,7 @@ namespace GuitarTabsAndChords.WebAPI.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: true),
+                    Approved = table.Column<bool>(nullable: false),
                     AlbumsId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
@@ -128,7 +132,8 @@ namespace GuitarTabsAndChords.WebAPI.Migrations
                     Year = table.Column<int>(nullable: false),
                     AlbumId = table.Column<int>(nullable: false),
                     ArtistId = table.Column<int>(nullable: false),
-                    GenreId = table.Column<int>(nullable: false)
+                    GenreId = table.Column<int>(nullable: false),
+                    Approved = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -154,42 +159,44 @@ namespace GuitarTabsAndChords.WebAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Tabs",
+                name: "Notations",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Notation = table.Column<string>(nullable: true),
+                    NotationContent = table.Column<string>(nullable: true),
+                    Type = table.Column<int>(nullable: false),
                     DateAdded = table.Column<DateTime>(nullable: false),
                     LastEditted = table.Column<DateTime>(nullable: false),
                     UserId = table.Column<int>(nullable: false),
                     LastEditorId = table.Column<int>(nullable: false),
                     SongId = table.Column<int>(nullable: false),
-                    TuningId = table.Column<int>(nullable: false)
+                    TuningId = table.Column<int>(nullable: false),
+                    Approved = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Tabs", x => x.Id);
+                    table.PrimaryKey("PK_Notations", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Tabs_Users_LastEditorId",
+                        name: "FK_Notations_Users_LastEditorId",
                         column: x => x.LastEditorId,
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Tabs_Songs_SongId",
+                        name: "FK_Notations_Songs_SongId",
                         column: x => x.SongId,
                         principalTable: "Songs",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Tabs_Tunings_TuningId",
+                        name: "FK_Notations_Tunings_TuningId",
                         column: x => x.TuningId,
                         principalTable: "Tunings",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Tabs_Users_UserId",
+                        name: "FK_Notations_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
@@ -203,15 +210,15 @@ namespace GuitarTabsAndChords.WebAPI.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     UserId = table.Column<int>(nullable: false),
-                    TabId = table.Column<int>(nullable: false)
+                    NotationId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Favorites", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Favorites_Tabs_TabId",
-                        column: x => x.TabId,
-                        principalTable: "Tabs",
+                        name: "FK_Favorites_Notations_NotationId",
+                        column: x => x.NotationId,
+                        principalTable: "Notations",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -230,15 +237,15 @@ namespace GuitarTabsAndChords.WebAPI.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Rating = table.Column<int>(nullable: false),
                     UserId = table.Column<int>(nullable: false),
-                    TabId = table.Column<int>(nullable: false)
+                    NotationId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Ratings", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Ratings_Tabs_TabId",
-                        column: x => x.TabId,
-                        principalTable: "Tabs",
+                        name: "FK_Ratings_Notations_NotationId",
+                        column: x => x.NotationId,
+                        principalTable: "Notations",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -255,19 +262,20 @@ namespace GuitarTabsAndChords.WebAPI.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    TabId = table.Column<int>(nullable: false),
-                    Notation = table.Column<string>(nullable: true),
+                    NotationId = table.Column<int>(nullable: false),
+                    NotationContent = table.Column<string>(nullable: true),
                     TuningId = table.Column<int>(nullable: false),
                     UserId = table.Column<int>(nullable: false),
-                    DateSubmitted = table.Column<DateTime>(nullable: false)
+                    DateSubmitted = table.Column<DateTime>(nullable: false),
+                    Approved = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TabCorrections", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_TabCorrections_Tabs_TabId",
-                        column: x => x.TabId,
-                        principalTable: "Tabs",
+                        name: "FK_TabCorrections_Notations_NotationId",
+                        column: x => x.NotationId,
+                        principalTable: "Notations",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -290,9 +298,9 @@ namespace GuitarTabsAndChords.WebAPI.Migrations
                 column: "ArtistId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Favorites_TabId",
+                name: "IX_Favorites_NotationId",
                 table: "Favorites",
-                column: "TabId");
+                column: "NotationId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Favorites_UserId",
@@ -305,9 +313,29 @@ namespace GuitarTabsAndChords.WebAPI.Migrations
                 column: "AlbumsId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Ratings_TabId",
+                name: "IX_Notations_LastEditorId",
+                table: "Notations",
+                column: "LastEditorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Notations_SongId",
+                table: "Notations",
+                column: "SongId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Notations_TuningId",
+                table: "Notations",
+                column: "TuningId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Notations_UserId",
+                table: "Notations",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Ratings_NotationId",
                 table: "Ratings",
-                column: "TabId");
+                column: "NotationId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Ratings_UserId",
@@ -330,9 +358,9 @@ namespace GuitarTabsAndChords.WebAPI.Migrations
                 column: "GenreId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TabCorrections_TabId",
+                name: "IX_TabCorrections_NotationId",
                 table: "TabCorrections",
-                column: "TabId");
+                column: "NotationId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TabCorrections_TuningId",
@@ -342,26 +370,6 @@ namespace GuitarTabsAndChords.WebAPI.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_TabCorrections_UserId",
                 table: "TabCorrections",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Tabs_LastEditorId",
-                table: "Tabs",
-                column: "LastEditorId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Tabs_SongId",
-                table: "Tabs",
-                column: "SongId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Tabs_TuningId",
-                table: "Tabs",
-                column: "TuningId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Tabs_UserId",
-                table: "Tabs",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
@@ -382,7 +390,7 @@ namespace GuitarTabsAndChords.WebAPI.Migrations
                 name: "TabCorrections");
 
             migrationBuilder.DropTable(
-                name: "Tabs");
+                name: "Notations");
 
             migrationBuilder.DropTable(
                 name: "Users");

@@ -16,6 +16,10 @@ namespace GuitarTabsAndChords.Model
         public Artists Artist { get; set; }
         public int GenreId { get; set; }
         public Genres Genre { get; set; }
-        public bool Approved { get; set; }
+        public ReviewStatus Status { get; set; }
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

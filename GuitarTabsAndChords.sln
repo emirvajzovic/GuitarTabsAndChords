@@ -1,11 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.168
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29123.88
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GuitarTabsAndChords.WebAPI", "GuitarTabsAndChords.WebAPI\GuitarTabsAndChords.WebAPI.csproj", "{BA39C2FF-1047-4A43-B9E1-A1A26442D1F8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GuitarTabsAndChords.WebAPI", "GuitarTabsAndChords.WebAPI\GuitarTabsAndChords.WebAPI.csproj", "{BA39C2FF-1047-4A43-B9E1-A1A26442D1F8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GuitarTabsAndChords.Model", "GuitarTabsAndChords.Model\GuitarTabsAndChords.Model.csproj", "{79C90DC5-BC85-41AB-A333-C34054543F2A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GuitarTabsAndChords.Model", "GuitarTabsAndChords.Model\GuitarTabsAndChords.Model.csproj", "{79C90DC5-BC85-41AB-A333-C34054543F2A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GuitarTabsAndChords.WinUI", "GuitarTabsAndChords.WinUI\GuitarTabsAndChords.WinUI.csproj", "{7D13CB7E-281D-4FD9-9BBE-A0E0F1005BA9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{CD218634-734F-4C81-AC37-052A9474C06A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,9 +25,16 @@ Global
 		{79C90DC5-BC85-41AB-A333-C34054543F2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{79C90DC5-BC85-41AB-A333-C34054543F2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{79C90DC5-BC85-41AB-A333-C34054543F2A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D13CB7E-281D-4FD9-9BBE-A0E0F1005BA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D13CB7E-281D-4FD9-9BBE-A0E0F1005BA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D13CB7E-281D-4FD9-9BBE-A0E0F1005BA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D13CB7E-281D-4FD9-9BBE-A0E0F1005BA9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7D13CB7E-281D-4FD9-9BBE-A0E0F1005BA9} = {CD218634-734F-4C81-AC37-052A9474C06A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {51FCC9D1-A3F7-4065-9B25-054E3EAEFF58}

@@ -27,6 +27,14 @@ namespace GuitarTabsAndChords.WebAPI.Services
             if (!string.IsNullOrWhiteSpace(request?.Name))
                 query = query.Where(x => x.Name.Contains(request.Name));
 
+            if (request.Filter.HasValue)
+            {
+                if (request.Filter.Value == (int)ReviewStatus.FilterPendingApproved)
+                    query = query.Where(x => x.Status == ReviewStatus.Pending || x.Status == ReviewStatus.Approved);
+                else
+                    query = query.Where(x => (int)x.Status == request.Filter.Value);
+            }
+
             var list = query.ToList();
 
             return _mapper.Map<List<Model.Artists>>(list);
@@ -43,7 +51,7 @@ namespace GuitarTabsAndChords.WebAPI.Services
         {
             var entity = _mapper.Map<Database.Artists>(request);
 
-            entity.Approved = true;
+            entity.Status = ReviewStatus.Approved;
 
             _context.Artists.Add(entity);
             _context.SaveChanges();
@@ -58,7 +66,10 @@ namespace GuitarTabsAndChords.WebAPI.Services
             _context.Artists.Attach(entity);
             _context.Artists.Update(entity);
 
-            _mapper.Map(request, entity);
+            if (request.Status == ReviewStatus.Rejected)
+                entity.Status = ReviewStatus.Rejected;
+            else
+                _mapper.Map(request, entity);
 
             _context.SaveChanges();
 
