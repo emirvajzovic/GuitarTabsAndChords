@@ -12,11 +12,17 @@ namespace GuitarTabsAndChords.Mobile.Views
     [DesignTimeVisible(false)]
     public partial class MainPage : Xamarin.Forms.TabbedPage
     {
+        [Obsolete]
         public MainPage()
         {
             InitializeComponent();
-            On<Xamarin.Forms.PlatformConfiguration.Windows>().SetToolbarPlacement(Xamarin.Forms.PlatformConfiguration.WindowsSpecific.ToolbarPlacement.Bottom);
-            On<Xamarin.Forms.PlatformConfiguration.Android>().SetToolbarPlacement(Xamarin.Forms.PlatformConfiguration.AndroidSpecific.ToolbarPlacement.Bottom);
+
+            if(Device.RuntimePlatform == Device.Android)
+            {
+                On<Xamarin.Forms.PlatformConfiguration.Android>().SetToolbarPlacement(Xamarin.Forms.PlatformConfiguration.AndroidSpecific.ToolbarPlacement.Bottom)
+                             .SetBarItemColor(Color.Black)
+                             .SetBarSelectedItemColor(Color.Black);
+            }
 
         }
     }

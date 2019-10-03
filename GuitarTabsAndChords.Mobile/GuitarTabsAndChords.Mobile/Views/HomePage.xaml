@@ -3,11 +3,114 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+             xmlns:local="clr-namespace:GuitarTabsAndChords.Mobile.Converters"
              mc:Ignorable="d"
-             x:Class="GuitarTabsAndChords.Mobile.Views.HomePage">
+             x:Class="GuitarTabsAndChords.Mobile.Views.HomePage"
+             Title="{Binding Title}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:ImageConverter x:Key="imgConv"></local:ImageConverter>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Padding="5">
+
+                <Label Text="Recommended for you" FontAttributes="Bold" FontSize="20" />
+
+                <syncfusion:SfListView Orientation="Horizontal"
+                                   ItemSpacing="5" ItemSize="125" IsScrollBarVisible="true"
+                                   HeightRequest="200"
+                                   
+                                   SelectionMode="None" 
+                                   ItemsSource="{Binding RecommendedList}">
+                    <syncfusion:SfListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout VerticalOptions="FillAndExpand" Padding="0,0,0,0" HorizontalOptions="FillAndExpand">
+                                    <Image Source="{Binding Song.Album.AlbumCover, Converter={StaticResource imgConv}}" Aspect="AspectFit" HeightRequest="125"/>
 
 
-    <StackLayout>
-       
-    </StackLayout>
+                                    <Label Text="{Binding Type}" FontSize="10" HorizontalTextAlignment="Center"/>
+                                    <Label Text="{Binding Song.Name}" FontSize="13" HorizontalTextAlignment="Center"/>
+
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer
+                                    Tapped="TapGestureRecognizer_Tapped" />
+                                    </StackLayout.GestureRecognizers>
+
+
+                                </StackLayout>
+
+                            </ViewCell>
+                        </DataTemplate>
+                    </syncfusion:SfListView.ItemTemplate>
+                </syncfusion:SfListView>
+
+                <Label Text="Popular Tabs" FontAttributes="Bold" FontSize="20" />
+
+                <syncfusion:SfListView Orientation="Horizontal"
+                                   ItemSpacing="5" ItemSize="125" IsScrollBarVisible="true"
+                                   HeightRequest="200"
+                                   
+                                   SelectionMode="None" 
+                                   ItemsSource="{Binding RecommendedList}">
+                    <syncfusion:SfListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout VerticalOptions="FillAndExpand" Padding="0,0,0,0" HorizontalOptions="FillAndExpand">
+                                    <Image Source="{Binding Song.Album.AlbumCover, Converter={StaticResource imgConv}}" Aspect="AspectFit" HeightRequest="125"/>
+
+
+                                    <Label Text="{Binding Type}" FontSize="10" HorizontalTextAlignment="Center"/>
+                                    <Label Text="{Binding Song.Name}" FontSize="13" HorizontalTextAlignment="Center"/>
+
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer
+                                    Tapped="TapGestureRecognizer_Tapped" />
+                                    </StackLayout.GestureRecognizers>
+
+
+                                </StackLayout>
+
+                            </ViewCell>
+                        </DataTemplate>
+                    </syncfusion:SfListView.ItemTemplate>
+                </syncfusion:SfListView>
+
+                <Label Text="Popular Chords" FontAttributes="Bold" FontSize="20" />
+
+                <syncfusion:SfListView Orientation="Horizontal"
+                                   ItemSpacing="5" ItemSize="125" IsScrollBarVisible="true"
+                                   HeightRequest="200"
+                                   
+                                   SelectionMode="None" 
+                                   ItemsSource="{Binding RecommendedList}">
+                    <syncfusion:SfListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout VerticalOptions="FillAndExpand" Padding="0,0,0,0" HorizontalOptions="FillAndExpand">
+                                    <Image Source="{Binding Song.Album.AlbumCover, Converter={StaticResource imgConv}}" Aspect="AspectFit" HeightRequest="125"/>
+
+
+                                    <Label Text="{Binding Type}" FontSize="10" HorizontalTextAlignment="Center"/>
+                                    <Label Text="{Binding Song.Name}" FontSize="13" HorizontalTextAlignment="Center"/>
+
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer
+                                    Tapped="TapGestureRecognizer_Tapped" />
+                                    </StackLayout.GestureRecognizers>
+
+
+                                </StackLayout>
+
+                            </ViewCell>
+                        </DataTemplate>
+                    </syncfusion:SfListView.ItemTemplate>
+                </syncfusion:SfListView>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
 </ContentPage>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GuitarTabsAndChords.Mobile.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,9 +13,27 @@ namespace GuitarTabsAndChords.Mobile.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class HomePage : ContentPage
     {
+        private HomeViewModel VM;
+
         public HomePage()
         {
             InitializeComponent();
+            BindingContext = VM = new HomeViewModel();
+        }
+
+        protected async override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            await VM.LoadItems();
+        }
+
+        private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        {
+            var element = sender as StackLayout;
+            var context = element.BindingContext as Model.Notations;
+
+            await Application.Current.MainPage.DisplayAlert("solid", "solidio si " + context.Song.Name, "OK");
         }
     }
 }
