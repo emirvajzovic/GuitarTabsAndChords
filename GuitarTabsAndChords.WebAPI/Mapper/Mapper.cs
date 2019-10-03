@@ -19,7 +19,6 @@ namespace GuitarTabsAndChords.WebAPI.Mapper
             CreateMap<Database.Roles, Model.Roles>();
             CreateMap<Database.Songs, Model.Songs>();
             CreateMap<Database.NotationCorrections, Model.NotationCorrections>();
-            CreateMap<Database.Tunings, Model.Tunings>();
             CreateMap<Database.Users, Model.Users>();
 
             CreateMap<Database.Artists, Model.Requests.ArtistsInsertRequest>().ReverseMap();
@@ -28,6 +27,7 @@ namespace GuitarTabsAndChords.WebAPI.Mapper
             CreateMap<Database.Genres, Model.Requests.GenresInsertRequest>().ReverseMap();
             CreateMap<Database.Users, Model.Requests.UsersInsertRequest>().ReverseMap();
             CreateMap<Database.Users, Model.Requests.UsersUpdateRequest>().ReverseMap();
+            CreateMap<Database.Notations, Model.Requests.NotationsInsertRequest>().ReverseMap();
         }
     }
 }

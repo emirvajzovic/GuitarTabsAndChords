@@ -14,7 +14,9 @@ namespace GuitarTabsAndChords.Model.Requests
         [Required]
         public int SongId { get; set; }
         [Required]
-        public int TuningId { get; set; }
+        public string Tuning { get; set; }
+        [Required]
+        public string TuningDescription { get; set; }
         [Required]
         public ReviewStatus Status { get; set; }
     }

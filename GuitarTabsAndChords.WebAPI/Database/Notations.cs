@@ -19,8 +19,8 @@ namespace GuitarTabsAndChords.WebAPI.Database
         public Users LastEditor { get; set; }
         public int SongId { get; set; }
         public Songs Song { get; set; }
-        public int TuningId { get; set; }
-        public Tunings Tuning { get; set; }
+        public string Tuning { get; set; }
+        public string TuningDescription { get; set; }
         public ReviewStatus Status { get; set; }
     }
 }

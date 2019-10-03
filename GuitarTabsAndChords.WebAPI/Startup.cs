@@ -45,6 +45,7 @@ namespace GuitarTabsAndChords.WebAPI
             services.AddScoped<ISongsService, SongsService>();
             services.AddScoped<IGenresService, GenresService>();
             services.AddScoped<IUsersService, UsersService>();
+            services.AddScoped<INotationsService, NotationsService>();
 
             var connection = Configuration.GetConnectionString("lokalni");
             services.AddDbContext<GuitarTabsContext>(options => options.UseSqlServer(connection));

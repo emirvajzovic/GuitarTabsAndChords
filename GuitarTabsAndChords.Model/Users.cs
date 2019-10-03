@@ -20,5 +20,10 @@ namespace GuitarTabsAndChords.Model
         public DateTime? BannedUntil { get; set; }
         public int RoleId { get; set; }
         public Roles Role { get; set; }
+
+        public override string ToString()
+        {
+            return NameLastname;
+        }
     }
 }

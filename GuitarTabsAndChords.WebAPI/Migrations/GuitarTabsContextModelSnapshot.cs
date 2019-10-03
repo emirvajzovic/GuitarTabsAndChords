@@ -105,15 +105,15 @@ namespace GuitarTabsAndChords.WebAPI.Migrations
 
                     b.Property<int>("Status");
 
-                    b.Property<int>("TuningId");
+                    b.Property<string>("Tuning");
+
+                    b.Property<string>("TuningDescription");
 
                     b.Property<int>("UserId");
 
                     b.HasKey("Id");
 
                     b.HasIndex("NotationId");
-
-                    b.HasIndex("TuningId");
 
                     b.HasIndex("UserId");
 
@@ -138,7 +138,9 @@ namespace GuitarTabsAndChords.WebAPI.Migrations
 
                     b.Property<int>("Status");
 
-                    b.Property<int>("TuningId");
+                    b.Property<string>("Tuning");
+
+                    b.Property<string>("TuningDescription");
 
                     b.Property<int>("Type");
 
@@ -149,8 +151,6 @@ namespace GuitarTabsAndChords.WebAPI.Migrations
                     b.HasIndex("LastEditorId");
 
                     b.HasIndex("SongId");
-
-                    b.HasIndex("TuningId");
 
                     b.HasIndex("UserId");
 
@@ -220,23 +220,6 @@ namespace GuitarTabsAndChords.WebAPI.Migrations
                     b.ToTable("Songs");
                 });
 
-            modelBuilder.Entity("GuitarTabsAndChords.WebAPI.Database.Tunings", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Description");
-
-                    b.Property<string>("Name");
-
-                    b.Property<int>("Status");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Tunings");
-                });
-
             modelBuilder.Entity("GuitarTabsAndChords.WebAPI.Database.Users", b =>
                 {
                     b.Property<int>("Id")
@@ -302,11 +285,6 @@ namespace GuitarTabsAndChords.WebAPI.Migrations
                         .HasForeignKey("NotationId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("GuitarTabsAndChords.WebAPI.Database.Tunings", "Tuning")
-                        .WithMany()
-                        .HasForeignKey("TuningId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.HasOne("GuitarTabsAndChords.WebAPI.Database.Users", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
@@ -323,11 +301,6 @@ namespace GuitarTabsAndChords.WebAPI.Migrations
                     b.HasOne("GuitarTabsAndChords.WebAPI.Database.Songs", "Song")
                         .WithMany()
                         .HasForeignKey("SongId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("GuitarTabsAndChords.WebAPI.Database.Tunings", "Tuning")
-                        .WithMany()
-                        .HasForeignKey("TuningId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("GuitarTabsAndChords.WebAPI.Database.Users", "User")

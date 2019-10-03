@@ -17,9 +17,6 @@ namespace GuitarTabsAndChords.WinUI
     {
         private readonly APIService _serviceNotations = new APIService("Notations");
         private readonly APIService _serviceSongs = new APIService("Songs");
-        private readonly APIService _serviceArtists = new APIService("Artists");
-        private readonly APIService _serviceAlbums = new APIService("Albums");
-        private readonly APIService _serviceGenres = new APIService("Genres");
         private readonly int _id;
         private Model.Requests.NotationsInsertRequest request = new Model.Requests.NotationsInsertRequest();
         private Model.Notations entity;
@@ -43,16 +40,26 @@ namespace GuitarTabsAndChords.WinUI
                         btnReject.Visible = true;
                     }
 
-                    //txtName.Text = entity.Name;
-                    //txtYear.Text = entity.Year.ToString();
+                    txtTuning.Text = entity.Tuning;
+                    txtTuningDescription.Text = entity.TuningDescription;
+                    txtContent.Text = entity.NotationContent;
 
                     await LoadCmbSongs();
+                    LoadNotationTypes();
 
-                    foreach (var item in cmbArtist.Items)
+                    foreach (var item in cmbSong.Items)
                     {
                         if ((item as Model.Songs).Id == entity.SongId)
                         {
-                            cmbArtist.SelectedItem = item;
+                            cmbSong.SelectedItem = item;
+                            break;
+                        }
+                    }
+                    foreach (var item in cmbNotationType.Items)
+                    {
+                        if ((NotationType)item == entity.Type)
+                        {
+                            cmbNotationType.SelectedItem = item;
                             break;
                         }
                     }
@@ -62,6 +69,7 @@ namespace GuitarTabsAndChords.WinUI
             else
             {
                 await LoadCmbSongs();
+                LoadNotationTypes();
             }
         }
 
@@ -69,13 +77,13 @@ namespace GuitarTabsAndChords.WinUI
         {
             bool isPending = (entity != null && entity.Status == ReviewStatus.Pending);
 
-            var request = new Model.Requests.ArtistsSearchRequest
+            var request = new Model.Requests.SongsSearchRequest
             {
                 Filter = isPending
                         ? (int)ReviewStatus.FilterPendingApproved
                         : (int)ReviewStatus.Approved
             };
-            var list = await _serviceArtists.Get<List<Model.Artists>>(request);
+            var list = await _serviceSongs.Get<List<Model.Songs>>(request);
             if (isPending)
             {
                 foreach (var item in list)
@@ -84,18 +92,19 @@ namespace GuitarTabsAndChords.WinUI
                         item.Name = "(PENDING) " + item.Name;
                 }
             }
-            cmbArtist.DataSource = list;
-            cmbArtist.ValueMember = "Id";
-            cmbArtist.DisplayMember = "Name";
+            cmbSong.DataSource = list;
+            cmbSong.ValueMember = "Id";
+            cmbSong.DisplayMember = "Name";
         }
 
         private async void BtnSave_Click(object sender, EventArgs e)
         {
-            //request.Name = txtName.Text;
-            //request.Year = int.Parse(txtYear.Text);
-            //request.ArtistId = (cmbArtist.SelectedItem as Model.Artists).Id;
-            //request.AlbumId = (cmbAlbum.SelectedItem as Model.Albums).Id;
-            //request.GenreId = (cmbGenre.SelectedItem as Model.Genres).Id;
+            request.NotationContent = txtContent.Text;
+            request.Tuning = txtTuning.Text;
+            request.TuningDescription = txtTuningDescription.Text;
+            request.SongId = (cmbSong.SelectedItem as Model.Songs).Id;
+            request.Type = (NotationType)cmbNotationType.SelectedItem;
+
             request.Status = Model.ReviewStatus.Approved;
 
             if (_id == 0)
@@ -121,13 +130,13 @@ namespace GuitarTabsAndChords.WinUI
 
         }
 
-        private async void BtnAddArtist_Click(object sender, EventArgs e)
+        private async void BtnAddSong_Click(object sender, EventArgs e)
         {
-            var SelectedArtist = cmbArtist.SelectedItem as Model.Artists;
-            frmArtistDetails frm = new frmArtistDetails();
-            if (SelectedArtist != null && SelectedArtist.Status == ReviewStatus.Pending)
+            var SelectedSong = cmbSong.SelectedItem as Model.Songs;
+            frmSongDetails frm = new frmSongDetails();
+            if (SelectedSong != null && SelectedSong.Status == ReviewStatus.Pending)
             {
-                frm = new frmArtistDetails(SelectedArtist.Id);
+                frm = new frmSongDetails(SelectedSong.Id);
             }
 
             if (frm.ShowDialog() == DialogResult.OK)
@@ -136,19 +145,26 @@ namespace GuitarTabsAndChords.WinUI
 
         private async void BtnReject_Click(object sender, EventArgs e)
         {
-            //request.Name = txtName.Text;
-            //request.ArtistId = (cmbArtist.SelectedItem as Model.Artists).Id;
-            //request.AlbumId = (cmbAlbum.SelectedItem as Model.Albums).Id;
-            //request.GenreId = (cmbGenre.SelectedItem as Model.Genres).Id;
+            request.NotationContent = txtContent.Text;
+            request.Tuning = txtTuning.Text;
+            request.TuningDescription = txtTuningDescription.Text;
+            request.SongId = (cmbSong.SelectedItem as Model.Songs).Id;
+            request.Type = (NotationType)cmbNotationType.SelectedItem;
+
             request.Status = Model.ReviewStatus.Rejected;
 
             entity = await _serviceNotations.Update<Model.Notations>(_id, request);
 
             if (entity != null)
             {
-                MessageBox.Show("Genre rejected");
+                MessageBox.Show("Notation rejected");
                 DialogResult = DialogResult.OK;
             }
+        }
+
+        private void LoadNotationTypes()
+        {
+            cmbNotationType.DataSource = Enum.GetValues(typeof(NotationType));
         }
     }
 }

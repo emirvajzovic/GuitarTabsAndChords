@@ -27,7 +27,8 @@ namespace GuitarTabsAndChords.WinUI
             int counter = 0;
             foreach (string name in Enum.GetNames(typeof(ReviewStatus)))
             {
-                cmbStatusFilter.Items.Add(new FilterItem { Id = counter++, Name = name });
+                if (!name.Contains("Filter"))
+                    cmbStatusFilter.Items.Add(new FilterItem { Id = counter++, Name = name });
             }
             cmbStatusFilter.ValueMember = "Id";
             cmbStatusFilter.DisplayMember = "Name";

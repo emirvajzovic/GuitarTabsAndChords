@@ -64,8 +64,8 @@ namespace GuitarTabsAndChords.WinUI
 
         private void BtnNotations_Click(object sender, EventArgs e)
         {
-            //var frm = new frmNotations();
-            //frm.ShowDialog();
+            var frm = new frmNotations();
+            frm.ShowDialog();
         }
     }
 }

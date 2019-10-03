@@ -34,7 +34,7 @@ namespace GuitarTabsAndChords.WebAPI.Services
             if (request?.SongId != 0)
                 query = query.Where(x => x.SongId == request.SongId);
             if (!string.IsNullOrWhiteSpace(request?.Tuning))
-                query = query.Where(x => x.Tuning.Name.Contains(request.Tuning));
+                query = query.Where(x => x.Tuning == request.Tuning);
 
             if (!string.IsNullOrWhiteSpace(request?.SearchTerm))
                 query = query.Where(x => x.Song.Artist.Name.Contains(request.SearchTerm) || x.Song.Album.Name.Contains(request.SearchTerm) || x.Song.Name.Contains(request.SearchTerm) || x.User.Username.Contains(request.SearchTerm));
@@ -52,7 +52,7 @@ namespace GuitarTabsAndChords.WebAPI.Services
                 .Include(x => x.Song.Artist)
                 .Include(x => x.Song.Genre)
                 .Include(x => x.User)
-                .Include(x => x.Tuning);
+                .Include(x=>x.LastEditor);
 
             var list = query.ToList();
 
@@ -66,7 +66,7 @@ namespace GuitarTabsAndChords.WebAPI.Services
                 .Include(x => x.Song.Artist)
                 .Include(x => x.Song.Genre)
                 .Include(x => x.User)
-                .Include(x => x.Tuning)
+                .Include(x => x.LastEditor)
                 .FirstOrDefault();
 
             return _mapper.Map<Model.Notations>(entity);
@@ -77,6 +77,10 @@ namespace GuitarTabsAndChords.WebAPI.Services
             var entity = _mapper.Map<Database.Notations>(request);
 
             entity.Status = ReviewStatus.Approved;
+
+            entity.LastEditted = entity.DateAdded = DateTime.Now;
+            entity.LastEditorId = 1;
+            entity.UserId = 1;
 
             _context.Notations.Add(entity);
             _context.SaveChanges();
@@ -90,6 +94,9 @@ namespace GuitarTabsAndChords.WebAPI.Services
 
             _context.Notations.Attach(entity);
             _context.Notations.Update(entity);
+
+            entity.LastEditted = DateTime.Now;
+            entity.LastEditorId = 1;
 
             if (request.Status == ReviewStatus.Rejected)
                 entity.Status = ReviewStatus.Rejected;
