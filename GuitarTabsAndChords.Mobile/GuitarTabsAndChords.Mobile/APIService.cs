@@ -11,15 +11,30 @@ namespace GuitarTabsAndChords.Mobile
 {
     public class APIService
     {
+
+        private string APIUrl;
         private readonly string _route;
         public APIService(string route)
         {
             _route = route;
+            APIUrl = getApiURL();
         }
+
+        public string getApiURL()
+        {
+            string local = "http://localhost:16/api";
+            string API = "http://192.168.1.16:16/api";
+
+            if (Device.RuntimePlatform == Device.UWP)
+                return local;
+            else
+                return API;
+        }
+
 
         public async Task<T> Get<T>(object search)
         {
-            var url = $"{Properties.Resources.APIUrl}/{_route}";
+            var url = $"{APIUrl}/{_route}";
 
             if (search != null)
             {
@@ -32,14 +47,14 @@ namespace GuitarTabsAndChords.Mobile
 
         public async Task<T> GetById<T>(object id)
         {
-            var url = $"{Properties.Resources.APIUrl}/{_route}/{id}";
+            var url = $"{APIUrl}/{_route}/{id}";
 
             return await url.GetJsonAsync<T>();
         }
 
         public async Task<T> Insert<T>(object request, string action = null)
-        {
-            var url = $"{Properties.Resources.APIUrl}";
+        {;
+            var url = $"{APIUrl}";
             url += $"{ _route}";
             if(action != null)
             {
@@ -74,7 +89,7 @@ namespace GuitarTabsAndChords.Mobile
         {
             try
             {
-                var url = $"{Properties.Resources.APIUrl}";
+                var url = $"{APIUrl}";
                 url += $"{ _route}";
                 if (action != null)
                 {

@@ -21,6 +21,7 @@ namespace GuitarTabsAndChords.WebAPI.Database
         public DbSet<Roles> Roles { get; set; }
         public DbSet<Songs> Songs { get; set; }
         public DbSet<NotationCorrections> NotationCorrections { get; set; }
+        public DbSet<NotationViews> NotationViews { get; set; }
         public DbSet<Notations> Notations { get; set; }
         public DbSet<Users> Users { get; set; }
 

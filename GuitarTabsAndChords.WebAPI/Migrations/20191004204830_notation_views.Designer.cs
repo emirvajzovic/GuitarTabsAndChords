@@ -4,14 +4,16 @@ using GuitarTabsAndChords.WebAPI.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GuitarTabsAndChords.WebAPI.Migrations
 {
     [DbContext(typeof(GuitarTabsContext))]
-    partial class GuitarTabsContextModelSnapshot : ModelSnapshot
+    [Migration("20191004204830_notation_views")]
+    partial class notation_views
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

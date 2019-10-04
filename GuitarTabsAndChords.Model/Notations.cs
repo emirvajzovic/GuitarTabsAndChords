@@ -21,6 +21,10 @@ namespace GuitarTabsAndChords.Model
         public string Tuning { get; set; }
         public string TuningDescription { get; set; }
         public ReviewStatus Status { get; set; }
+
+        public int Views { get; set; }
+        public int Favorites { get; set; }
+        public int Rating { get; set; }
     }
 
     public enum NotationType { Tab, Chord }

@@ -59,14 +59,5 @@ namespace GuitarTabsAndChords.Mobile.Properties {
                 resourceCulture = value;
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to http://192.168.1.16:16/api/.
-        /// </summary>
-        internal static string APIUrl {
-            get {
-                return ResourceManager.GetString("APIUrl", resourceCulture);
-            }
-        }
     }
 }

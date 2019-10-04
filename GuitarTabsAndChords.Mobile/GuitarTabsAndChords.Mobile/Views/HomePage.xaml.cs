@@ -33,7 +33,7 @@ namespace GuitarTabsAndChords.Mobile.Views
             var element = sender as StackLayout;
             var context = element.BindingContext as Model.Notations;
 
-            await Application.Current.MainPage.DisplayAlert("solid", "solidio si " + context.Song.Name, "OK");
+            await Navigation.PushAsync(new NotationDetailsPage(context.Id));
         }
     }
 }

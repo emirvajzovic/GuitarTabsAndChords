@@ -32,7 +32,7 @@
     },
     "IIS": {
       "commandName": "IIS",
-      "launchUrl": "http://localhost/swagger/index.html"
+      "launchUrl": "swagger/index.html"
     }
   }
 }

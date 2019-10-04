@@ -69,7 +69,29 @@ namespace GuitarTabsAndChords.WebAPI.Services
                 .Include(x => x.LastEditor)
                 .FirstOrDefault();
 
-            return _mapper.Map<Model.Notations>(entity);
+            if(entity != null)
+            {
+                NotationViews view = new NotationViews
+                {
+                    NotationId = entity.Id,
+                    Timestamp = DateTime.Now
+                };
+                _context.NotationViews.Add(view);
+                _context.SaveChanges();
+            }
+
+            var notation = _mapper.Map<Model.Notations>(entity);
+
+            IncludeNotationStats(notation);
+
+            return notation;
+        }
+
+        private void IncludeNotationStats(Model.Notations entity)
+        {
+            entity.Rating = (int)Math.Round(_context.Ratings.Where(x => x.NotationId == entity.Id).Average(x => (double?)x.Rating) ?? 0);
+            entity.Favorites = _context.Favorites.Count(x => x.NotationId == entity.Id);
+            entity.Views = _context.NotationViews.Count(x => x.NotationId == entity.Id);
         }
 
         public Model.Notations Insert(NotationsInsertRequest request)
