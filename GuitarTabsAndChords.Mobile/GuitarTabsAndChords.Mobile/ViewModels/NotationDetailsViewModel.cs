@@ -71,7 +71,7 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
 
         public NotationDetailsViewModel(int NotationId)
         {
-            Title = "Notation";
+            Title = "Notation Details";
             _notationId = NotationId;
 
             InitCommand = new Command(async () => await Init());
