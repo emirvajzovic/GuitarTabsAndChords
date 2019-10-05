@@ -71,7 +71,7 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
 
         public NotationDetailsViewModel(int NotationId)
         {
-            Title = "Notation Details";
+            
             _notationId = NotationId;
 
             InitCommand = new Command(async () => await Init());
@@ -90,7 +90,7 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
         {
             Notation = await _serviceNotations.GetById<Model.Notations>(_notationId);
             LastEditInfo = Notation.LastEditor.Username + " on " + Notation.LastEditted.ToShortDateString();
-
+            Title = Notation.Type.ToString() + "s";
             UpdateZvjezdice();
         }
 
