@@ -11,8 +11,8 @@ namespace GuitarTabsAndChords.Model
         public int Rating { get; set; }
         public int UserId { get; set; }
         public Users User { get; set; }
-        public int TabId { get; set; }
-        public Notations Tab { get; set; }
+        public int NotationId { get; set; }
+        public Notations Notation { get; set; }
 
     }
 }

@@ -31,6 +31,9 @@ namespace GuitarTabsAndChords.WebAPI.Database
                 var temp = new List<Genres>();
                 foreach (var song in Songs)
                 {
+                    if (song == null)
+                        continue;
+
                     bool add = true;
                     foreach (var genre in temp)
                     {

@@ -14,6 +14,7 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
     public class HomeViewModel : BaseViewModel
     {
         public ObservableCollection<Model.Notations> RecommendedList { get; set; }
+        public List<Models.MenuItem> MenuItems { get; set; } = new List<Models.MenuItem>();
 
         private readonly APIService _serviceNotations = new APIService("Notations");
 
@@ -21,6 +22,24 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
         {
             Title = "Home";
             RecommendedList = new ObservableCollection<Model.Notations>();
+            MenuItems.Add(new Models.MenuItem
+            {
+                Image = "star_empty.png",
+                Text = "Top 100",
+                Page = typeof(Top100Page)
+            });
+            MenuItems.Add(new Models.MenuItem
+            {
+                Image = "icon_user.png",
+                Text = "Profile",
+                Page = typeof(Top100Page)
+            });
+            MenuItems.Add(new Models.MenuItem
+            {
+                Image = "star_empty.png",
+                Text = "Sign Out",
+                Page = null
+            });
         }
 
         public async Task LoadItems()

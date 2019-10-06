@@ -18,8 +18,12 @@ namespace GuitarTabsAndChords.Mobile.Views
         public NotationDetailsPage(int NotationId)
         {
             InitializeComponent();
-            BindingContext = VM = new NotationDetailsViewModel(NotationId);
+            BindingContext = VM = new NotationDetailsViewModel(NotationId, FavoriteToolbarItem);
         }
 
+        private void FavoriteToolbarItem_Clicked(object sender, EventArgs e)
+        {
+            VM.ToggleFavoriteNotation();
+        }
     }
 }

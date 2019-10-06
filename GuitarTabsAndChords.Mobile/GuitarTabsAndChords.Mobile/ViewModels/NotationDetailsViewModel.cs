@@ -13,6 +13,8 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
     public class NotationDetailsViewModel: BaseViewModel
     {
         private readonly APIService _serviceNotations = new APIService("Notations");
+        private readonly APIService _serviceRatings = new APIService("Ratings");
+        private readonly APIService _serviceFavorites = new APIService("Favorites");
         private int _notationId;
 
         private Model.Notations _notation;
@@ -29,10 +31,15 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
             set { SetProperty(ref _lastEditInfo, value); }
         }
 
-        private Command InitCommand;
-        public ICommand OcijeniStarCommand { get; set; }
 
-        public int Ocjena { get; set; }
+        private Command InitCommand;
+        public ICommand RateStarCommand { get; set; }
+
+        private ToolbarItem _favoriteToolbarItem;
+        public bool HasFavoritedNotation { get; set; } = false;
+
+
+        public int Rating { get; set; }
 
         #region stars
 
@@ -69,33 +76,61 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
 
         #endregion
 
-        public NotationDetailsViewModel(int NotationId)
+        public NotationDetailsViewModel(int NotationId, ToolbarItem favoriteToolbarItem)
         {
-            
             _notationId = NotationId;
+            _favoriteToolbarItem = favoriteToolbarItem;
 
             InitCommand = new Command(async () => await Init());
             InitCommand.Execute(null);
 
-            OcijeniStarCommand = new Command<string>(async (ocjena) => await OcijeniStar(ocjena));
+            RateStarCommand = new Command<string>(async (Rating) => await RateStar(Rating));
 
             Star1 = new Star();
             Star2 = new Star();
             Star3 = new Star();
             Star4 = new Star();
             Star5 = new Star();
+
+            _favoriteToolbarItem.IconImageSource = ImageSource.FromFile("star_empty.png");
         }
 
         private async Task Init()
         {
-            Notation = await _serviceNotations.GetById<Model.Notations>(_notationId);
-            LastEditInfo = Notation.LastEditor.Username + " on " + Notation.LastEditted.ToShortDateString();
-            Title = Notation.Type.ToString() + "s";
-            UpdateZvjezdice();
+            await LoadNotation();
+
+            await LoadExistingRating();
+
+            await LoadFavoriteButton();
+
+            UpdateRatingStars();
         }
 
 
-        private void UpdateZvjezdice()
+        private async Task LoadNotation()
+        {
+            Notation = await _serviceNotations.GetById<Model.Notations>(_notationId);
+            LastEditInfo = Notation.LastEditor.Username + " on " + Notation.LastEditted.ToShortDateString();
+            Title = Notation.Type.ToString() + "s";
+        }
+
+        #region star rating
+        private async Task LoadExistingRating()
+        {
+            var request = new Model.Requests.RatingsSearchRequest
+            {
+                NotationId = _notationId
+            };
+            var ExistingRating = await _serviceRatings.Get<List<Model.Ratings>>(request);
+            if (ExistingRating.Count > 0)
+            {
+                Rating = ExistingRating[0].Rating;
+            }
+        }
+
+
+
+        private void UpdateRatingStars()
         {
             var star_emptyinside = new Star { Slika = "star_empty.png" };
             var Star_Filled = new Star { Slika = "star_filled.png" };
@@ -106,40 +141,79 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
             Star4 = star_emptyinside;
             Star5 = star_emptyinside;
 
-            if (Ocjena >= 1)
+            if (Rating >= 1)
                 Star1 = Star_Filled;
-            if (Ocjena >= 2)
+            if (Rating >= 2)
                 Star2 = Star_Filled;
-            if (Ocjena >= 3)
+            if (Rating >= 3)
                 Star3 = Star_Filled;
-            if (Ocjena >= 4)
+            if (Rating >= 4)
                 Star4 = Star_Filled;
-            if (Ocjena == 5)
+            if (Rating == 5)
                 Star5 = Star_Filled;
         }
 
 
-        private async Task OcijeniStar(string ocjena)
+        private async Task RateStar(string NewRating)
         {
-            int OcjenaBroj = int.TryParse(ocjena, out int value) ? value : 0;
-            if (OcjenaBroj >= 1 && OcjenaBroj <= 5)
+            int RatingNum = int.TryParse(NewRating, out int value) ? value : 0;
+            if (RatingNum >= 1 && RatingNum <= 5)
             {
 
-                //var request = new Model.Requests.OcjeneInsertRequest
-                //{
-                //    IgraId = _igraId,
-                //    Ocjena = OcjenaBroj
-                //};
+                var request = new Model.Requests.RatingsInsertRequest
+                {
+                    NotationId = _notationId,
+                    Rating = RatingNum
+                };
 
-                //Ocjena = OcjenaBroj;
+                Rating = RatingNum;
 
-                //UpdateZvjezdice();
+                UpdateRatingStars();
 
-                //await _serviceOcjene.Insert<Model.Ocjene>(request, "OcijeniIgru");
+                await _serviceRatings.Insert<Model.Ratings>(request, "RateNotation");
 
-                //await UcitajIgraDetails();
+            }
+        }
+        #endregion
+
+        #region favorite
+        private async Task LoadFavoriteButton()
+        {
+            var entity = await _serviceFavorites.GetById<Model.Favorites>(_notationId);
+
+            if (entity != null)
+            {
+                _favoriteToolbarItem.IconImageSource = ImageSource.FromFile("star_filled.png");
+                HasFavoritedNotation = true;
             }
         }
 
+        public async void ToggleFavoriteNotation()
+        {
+            if (HasFavoritedNotation)
+            { // unfavoriting
+                var success = await _serviceFavorites.Delete<bool>(_notationId);
+                if (success)
+                {
+                    _favoriteToolbarItem.IconImageSource = ImageSource.FromFile("star_empty.png");
+                    HasFavoritedNotation = false;
+                }
+            }
+            else
+            { // favoriting
+                var request = new Model.Requests.FavoritesInsertRequest
+                {
+                    NotationId = _notationId
+                };
+                var entity = await _serviceFavorites.Insert<Model.Favorites>(request);
+                if (entity != null)
+                {
+                    _favoriteToolbarItem.IconImageSource = ImageSource.FromFile("star_filled.png");
+                    HasFavoritedNotation = true;
+                }
+            }
+        }
+
+        #endregion
     }
 }

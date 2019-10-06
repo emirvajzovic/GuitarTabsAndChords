@@ -32,7 +32,7 @@
                 </OnPlatform>
             </NavigationPage.Icon>
             <x:Arguments>
-                <views:AboutPage />
+                <views:FavoritesPage />
             </x:Arguments>
         </NavigationPage>
         
@@ -45,7 +45,7 @@
                 </OnPlatform>
             </NavigationPage.Icon>
             <x:Arguments>
-                <views:AboutPage />
+                <views:BrowsePage />
             </x:Arguments>
         </NavigationPage>
         

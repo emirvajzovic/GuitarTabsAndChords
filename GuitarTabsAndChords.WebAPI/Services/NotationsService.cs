@@ -52,7 +52,7 @@ namespace GuitarTabsAndChords.WebAPI.Services
                 .Include(x => x.Song.Artist)
                 .Include(x => x.Song.Genre)
                 .Include(x => x.User)
-                .Include(x=>x.LastEditor);
+                .Include(x => x.LastEditor);
 
             var list = query.ToList();
 
@@ -69,7 +69,7 @@ namespace GuitarTabsAndChords.WebAPI.Services
                 .Include(x => x.LastEditor)
                 .FirstOrDefault();
 
-            if(entity != null)
+            if (entity != null)
             {
                 NotationViews view = new NotationViews
                 {
@@ -128,6 +128,70 @@ namespace GuitarTabsAndChords.WebAPI.Services
             _context.SaveChanges();
 
             return _mapper.Map<Model.Notations>(entity);
+        }
+
+        public List<Model.Notations> GetThisWeekTop5()
+        {
+            var query = _context.Notations.AsQueryable();
+
+            query = query.Where(x => x.Status == ReviewStatus.Approved);
+
+            query = query
+                .Include(x => x.Song.Artist)
+                .Include(x => x.Song.Genre)
+                .Include(x => x.User);
+
+            query = query.OrderByDescending(x => _context
+                    .NotationViews
+                    .Where(views => views.Timestamp >= DateTime.Now.AddDays(-7))
+                    .Count(views => views.NotationId == x.Id)
+                ).Take(5);
+
+
+            var list = query.ToList();
+
+            List<Model.Notations> notationList = _mapper.Map<List<Model.Notations>>(list);
+
+            foreach (var entity in notationList)
+            {
+                entity.Rating = _context.Ratings.Where(x => x.NotationId == entity.Id).Average(x => (double?)x.Rating) ?? 0;
+                entity.Views = _context.NotationViews
+                    .Where(x=>x.Timestamp >= DateTime.Now.AddDays(-7))
+                    .Count(x => x.NotationId == entity.Id);
+            }
+
+            return notationList;
+        }
+
+        public List<Model.Notations> GetTop100()
+        {
+            var query = _context.Notations.AsQueryable();
+
+            query = query.Where(x => x.Status == ReviewStatus.Approved);
+
+            query = query
+                .Include(x => x.Song.Artist)
+                .Include(x => x.Song.Genre)
+                .Include(x => x.User);
+
+            query = query.OrderByDescending(x => _context
+                .Ratings
+                .Where(views => views.NotationId == x.Id)
+                .Average(avg=>(double?)avg.Rating) ?? 0
+            );
+
+            var list = query.ToList();
+
+            List<Model.Notations> notationList = _mapper.Map<List<Model.Notations>>(list);
+
+            foreach (var entity in notationList)
+            {
+                entity.Rating = _context.Ratings.Where(x => x.NotationId == entity.Id).Average(x => (double?)x.Rating) ?? 0;
+                entity.Views = _context.NotationViews
+                    .Count(x => x.NotationId == entity.Id);
+            }
+
+            return notationList;
         }
     }
 }

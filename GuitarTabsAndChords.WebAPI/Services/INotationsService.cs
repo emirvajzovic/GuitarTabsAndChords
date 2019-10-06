@@ -13,5 +13,7 @@ namespace GuitarTabsAndChords.WebAPI.Services
         Notations GetById(int id);
         Notations Insert(NotationsInsertRequest request);
         Notations Update(int id, NotationsInsertRequest request);
+        List<Notations> GetThisWeekTop5();
+        List<Notations> GetTop100();
     }
 }

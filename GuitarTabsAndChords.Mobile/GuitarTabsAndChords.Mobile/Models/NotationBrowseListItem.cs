@@ -1,12 +1,21 @@
-﻿using System;
+﻿using GuitarTabsAndChords.Model;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 
-namespace GuitarTabsAndChords.Model
+namespace GuitarTabsAndChords.Mobile.Models
 {
-    public class Notations
+    public class NotationBrowseListItem
     {
+        NotationBrowseListItem()
+        {
+            Star1 = new Star();
+            Star2 = new Star();
+            Star3 = new Star();
+            Star4 = new Star();
+            Star5 = new Star();
+        }
+
         public int Id { get; set; }
         public string NotationContent { get; set; }
         public NotationType Type { get; set; }
@@ -25,7 +34,11 @@ namespace GuitarTabsAndChords.Model
         public int Views { get; set; }
         public int Favorites { get; set; }
         public double Rating { get; set; }
-    }
 
-    public enum NotationType { Tab, Chord }
+        public Star Star1 { get; set; }
+        public Star Star2 { get; set; }
+        public Star Star3 { get; set; }
+        public Star Star4 { get; set; }
+        public Star Star5 { get; set; }
+    }
 }

@@ -43,5 +43,15 @@ namespace GuitarTabsAndChords.WebAPI.Controllers
             return _service.Update(Id, request);
         }
 
+        [HttpGet("ThisWeekTop5")]
+        public List<Model.Notations> GetThisWeekTop5()
+        {
+            return _service.GetThisWeekTop5();
+        }
+        [HttpGet("Top100")]
+        public List<Model.Notations> GetTop100()
+        {
+            return _service.GetTop100();
+        }
     }
 }

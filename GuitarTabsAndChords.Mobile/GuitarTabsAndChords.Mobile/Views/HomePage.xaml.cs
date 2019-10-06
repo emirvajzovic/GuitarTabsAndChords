@@ -35,5 +35,22 @@ namespace GuitarTabsAndChords.Mobile.Views
 
             await Navigation.PushAsync(new NotationDetailsPage(context.Id));
         }
+
+        private void ListView_ItemTapped(object sender, ItemTappedEventArgs e)
+        {
+            if(e.Item != null)
+            {
+                Models.MenuItem menuItem = e.Item as Models.MenuItem;
+                if(menuItem.Page == null)
+                {
+                    // todo logout
+                }
+                else
+                {
+                    Page instance = (Page)Activator.CreateInstance(menuItem.Page);
+                    Navigation.PushAsync(instance);
+                }
+            }
+        }
     }
 }

@@ -23,6 +23,12 @@ namespace GuitarTabsAndChords.Mobile.Views
                              .SetBarItemColor(Color.Black)
                              .SetBarSelectedItemColor(Color.Black);
             }
+            else if(Device.RuntimePlatform == Device.UWP)
+            {
+                On<Xamarin.Forms.PlatformConfiguration.Android>().SetToolbarPlacement(Xamarin.Forms.PlatformConfiguration.AndroidSpecific.ToolbarPlacement.Bottom)
+                             .SetBarItemColor(Color.White)
+                             .SetBarSelectedItemColor(Color.White);
+            }
 
         }
     }

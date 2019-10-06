@@ -6,11 +6,18 @@
              mc:Ignorable="d"
              x:Class="GuitarTabsAndChords.Mobile.Views.NotationDetailsPage"
              Title="{Binding Title}">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Favorite" x:Name="FavoriteToolbarItem" Clicked="FavoriteToolbarItem_Clicked"/>
+    </ContentPage.ToolbarItems>
+    
     <ContentPage.Content>
         <ScrollView Padding="5">
 
             <Grid>
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -28,7 +35,7 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <Label Grid.Row="0" Grid.Column="0" Text="{Binding Notation.Song.Name}" TextColor="#2296f3" FontSize="18" FontAttributes="Bold"/>
+                <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Notation.Song.Name}" TextColor="#2296f3" FontSize="18" FontAttributes="Bold"/>
                 <Label Grid.Row="1" Grid.Column="0" Text="Artist:" FontAttributes="Bold" />
                 <Label Grid.Row="1" Grid.Column="1" Text="{Binding Notation.Song.Artist.Name}" TextColor="#2296f3" FontAttributes="Bold" />
 
@@ -73,35 +80,35 @@
                 
                 <StackLayout Grid.Row="12" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal">
                     <ImageButton                    
-        Command="{Binding OcijeniStarCommand}"
+        Command="{Binding RateStarCommand}"
         BackgroundColor="Transparent"
         Source="{Binding Star1.Slika}"
                             WidthRequest="32"
                             CommandParameter="1"
                             />
                     <ImageButton                    
-        Command="{Binding OcijeniStarCommand}"
+        Command="{Binding RateStarCommand}"
         BackgroundColor="Transparent"
         Source="{Binding Star2.Slika}" 
                             WidthRequest="32"
                             CommandParameter="2"
                             />
                     <ImageButton                    
-        Command="{Binding OcijeniStarCommand}"
+        Command="{Binding RateStarCommand}"
         BackgroundColor="Transparent"
         Source="{Binding Star3.Slika}" 
                             WidthRequest="32"
                             CommandParameter="3"
                             />
                     <ImageButton                    
-        Command="{Binding OcijeniStarCommand}"
+        Command="{Binding RateStarCommand}"
         BackgroundColor="Transparent"
         Source="{Binding Star4.Slika}" 
                             WidthRequest="32"
                             CommandParameter="4"
                             />
                     <ImageButton                    
-        Command="{Binding OcijeniStarCommand}"
+        Command="{Binding RateStarCommand}"
         BackgroundColor="Transparent"
         Source="{Binding Star5.Slika}" 
                             WidthRequest="32"

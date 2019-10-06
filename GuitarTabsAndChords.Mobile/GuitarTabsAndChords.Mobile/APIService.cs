@@ -32,9 +32,13 @@ namespace GuitarTabsAndChords.Mobile
         }
 
 
-        public async Task<T> Get<T>(object search)
+        public async Task<T> Get<T>(object search, string action = null)
         {
             var url = $"{APIUrl}/{_route}";
+            if(action != null)
+            {
+                url += "/" + action;
+            }
 
             if (search != null)
             {
@@ -53,9 +57,8 @@ namespace GuitarTabsAndChords.Mobile
         }
 
         public async Task<T> Insert<T>(object request, string action = null)
-        {;
-            var url = $"{APIUrl}";
-            url += $"{ _route}";
+        {
+            var url = $"{APIUrl}/{ _route}";
             if(action != null)
             {
                 url += $"/{action}";
@@ -89,8 +92,7 @@ namespace GuitarTabsAndChords.Mobile
         {
             try
             {
-                var url = $"{APIUrl}";
-                url += $"{ _route}";
+                var url = $"{APIUrl}/{ _route}";
                 if (action != null)
                 {
                     url += $"/{action}";
@@ -114,5 +116,12 @@ namespace GuitarTabsAndChords.Mobile
             }
 
         }
+        public async Task<T> Delete<T>(int id)
+        {
+            var url = $"{APIUrl}/{_route}/{id}";
+
+            return await url.DeleteAsync().ReceiveJson<T>();
+        }
+
     }
 }

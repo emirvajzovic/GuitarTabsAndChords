@@ -8,8 +8,8 @@ namespace GuitarTabsAndChords.Model
     public class NotationCorrections
     {
         public int Id { get; set; }
-        public int TabId { get; set; }
-        public Notations Tab { get; set; }
+        public int NotationId { get; set; }
+        public Notations Notation { get; set; }
         public string NotationContent { get; set; }
         public string Tuning { get; set; }
         public string TuningDescription { get; set; }

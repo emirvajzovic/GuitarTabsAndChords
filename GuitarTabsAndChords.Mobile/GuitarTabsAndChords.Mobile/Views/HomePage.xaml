@@ -110,6 +110,29 @@
                         </DataTemplate>
                     </syncfusion:SfListView.ItemTemplate>
                 </syncfusion:SfListView>
+
+
+                <ListView
+                VerticalOptions="FillAndExpand"
+                ItemsSource="{Binding MenuItems}"
+                    ItemTapped="ListView_ItemTapped"
+                    HeightRequest="150">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout Orientation="Horizontal">
+                                    <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                                        <Image Source="{Binding Image}" VerticalOptions="Center" HeightRequest="32" />
+                                    </StackLayout>
+                                    <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="Fill">
+                                        <Label Text="{Binding Text}"/>
+                                    </StackLayout>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>
