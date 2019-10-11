@@ -17,6 +17,8 @@ namespace GuitarTabsAndChords.WebAPI.Services
         private readonly GuitarTabsContext _context;
         private readonly IMapper _mapper;
 
+        private Model.Users _currentUser;
+
         public UsersService(GuitarTabsContext context, IMapper mapper)
         {
             _context = context;
@@ -132,5 +134,44 @@ namespace GuitarTabsAndChords.WebAPI.Services
             return Convert.ToBase64String(inArray);
         }
 
+        public Model.Users MyProfile()
+        {
+            var query = _context.Users.AsQueryable();
+
+            query = query.Where(x => x.Id == _currentUser.Id);
+
+            query = query.Include(x => x.Role);
+
+            var entity = query.FirstOrDefault();
+
+            return _mapper.Map<Model.Users>(entity);
+        }
+
+        public Model.Users Authenticate(string username, string pass)
+        {
+            var user = _context.Users
+                         .Include(x => x.Role)
+                         .FirstOrDefault(x => x.Username == username);
+
+            if (user != null)
+            {
+                var newHash = GenerateHash(user.PasswordSalt, pass);
+
+                if (newHash == user.PasswordHash)
+                {
+                    return _mapper.Map<Model.Users>(user);
+                }
+            }
+            return null;
+        }
+
+        public void SetCurrentUser(Model.Users user)
+        {
+            _currentUser = user;
+        }
+        public Model.Users GetCurrentUser()
+        {
+            return _currentUser;
+        }
     }
 }

@@ -14,5 +14,10 @@ namespace GuitarTabsAndChords.WebAPI.Services
         Model.Users Update(int id, Model.Requests.UsersUpdateRequest request);
         Model.Users GetById(int id);
         Users InsertAdmin(UsersInsertRequest request);
+        Model.Users MyProfile();
+        Model.Users Authenticate(string username, string pass);
+
+        Model.Users GetCurrentUser();
+        void SetCurrentUser(Model.Users user);
     }
 }

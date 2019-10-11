@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using GuitarTabsAndChords.WebAPI.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -47,6 +48,13 @@ namespace GuitarTabsAndChords.WebAPI.Controllers
         public Model.Users Update(int Id, [FromBody] Model.Requests.UsersUpdateRequest request)
         {
             return _service.Update(Id, request);
+        }
+
+        [HttpGet("MyProfile")]
+        [Authorize]
+        public Model.Users MyProfile()
+        {
+            return _service.MyProfile();
         }
 
     }

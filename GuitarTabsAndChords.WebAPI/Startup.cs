@@ -5,7 +5,9 @@ using System.Threading.Tasks;
 using AutoMapper;
 using GuitarTabsAndChords.WebAPI.Database;
 using GuitarTabsAndChords.WebAPI.Filters;
+using GuitarTabsAndChords.WebAPI.Security;
 using GuitarTabsAndChords.WebAPI.Services;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -15,9 +17,23 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.Swagger;
+using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace GuitarTabsAndChords.WebAPI
 {
+    public class BasicAuthDocumentFilter : IDocumentFilter
+    {
+        public void Apply(SwaggerDocument swaggerDoc, DocumentFilterContext context)
+        {
+            var securityRequirements = new Dictionary<string, IEnumerable<string>>()
+        {
+            { "basic", new string[] { } }  // in swagger you specify empty list unless using OAuth2 scopes
+        };
+
+            swaggerDoc.Security = new[] { securityRequirements };
+        }
+    }
+
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -35,11 +51,6 @@ namespace GuitarTabsAndChords.WebAPI
             services.AddAutoMapper();
 #pragma warning restore CS0618 // Type or member is obsolete
 
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
-            });
-
             services.AddScoped<IArtistsService, ArtistsService>();
             services.AddScoped<IAlbumsService, AlbumsService>();
             services.AddScoped<ISongsService, SongsService>();
@@ -49,6 +60,16 @@ namespace GuitarTabsAndChords.WebAPI
             services.AddScoped<IRatingsService, RatingsService>();
             services.AddScoped<IFavoritesService, FavoritesService>();
             services.AddScoped<ISearchService, SearchService>();
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info { Title = "GuitarTabsAndChords API v1", Version = "v1" });
+                c.AddSecurityDefinition("basic", new BasicAuthScheme() { Type = "basic" });
+                c.DocumentFilter<BasicAuthDocumentFilter>();
+            });
+
+            services.AddAuthentication("BasicAuthentication")
+               .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
 
             var connection = Configuration.GetConnectionString("lokalni");
             services.AddDbContext<GuitarTabsContext>(options => options.UseSqlServer(connection));
@@ -69,9 +90,10 @@ namespace GuitarTabsAndChords.WebAPI
 
             app.UseSwaggerUI(s =>
             {
-                s.SwaggerEndpoint("/swagger/v1/swagger.json", "My Project API");
+                s.SwaggerEndpoint("/swagger/v1/swagger.json", "GuitarTabsAndChords API v1");
             });
 
+            app.UseAuthentication();
             app.UseMvc();
         }
     }

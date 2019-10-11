@@ -16,7 +16,12 @@ namespace GuitarTabsAndChords.WinUI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmIndex());
+
+            var frm = new frmLogin();
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                Application.Run(new frmIndex());
+            }
         }
     }
 }

@@ -11,6 +11,9 @@ namespace GuitarTabsAndChords.Mobile
 {
     public class APIService
     {
+        public static string Username { get; set; }
+        public static string Password { get; set; }
+        public static Model.Users CurrentUser { get; set; }
 
         private string APIUrl;
         private readonly string _route;
@@ -22,7 +25,7 @@ namespace GuitarTabsAndChords.Mobile
 
         public string getApiURL()
         {
-            string local = "http://localhost:16/api";
+            string local = "http://localhost:59058/api";
             string API = "http://192.168.1.16:16/api";
 
             if (Device.RuntimePlatform == Device.UWP)
@@ -35,31 +38,62 @@ namespace GuitarTabsAndChords.Mobile
         public async Task<T> Get<T>(object search, string action = null)
         {
             var url = $"{APIUrl}/{_route}";
-            if(action != null)
+            try
             {
-                url += "/" + action;
-            }
+                if (action != null)
+                {
+                    url += "/" + action;
+                }
 
-            if (search != null)
+                if (search != null)
+                {
+                    url += "?";
+                    url += await search.ToQueryString();
+                }
+
+                return await url.WithBasicAuth(Username, Password).GetJsonAsync<T>();
+            }
+            catch (FlurlHttpException ex)
             {
-                url += "?";
-                url += await search.ToQueryString();
+                if (ex.Call.HttpStatus == System.Net.HttpStatusCode.Unauthorized)
+                {
+                    await Application.Current.MainPage.DisplayAlert("Error", "You are not logged in.", "OK");
+                }
+                if (ex.Call.HttpStatus == System.Net.HttpStatusCode.Forbidden)
+                {
+                    await Application.Current.MainPage.DisplayAlert("Error", "You are not authorized", "OK");
+                    return default(T);
+                }
+                throw;
             }
-
-            return await url.GetJsonAsync<T>();
         }
 
         public async Task<T> GetById<T>(object id)
         {
             var url = $"{APIUrl}/{_route}/{id}";
-
-            return await url.GetJsonAsync<T>();
+            try
+            {
+                return await url.GetJsonAsync<T>();
+            }
+            catch (FlurlHttpException ex)
+            {
+                if (ex.Call.HttpStatus == System.Net.HttpStatusCode.Unauthorized)
+                {
+                    await Application.Current.MainPage.DisplayAlert("Error", "You are not logged in.", "OK");
+                }
+                if (ex.Call.HttpStatus == System.Net.HttpStatusCode.Forbidden)
+                {
+                    await Application.Current.MainPage.DisplayAlert("Error", "You are not authorized", "OK");
+                    return default(T);
+                }
+                throw;
+            }
         }
 
         public async Task<T> Insert<T>(object request, string action = null)
         {
             var url = $"{APIUrl}/{ _route}";
-            if(action != null)
+            if (action != null)
             {
                 url += $"/{action}";
             }
@@ -69,6 +103,17 @@ namespace GuitarTabsAndChords.Mobile
             }
             catch (FlurlHttpException ex)
             {
+                if (ex.Call.HttpStatus == System.Net.HttpStatusCode.Unauthorized)
+                {
+                    await Application.Current.MainPage.DisplayAlert("Error", "You are not logged in.", "OK");
+                    throw;
+                }
+                if (ex.Call.HttpStatus == System.Net.HttpStatusCode.Forbidden)
+                {
+                    await Application.Current.MainPage.DisplayAlert("Error", "You are not authorized", "OK");
+                    return default(T);
+                }
+
                 var errors = await ex.GetResponseJsonAsync<Dictionary<string, string[]>>();
 
                 var stringBuilder = new StringBuilder();
@@ -80,7 +125,7 @@ namespace GuitarTabsAndChords.Mobile
                 await Application.Current.MainPage.DisplayAlert("Error", stringBuilder.ToString(), "OK");
                 return default(T);
             }
-            catch(Exception)
+            catch (Exception)
             {
                 return default(T);
 
@@ -103,6 +148,17 @@ namespace GuitarTabsAndChords.Mobile
             }
             catch (FlurlHttpException ex)
             {
+                if (ex.Call.HttpStatus == System.Net.HttpStatusCode.Unauthorized)
+                {
+                    await Application.Current.MainPage.DisplayAlert("Error", "You are not logged in.", "OK");
+                    throw;
+                }
+                if (ex.Call.HttpStatus == System.Net.HttpStatusCode.Forbidden)
+                {
+                    await Application.Current.MainPage.DisplayAlert("Error", "You are not authorized", "OK");
+                    return default(T);
+                }
+
                 var errors = await ex.GetResponseJsonAsync<Dictionary<string, string[]>>();
 
                 var stringBuilder = new StringBuilder();
@@ -120,7 +176,22 @@ namespace GuitarTabsAndChords.Mobile
         {
             var url = $"{APIUrl}/{_route}/{id}";
 
-            return await url.DeleteAsync().ReceiveJson<T>();
+            try
+            {
+                return await url.DeleteAsync().ReceiveJson<T>();
+            }
+            catch (FlurlHttpException ex)
+            {
+                if (ex.Call.HttpStatus == System.Net.HttpStatusCode.Unauthorized)
+                {
+                    await Application.Current.MainPage.DisplayAlert("Error", "You are not logged in.", "OK");
+                }
+                if (ex.Call.HttpStatus == System.Net.HttpStatusCode.Forbidden)
+                {
+                    await Application.Current.MainPage.DisplayAlert("Error", "You are not authorized", "OK");
+                }
+                return default(T);
+            }
         }
 
     }
