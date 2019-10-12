@@ -24,6 +24,8 @@ namespace GuitarTabsAndChords.Model
             return Name;
         }
 
+        public string GenresStr { get => string.Join(", ", Genres.Select(x=>x.Name).ToArray()); }
+
     }
 
 }

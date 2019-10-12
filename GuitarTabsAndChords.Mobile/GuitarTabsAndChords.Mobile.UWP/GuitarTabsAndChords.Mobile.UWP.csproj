@@ -104,6 +104,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon_browse.png" />
+    <Content Include="icon_edit.png" />
     <Content Include="icon_home.png" />
     <Content Include="icon_recommended.png" />
     <Content Include="icon_star.png" />

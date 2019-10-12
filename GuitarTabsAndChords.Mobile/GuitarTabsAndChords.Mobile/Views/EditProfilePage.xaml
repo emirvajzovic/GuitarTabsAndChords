@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:GuitarTabsAndChords.Mobile.Converters"
+             mc:Ignorable="d"
+             x:Class="GuitarTabsAndChords.Mobile.Views.EditProfilePage"
+             Title="{Binding Title}"
+             >
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:ImageConverter x:Key="imgConv"></local:ImageConverter>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+
+        <ScrollView>
+            <StackLayout Padding="10">
+                <StackLayout Orientation="Vertical">
+                    <Image x:Name="imageView" Source="{Binding User.ProfilePicture, Converter={StaticResource imgConv}}" />
+                    <ActivityIndicator x:Name="uploadIndicator" IsVisible="False" IsRunning="False" Color="DodgerBlue" />
+                    <Button x:Name="btnSelectPic" Text="Select picture" Clicked="BtnSelectPic_Clicked" BackgroundColor="DodgerBlue" TextColor="White" />
+                    <Button x:Name="btnTakePic" Text="Take picture" Clicked="BtnTakePic_Clicked" BackgroundColor="DodgerBlue" TextColor="White" />
+                </StackLayout>
+                <StackLayout Orientation="Vertical">
+                    <Label Text="Name"/>
+                    <Entry Text="{Binding User.Name}"/>
+                </StackLayout>
+                <StackLayout Orientation="Vertical">
+                    <Label Text="Last name"/>
+                    <Entry Text="{Binding User.LastName}"/>
+                </StackLayout>
+                <StackLayout Orientation="Vertical">
+                    <Label Text="Email"/>
+                    <Entry Text="{Binding User.Email}"/>
+                </StackLayout>
+                <StackLayout Orientation="Vertical">
+                    <Label Text="Username"/>
+                    <Entry Text="{Binding User.Username}"/>
+                </StackLayout>
+                <StackLayout Orientation="Vertical">
+                    <Label Text="Password"/>
+                    <Entry Text="{Binding User.Password}" IsPassword="True"/>
+                </StackLayout>
+                <StackLayout Orientation="Vertical">
+                    <Label Text="Password confirmation"/>
+                    <Entry Text="{Binding User.PasswordConfirmation}" IsPassword="True"/>
+                </StackLayout>
+                <StackLayout Orientation="Vertical">
+                    <Label Text="Date of birth"/>
+                    <DatePicker Date="{Binding User.DateOfBirth}"/>
+                </StackLayout>
+
+                <Button x:Name="btnSave" Text="Save changes" Command="{Binding SaveProfileCommand}"/>
+
+            </StackLayout>
+        </ScrollView>
+        
+    </ContentPage.Content>
+</ContentPage>

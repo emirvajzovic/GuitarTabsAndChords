@@ -44,6 +44,7 @@ namespace GuitarTabsAndChords.WebAPI.Controllers
             return _service.InsertAdmin(request);
         }
 
+        [Authorize]
         [HttpPut("{Id}")]
         public Model.Users Update(int Id, [FromBody] Model.Requests.UsersUpdateRequest request)
         {

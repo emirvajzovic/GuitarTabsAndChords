@@ -13,5 +13,6 @@ namespace GuitarTabsAndChords.Model.Requests
         public int SongId { get; set; }
         public int? Filter { get; set; }
         public string Tuning { get; set; }
+        public int UserId { get; set; }
     }
 }

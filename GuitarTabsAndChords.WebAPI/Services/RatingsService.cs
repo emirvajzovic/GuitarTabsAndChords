@@ -13,11 +13,13 @@ namespace GuitarTabsAndChords.WebAPI.Services
     {
         private readonly GuitarTabsContext _context;
         private readonly IMapper _mapper;
+        private readonly IUsersService _usersService;
 
-        public RatingsService(GuitarTabsContext context, IMapper mapper)
+        public RatingsService(GuitarTabsContext context, IMapper mapper, IUsersService usersService)
         {
             _context = context;
             _mapper = mapper;
+            _usersService = usersService;
         }
 
         public List<Model.Ratings> Get(RatingsSearchRequest request)
@@ -27,7 +29,7 @@ namespace GuitarTabsAndChords.WebAPI.Services
             if (request?.NotationId != 0)
                 query = query.Where(x => x.NotationId == request.NotationId);
 
-            query = query.Where(x => x.UserId == 1); // todo
+            query = query.Where(x => x.UserId == _usersService.GetCurrentUser().Id);
 
             var list = query.ToList();
 
@@ -43,7 +45,7 @@ namespace GuitarTabsAndChords.WebAPI.Services
 
         public Model.Ratings RateNotation(RatingsInsertRequest request)
         {
-            int UserId = 1; // Todo
+            int UserId = _usersService.GetCurrentUser().Id;
 
             Database.Ratings entity = _context.Ratings.Where(x => x.NotationId == request.NotationId && x.UserId == UserId).FirstOrDefault();
             if (entity != null)

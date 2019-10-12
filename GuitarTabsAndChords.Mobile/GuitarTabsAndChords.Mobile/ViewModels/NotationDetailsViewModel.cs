@@ -110,7 +110,7 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
         private async Task LoadNotation()
         {
             Notation = await _serviceNotations.GetById<Model.Notations>(_notationId);
-            LastEditInfo = Notation.LastEditor.Username + " on " + Notation.LastEditted.ToShortDateString();
+            LastEditInfo = "on " + Notation.LastEditted.ToShortDateString();
             Title = Notation.Type.ToString() + "s";
         }
 

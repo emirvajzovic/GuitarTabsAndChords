@@ -35,6 +35,8 @@ namespace GuitarTabsAndChords.WebAPI.Services
                 query = query.Where(x => x.SongId == request.SongId);
             if (!string.IsNullOrWhiteSpace(request?.Tuning))
                 query = query.Where(x => x.Tuning == request.Tuning);
+            if (request?.UserId != 0)
+                query = query.Where(x => x.UserId == request.UserId);
 
             if (!string.IsNullOrWhiteSpace(request?.SearchTerm))
                 query = query.Where(x => x.Song.Artist.Name.Contains(request.SearchTerm) || x.Song.Album.Name.Contains(request.SearchTerm) || x.Song.Name.Contains(request.SearchTerm) || x.User.Username.Contains(request.SearchTerm));
@@ -54,9 +56,24 @@ namespace GuitarTabsAndChords.WebAPI.Services
                 .Include(x => x.User)
                 .Include(x => x.LastEditor);
 
+            if (request?.ArtistId != 0)
+            {
+                query = query.OrderByDescending(x => _context.NotationViews.Where(nv => nv.NotationId == x.Id).Count());
+            }
+
             var list = query.ToList();
 
-            return _mapper.Map<List<Model.Notations>>(list);
+            List<Model.Notations> notationList = _mapper.Map<List<Model.Notations>>(list);
+
+            foreach (var entity in notationList)
+            {
+                entity.Rating = _context.Ratings.Where(x => x.NotationId == entity.Id).Average(x => (double?)x.Rating) ?? 0;
+                entity.Views = _context.NotationViews
+                    .Where(x => x.Timestamp >= DateTime.Now.AddDays(-7))
+                    .Count(x => x.NotationId == entity.Id);
+            }
+
+            return notationList;
         }
 
         public Model.Notations GetById(int id)
@@ -156,7 +173,7 @@ namespace GuitarTabsAndChords.WebAPI.Services
             {
                 entity.Rating = _context.Ratings.Where(x => x.NotationId == entity.Id).Average(x => (double?)x.Rating) ?? 0;
                 entity.Views = _context.NotationViews
-                    .Where(x=>x.Timestamp >= DateTime.Now.AddDays(-7))
+                    .Where(x => x.Timestamp >= DateTime.Now.AddDays(-7))
                     .Count(x => x.NotationId == entity.Id);
             }
 
@@ -177,7 +194,7 @@ namespace GuitarTabsAndChords.WebAPI.Services
             query = query.OrderByDescending(x => _context
                 .Ratings
                 .Where(views => views.NotationId == x.Id)
-                .Average(avg=>(double?)avg.Rating) ?? 0
+                .Average(avg => (double?)avg.Rating) ?? 0
             );
 
             var list = query.ToList();

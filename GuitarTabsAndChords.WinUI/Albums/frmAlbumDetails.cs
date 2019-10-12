@@ -95,6 +95,18 @@ namespace GuitarTabsAndChords.WinUI
             cmbArtist.DataSource = list;
             cmbArtist.ValueMember = "Id";
             cmbArtist.DisplayMember = "Name";
+
+            if(entity != null)
+            {
+                foreach (var item in list)
+                {
+                    if (item.Id == entity.ArtistId)
+                    {
+                        cmbArtist.SelectedItem = item;
+                        break;
+                    }
+                }
+            }
         }
 
 

@@ -43,6 +43,12 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
             {
                 APIService.CurrentUser = await _service.Get<Model.Users>(null, "MyProfile");
 
+                if(APIService.CurrentUser.Role.Name != "User")
+                {
+                    await Application.Current.MainPage.DisplayAlert("Error", "Error logging in.", "OK");
+                    return;
+                }
+
 #pragma warning disable CS0612 // Type or member is obsolete
                 Application.Current.MainPage = new MainPage();
 #pragma warning restore CS0612 // Type or member is obsolete

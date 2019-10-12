@@ -40,5 +40,7 @@ namespace GuitarTabsAndChords.Mobile.Models
         public Star Star3 { get; set; }
         public Star Star4 { get; set; }
         public Star Star5 { get; set; }
+
+        public int Counter { get; set; }
     }
 }

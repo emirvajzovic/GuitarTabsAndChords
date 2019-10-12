@@ -43,7 +43,7 @@ namespace GuitarTabsAndChords.Mobile.Views
                 Models.MenuItem menuItem = e.Item as Models.MenuItem;
                 if(menuItem.Page == null)
                 {
-                    // todo logout
+                    Application.Current.MainPage = new LoginPage();
                 }
                 else
                 {

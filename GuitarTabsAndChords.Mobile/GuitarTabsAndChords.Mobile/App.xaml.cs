@@ -15,7 +15,7 @@ namespace GuitarTabsAndChords.Mobile
 
             DependencyService.Register<MockDataStore>();
 #pragma warning disable CS0612 // Type or member is obsolete
-            MainPage = new MainPage();
+            MainPage = new LoginPage();
 #pragma warning restore CS0612 // Type or member is obsolete
         }
 

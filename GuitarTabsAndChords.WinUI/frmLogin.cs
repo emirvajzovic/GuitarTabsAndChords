@@ -27,6 +27,12 @@ namespace GuitarTabsAndChords.WinUI
             {
                 APIService.CurrentUser = await _service.Get<Model.Users>(null, "MyProfile");
 
+                if(APIService.CurrentUser.Role.Name != "Administrator")
+                {
+                    MessageBox.Show("You don't have permission for this operation.", "Forbidden", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
                 DialogResult = DialogResult.OK;
             }
             catch (Exception)

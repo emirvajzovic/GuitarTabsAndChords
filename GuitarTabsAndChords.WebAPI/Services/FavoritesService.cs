@@ -14,11 +14,13 @@ namespace GuitarTabsAndChords.WebAPI.Services
     {
         private readonly GuitarTabsContext _context;
         private readonly IMapper _mapper;
+        private readonly IUsersService _usersService;
 
-        public FavoritesService(GuitarTabsContext context, IMapper mapper)
+        public FavoritesService(GuitarTabsContext context, IMapper mapper, IUsersService usersService)
         {
             _context = context;
             _mapper = mapper;
+            _usersService = usersService;
         }
 
         public List<Model.Favorites> Get(FavoritesSearchRequest request)
@@ -28,7 +30,7 @@ namespace GuitarTabsAndChords.WebAPI.Services
             if (request?.NotationId != 0)
                 query = query.Where(x => x.NotationId == request.NotationId);
 
-            query = query.Where(x => x.UserId == 1); // todo
+            query = query.Where(x => x.UserId == _usersService.GetCurrentUser().Id);
 
             query = query.Include(x => x.Notation.User);
             query = query.Include(x => x.Notation.Song.Artist);
@@ -42,7 +44,7 @@ namespace GuitarTabsAndChords.WebAPI.Services
         {
             var entity = _context.Favorites
                 .Where(x => x.NotationId == id)
-                .Where(x => x.UserId == 1) // todo
+                .Where(x => x.UserId == _usersService.GetCurrentUser().Id)
                 .FirstOrDefault();
 
             return _mapper.Map<Model.Favorites>(entity);
@@ -52,7 +54,7 @@ namespace GuitarTabsAndChords.WebAPI.Services
         {
             Database.Favorites entity = _context.Favorites
                 .Where(x => x.NotationId == id)
-                .Where(x => x.UserId == 1) // todo
+                .Where(x => x.UserId == _usersService.GetCurrentUser().Id)
                 .FirstOrDefault();
 
             if (entity != null)
@@ -67,7 +69,7 @@ namespace GuitarTabsAndChords.WebAPI.Services
 
         public Model.Favorites Insert(FavoritesInsertRequest request)
         {
-            int UserId = 1; // todo
+            int UserId = _usersService.GetCurrentUser().Id;
 
             var existingEntity = _context.Favorites.Where(x => x.NotationId == request.NotationId && x.UserId == UserId).FirstOrDefault();
             if (existingEntity != null)

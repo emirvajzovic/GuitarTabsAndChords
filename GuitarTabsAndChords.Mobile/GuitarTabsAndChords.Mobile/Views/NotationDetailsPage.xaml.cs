@@ -25,5 +25,25 @@ namespace GuitarTabsAndChords.Mobile.Views
         {
             VM.ToggleFavoriteNotation();
         }
+
+        private void SongLabel_Tapped(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new SongPage(VM.Notation.SongId));
+        }
+
+        private void ArtistLabel_Tapped(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new ArtistPage(VM.Notation.Song.ArtistId));
+        }
+
+        private void UserLabel_Tapped(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new ProfilePage(VM.Notation.UserId));
+        }
+
+        private void LastEditLabel_Tapped(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new ProfilePage(VM.Notation.LastEditorId));
+        }
     }
 }

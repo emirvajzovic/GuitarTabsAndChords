@@ -25,7 +25,7 @@ namespace GuitarTabsAndChords.Mobile
 
         public string getApiURL()
         {
-            string local = "http://localhost:59058/api";
+            string local = "http://localhost:16/api";
             string API = "http://192.168.1.16:16/api";
 
             if (Device.RuntimePlatform == Device.UWP)
@@ -68,12 +68,17 @@ namespace GuitarTabsAndChords.Mobile
             }
         }
 
-        public async Task<T> GetById<T>(object id)
+        public async Task<T> GetById<T>(object id, string action = null)
         {
-            var url = $"{APIUrl}/{_route}/{id}";
+            var url = $"{APIUrl}/{_route}";
             try
             {
-                return await url.GetJsonAsync<T>();
+                if (action != null)
+                {
+                    url += $"/{action}";
+                }
+                url += $"/{id}";
+                return await url.WithBasicAuth(Username, Password).GetJsonAsync<T>();
             }
             catch (FlurlHttpException ex)
             {
@@ -99,7 +104,7 @@ namespace GuitarTabsAndChords.Mobile
             }
             try
             {
-                return await url.PostJsonAsync(request).ReceiveJson<T>();
+                return await url.WithBasicAuth(Username, Password).PostJsonAsync(request).ReceiveJson<T>();
             }
             catch (FlurlHttpException ex)
             {
@@ -144,7 +149,7 @@ namespace GuitarTabsAndChords.Mobile
                 }
                 url += $"/{id}";
 
-                return await url.PutJsonAsync(request).ReceiveJson<T>();
+                return await url.WithBasicAuth(Username, Password).PutJsonAsync(request).ReceiveJson<T>();
             }
             catch (FlurlHttpException ex)
             {
@@ -178,7 +183,7 @@ namespace GuitarTabsAndChords.Mobile
 
             try
             {
-                return await url.DeleteAsync().ReceiveJson<T>();
+                return await url.WithBasicAuth(Username, Password).DeleteAsync().ReceiveJson<T>();
             }
             catch (FlurlHttpException ex)
             {

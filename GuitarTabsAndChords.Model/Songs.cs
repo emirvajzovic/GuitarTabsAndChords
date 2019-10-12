@@ -21,5 +21,7 @@ namespace GuitarTabsAndChords.Model
         {
             return Name;
         }
+
+        public int Counter { get; set; }
     }
 }

@@ -52,13 +52,13 @@ namespace GuitarTabsAndChords.Mobile.Views
                 switch(item.ResultTypeName)
                 {
                     case "Song":
-                        //Navigation.PushAsync(new SongPage(item.Id));
+                        Navigation.PushAsync(new SongPage(item.Id));
                         break;
                     case "Album":
-                        //Navigation.PushAsync(new AlbumPage(item.Id));
+                        Navigation.PushAsync(new AlbumPage(item.Id));
                         break;
                     case "Artist":
-                        //Navigation.PushAsync(new ArtistPage(item.Id));
+                        Navigation.PushAsync(new ArtistPage(item.Id));
                         break;
                     default:
                         break;

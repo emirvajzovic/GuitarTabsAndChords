@@ -83,7 +83,7 @@ namespace GuitarTabsAndChords.WinUI
         public async Task<T> Insert<T>(object request, string action = null)
         {
             var url = $"{Properties.Settings.Default.APIUrl}";
-            url += $"{ _route}";
+            url += $"/{ _route}";
             if (action != null)
             {
                 url += $"/{action}";
@@ -129,7 +129,7 @@ namespace GuitarTabsAndChords.WinUI
             try
             {
                 var url = $"{Properties.Settings.Default.APIUrl}";
-                url += $"{ _route}";
+                url += $"/{ _route}";
                 if (action != null)
                 {
                     url += $"/{action}";

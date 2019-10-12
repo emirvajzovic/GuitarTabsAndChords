@@ -67,5 +67,18 @@ namespace GuitarTabsAndChords.WinUI
             var frm = new frmNotations();
             frm.ShowDialog();
         }
+
+        private void BtnLogout_Click(object sender, EventArgs e)
+        {
+            APIService.Username = null;
+            APIService.Password = null;
+            APIService.CurrentUser = null;
+
+            frmLogin frm = new frmLogin();
+            if (frm.ShowDialog() != DialogResult.OK)
+            {
+                Close();
+            }
+        }
     }
 }

@@ -32,7 +32,7 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
             {
                 Image = "icon_user.png",
                 Text = "Profile",
-                Page = typeof(Top100Page)
+                Page = typeof(ProfilePage)
             });
             MenuItems.Add(new Models.MenuItem
             {

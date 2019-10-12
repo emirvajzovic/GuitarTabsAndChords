@@ -98,7 +98,7 @@ namespace GuitarTabsAndChords.WebAPI.Services
             {
                 if (request.Password != request.PasswordConfirmation)
                 {
-                    throw new Exception("Passwordi se ne slažu");
+                    throw new Exception("Passwords do not match.");
                 }
 
                 entity.PasswordSalt = GenerateSalt();
@@ -159,6 +159,8 @@ namespace GuitarTabsAndChords.WebAPI.Services
 
                 if (newHash == user.PasswordHash)
                 {
+                    user.LastLogin = DateTime.Now;
+                    _context.SaveChanges();
                     return _mapper.Map<Model.Users>(user);
                 }
             }
