@@ -1,0 +1,64 @@
+[Intro]
+
+
+
+
+[Verse 1]
+
+
+
+
+[Chorus]
+
+
+
+
+[Verse 2]
+
+
+
+
+[Chorus]
+
+
+
+
+[Bridge]
+
+
+
+
+[Chorus]
+
+
+
+
+[Outro]
+
+
+
+
+************************************
+
+| x   Dead note
+| g   Grace note
+| (n) Ghost note
+| h   Hammer-on
+| p   Pull-off
+| r   Release
+| >   Accented note
+| t   Tapping
+| b   Bend
+| br  Bend release
+| pb  Pre-bend
+| pbr Pre-bend release
+| /   Slide up
+| \   Slide down
+| ~   Vibrato
+| s   Slap
+| P   Pop
+| PM  Palm mute
+| TR  Trill
+| N   Tremolo
+
+************************************

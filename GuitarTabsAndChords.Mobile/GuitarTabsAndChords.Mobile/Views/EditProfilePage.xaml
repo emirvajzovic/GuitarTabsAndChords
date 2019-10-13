@@ -19,7 +19,7 @@
         <ScrollView>
             <StackLayout Padding="10">
                 <StackLayout Orientation="Vertical">
-                    <Image x:Name="imageView" Source="{Binding User.ProfilePicture, Converter={StaticResource imgConv}}" />
+                    <Image x:Name="imageView" Source="{Binding User.ProfilePicture, Converter={StaticResource imgConv}}" HeightRequest="150"/>
                     <ActivityIndicator x:Name="uploadIndicator" IsVisible="False" IsRunning="False" Color="DodgerBlue" />
                     <Button x:Name="btnSelectPic" Text="Select picture" Clicked="BtnSelectPic_Clicked" BackgroundColor="DodgerBlue" TextColor="White" />
                     <Button x:Name="btnTakePic" Text="Take picture" Clicked="BtnTakePic_Clicked" BackgroundColor="DodgerBlue" TextColor="White" />

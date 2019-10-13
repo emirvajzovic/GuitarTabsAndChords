@@ -14,13 +14,16 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
 {
     public class BrowseViewModel : BaseViewModel
     {
-        public ObservableCollection<Models.NotationBrowseListItem> ThisWeekTop5List { get; set; } = new ObservableCollection<NotationBrowseListItem>();
-        public ObservableCollection<Model.SearchResult> SearchResultList { get; set; } = new ObservableCollection<Model.SearchResult>();
-
         private readonly APIService _serviceNotations = new APIService("Notations");
         private readonly APIService _serviceSearch = new APIService("Search");
 
         public ICommand SearchCommand { get; set; }
+        public ICommand AddNotationCommand { get; set; }
+        private readonly INavigation _navigation;
+
+        public ObservableCollection<Models.NotationBrowseListItem> ThisWeekTop5List { get; set; } = new ObservableCollection<NotationBrowseListItem>();
+        public ObservableCollection<Model.SearchResult> SearchResultList { get; set; } = new ObservableCollection<Model.SearchResult>();
+
         private string _searchText = string.Empty;
         public string SearchText
         {
@@ -42,10 +45,17 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
             set { SetProperty(ref _isBrowseVisible, value); }
         }
 
-        public BrowseViewModel()
+        public BrowseViewModel(INavigation navigation)
         {
             Title = "Browse";
             SearchCommand = new Command(async () => await Search());
+            AddNotationCommand = new Command(async () => await AddNotation());
+            _navigation = navigation;
+        }
+
+        public async Task AddNotation()
+        {
+            await _navigation.PushAsync(new AddNotationPage());
         }
 
         public async Task Search()

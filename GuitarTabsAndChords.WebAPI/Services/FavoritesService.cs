@@ -2,6 +2,7 @@
 using GuitarTabsAndChords.Model;
 using GuitarTabsAndChords.Model.Requests;
 using GuitarTabsAndChords.WebAPI.Database;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

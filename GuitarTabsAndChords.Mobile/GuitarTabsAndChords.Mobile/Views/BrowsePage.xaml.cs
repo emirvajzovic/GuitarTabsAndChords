@@ -18,7 +18,7 @@ namespace GuitarTabsAndChords.Mobile.Views
         public BrowsePage()
         {
             InitializeComponent();
-            BindingContext = VM = new BrowseViewModel();
+            BindingContext = VM = new BrowseViewModel(Navigation);
         }
         private async void ListView_ItemTapped(object sender, ItemTappedEventArgs e)
         {

@@ -7,7 +7,7 @@
              x:Class="GuitarTabsAndChords.Mobile.Views.BrowsePage"
              Title="{Binding Title}">
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout Padding="5">
             <SearchBar Placeholder="Search..." Text="{Binding SearchText}" SearchButtonPressed="SearchBar_SearchButtonPressed" SearchCommand="{Binding SearchCommand}"/>
 
             <ListView 
@@ -41,7 +41,8 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            
+
+  
             <Label Text="This week's top hits" FontSize="18" FontAttributes="Bold" IsVisible="{Binding IsBrowseVisible}"/>
 
             <ListView 
@@ -115,6 +116,8 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+            
+            <Button Text="Add Notation" IsVisible="True" Command="{Binding AddNotationCommand}"/>
 
         </StackLayout>
     </ContentPage.Content>

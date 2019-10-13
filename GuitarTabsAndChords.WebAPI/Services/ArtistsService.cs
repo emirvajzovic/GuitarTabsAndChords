@@ -2,6 +2,7 @@
 using GuitarTabsAndChords.Model;
 using GuitarTabsAndChords.Model.Requests;
 using GuitarTabsAndChords.WebAPI.Database;
+using Microsoft.AspNetCore.Authorization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,15 +10,17 @@ using System.Threading.Tasks;
 
 namespace GuitarTabsAndChords.WebAPI.Services
 {
-    public class ArtistsService: IArtistsService
+    public class ArtistsService : IArtistsService
     {
         private readonly GuitarTabsContext _context;
         private readonly IMapper _mapper;
+        private readonly IUsersService _usersService;
 
-        public ArtistsService(GuitarTabsContext context, IMapper mapper)
+        public ArtistsService(GuitarTabsContext context, IMapper mapper, IUsersService usersService)
         {
             _context = context;
             _mapper = mapper;
+            _usersService = usersService;
         }
 
         public List<Model.Artists> Get(ArtistsSearchRequest request)
@@ -51,7 +54,10 @@ namespace GuitarTabsAndChords.WebAPI.Services
         {
             var entity = _mapper.Map<Database.Artists>(request);
 
-            entity.Status = ReviewStatus.Approved;
+            if (_usersService.GetCurrentUser().Role.Name == "Administrator")
+                entity.Status = ReviewStatus.Approved;
+            else
+                entity.Status = ReviewStatus.Pending;
 
             _context.Artists.Add(entity);
             _context.SaveChanges();

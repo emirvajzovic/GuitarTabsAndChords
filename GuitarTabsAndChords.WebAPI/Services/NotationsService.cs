@@ -2,6 +2,7 @@
 using GuitarTabsAndChords.Model;
 using GuitarTabsAndChords.Model.Requests;
 using GuitarTabsAndChords.WebAPI.Database;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -14,11 +15,13 @@ namespace GuitarTabsAndChords.WebAPI.Services
     {
         private readonly GuitarTabsContext _context;
         private readonly IMapper _mapper;
+        private readonly IUsersService _usersService;
 
-        public NotationsService(GuitarTabsContext context, IMapper mapper)
+        public NotationsService(GuitarTabsContext context, IMapper mapper, IUsersService usersService)
         {
             _context = context;
             _mapper = mapper;
+            _usersService = usersService;
         }
 
         public List<Model.Notations> Get(NotationsSearchRequest request)
@@ -115,11 +118,14 @@ namespace GuitarTabsAndChords.WebAPI.Services
         {
             var entity = _mapper.Map<Database.Notations>(request);
 
-            entity.Status = ReviewStatus.Approved;
+            if (_usersService.GetCurrentUser().Role.Name == "Administrator")
+                entity.Status = ReviewStatus.Approved;
+            else
+                entity.Status = ReviewStatus.Pending;
 
             entity.LastEditted = entity.DateAdded = DateTime.Now;
-            entity.LastEditorId = 1;
-            entity.UserId = 1;
+            entity.LastEditorId = _usersService.GetCurrentUser().Id;
+            entity.UserId = _usersService.GetCurrentUser().Id;
 
             _context.Notations.Add(entity);
             _context.SaveChanges();
@@ -133,9 +139,6 @@ namespace GuitarTabsAndChords.WebAPI.Services
 
             _context.Notations.Attach(entity);
             _context.Notations.Update(entity);
-
-            entity.LastEditted = DateTime.Now;
-            entity.LastEditorId = 1;
 
             if (request.Status == ReviewStatus.Rejected)
                 entity.Status = ReviewStatus.Rejected;
@@ -195,7 +198,7 @@ namespace GuitarTabsAndChords.WebAPI.Services
                 .Ratings
                 .Where(views => views.NotationId == x.Id)
                 .Average(avg => (double?)avg.Rating) ?? 0
-            );
+            ).Take(100);
 
             var list = query.ToList();
 

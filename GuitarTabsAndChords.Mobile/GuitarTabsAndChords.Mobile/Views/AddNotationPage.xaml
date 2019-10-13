@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:combobox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
+             mc:Ignorable="d"
+             x:Class="GuitarTabsAndChords.Mobile.Views.AddNotationPage"
+             Title="{Binding Title}">
+    <ContentPage.Content>
+        <ScrollView Padding="5">
+            <StackLayout>
+                <Label FontAttributes="Bold" FontSize="16" Text="Artist"/>
+                <combobox:SfComboBox HeightRequest="40" BorderColor="Black" x:Name="ArtistComboBox" DataSource="{Binding ArtistList}" IsEditableMode="True" DisplayMemberPath="Name" ValueChanged="ArtistComboBox_ValueChanged" SelectionChanged="ArtistComboBox_SelectionChanged"  AllowFiltering="True" TextHighlightMode="MultipleOccurrence" SuggestionMode="Contains" HighlightedTextColor="Red" NoResultsFoundText="{Binding NoResultsFoundText}"  />
+
+                <Label FontAttributes="Bold" FontSize="16" Text="Album"/>
+                <combobox:SfComboBox HeightRequest="40" BorderColor="Black" x:Name="AlbumComboBox" DataSource="{Binding AlbumList}" IsEditableMode="True" DisplayMemberPath="Name" ValueChanged="AlbumComboBox_ValueChanged" SelectionChanged="AlbumComboBox_SelectionChanged" AllowFiltering="True" TextHighlightMode="MultipleOccurrence" SuggestionMode="Contains" HighlightedTextColor="Red" NoResultsFoundText="{Binding NoResultsFoundText}" />
+
+                <Label FontAttributes="Bold" FontSize="16" Text="Song"/>
+                <combobox:SfComboBox HeightRequest="40" BorderColor="Black" x:Name="SongComboBox" DataSource="{Binding SongList}" IsEditableMode="True" DisplayMemberPath="Name" ValueChanged="SongComboBox_ValueChanged" SelectionChanged="SongComboBox_SelectionChanged" AllowFiltering="True" TextHighlightMode="MultipleOccurrence" SuggestionMode="Contains" HighlightedTextColor="Red" NoResultsFoundText="{Binding NoResultsFoundText}" />
+
+                <Label FontAttributes="Bold" FontSize="16" Text="Type"/>
+                <Picker ItemsSource="{Binding NotationTypes}" SelectedItem="{Binding Notation.Type}"/>
+                
+                <Label FontAttributes="Bold" FontSize="16" Text="Tuning"/>
+                <Entry Text="{Binding Notation.Tuning}"/>
+                
+                <Label FontAttributes="Bold" FontSize="16" Text="Tuning description"/>
+                <Entry Text="{Binding Notation.TuningDescription}"/>
+
+                <Label FontAttributes="Bold" FontSize="16" Text="Content"/>
+                <Editor Text="{Binding Notation.NotationContent}" HeightRequest="600" IsSpellCheckEnabled="false">
+                    <Editor.FontFamily>
+                        <OnPlatform x:TypeArguments="x:String">
+                            <On Platform="Android">monospace</On>
+                            <On Platform="iOS">Courier New</On>
+                            <On Platform="UWP">Lucida Console</On>
+                        </OnPlatform>
+                    </Editor.FontFamily>
+                    <Editor.FontSize>
+                        <OnPlatform x:TypeArguments="x:Double">
+                            <On Platform="Android">8.5</On>
+                            <On Platform="iOS">8.5</On>
+                            <On Platform="UWP">12</On>
+                        </OnPlatform>
+                    </Editor.FontSize>
+                </Editor>
+
+                <Button Text="Save notation" Command="{Binding SaveNotationCommand}"/>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

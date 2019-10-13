@@ -36,7 +36,7 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
             });
             MenuItems.Add(new Models.MenuItem
             {
-                Image = "star_empty.png",
+                Image = "icon_logout.png",
                 Text = "Sign Out",
                 Page = null
             });

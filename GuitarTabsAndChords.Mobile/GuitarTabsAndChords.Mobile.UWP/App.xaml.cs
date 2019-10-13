@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
@@ -52,8 +53,13 @@ namespace GuitarTabsAndChords.Mobile.UWP
 
                 rootFrame.NavigationFailed += OnNavigationFailed;
 
+
+                List<System.Reflection.Assembly> assembliesToInclude = new List<System.Reflection.Assembly>();
+                // Add all the renderer assemblies your app uses 
+                assembliesToInclude.Add(typeof(Syncfusion.XForms.UWP.ComboBox.SfComboBoxRenderer).GetTypeInfo().Assembly);
+
                 Xamarin.Forms.Forms.SetFlags("CollectionView_Experimental");
-                Xamarin.Forms.Forms.Init(e);
+                Xamarin.Forms.Forms.Init(e, assembliesToInclude);
 
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {

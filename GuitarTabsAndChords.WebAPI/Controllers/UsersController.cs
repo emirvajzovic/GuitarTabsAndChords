@@ -39,6 +39,7 @@ namespace GuitarTabsAndChords.WebAPI.Controllers
         }
 
         [HttpPost("InsertAdmin")]
+        [Authorize(Roles="Administrator")]
         public Model.Users InsertAdmin([FromBody] Model.Requests.UsersInsertRequest request)
         {
             return _service.InsertAdmin(request);

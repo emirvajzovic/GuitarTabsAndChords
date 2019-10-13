@@ -58,7 +58,7 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
             };
             var list = await _serviceNotations.Get<List<Models.NotationBrowseListItem>>(request);
             int counter = 0;
-            foreach (var item in list)
+            foreach (var item in list.GetRange(0, Math.Min(list.Count, 5)))
             {
                 UpdateStarRating(item);
                 item.Counter = ++counter;

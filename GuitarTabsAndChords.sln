@@ -17,7 +17,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GuitarTabsAndChords.Mobile.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GuitarTabsAndChords.Mobile.iOS", "GuitarTabsAndChords.Mobile\GuitarTabsAndChords.Mobile.iOS\GuitarTabsAndChords.Mobile.iOS.csproj", "{44FA5F86-AC6D-4393-9601-4BD61E5A2240}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GuitarTabsAndChords.Mobile", "GuitarTabsAndChords.Mobile\GuitarTabsAndChords.Mobile\GuitarTabsAndChords.Mobile.csproj", "{8C3B76EE-9731-4066-9CC6-4FC8768C8662}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GuitarTabsAndChords.Mobile", "GuitarTabsAndChords.Mobile\GuitarTabsAndChords.Mobile\GuitarTabsAndChords.Mobile.csproj", "{8C3B76EE-9731-4066-9CC6-4FC8768C8662}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -108,6 +108,8 @@ Global
 		{7D13CB7E-281D-4FD9-9BBE-A0E0F1005BA9}.Release|x86.ActiveCfg = Release|Any CPU
 		{7D13CB7E-281D-4FD9-9BBE-A0E0F1005BA9}.Release|x86.Build.0 = Release|Any CPU
 		{2B573A29-81BA-46ED-90B1-BA5F81870DD4}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{2B573A29-81BA-46ED-90B1-BA5F81870DD4}.Debug|Any CPU.Build.0 = Debug|x86
+		{2B573A29-81BA-46ED-90B1-BA5F81870DD4}.Debug|Any CPU.Deploy.0 = Debug|x86
 		{2B573A29-81BA-46ED-90B1-BA5F81870DD4}.Debug|ARM.ActiveCfg = Debug|ARM
 		{2B573A29-81BA-46ED-90B1-BA5F81870DD4}.Debug|ARM.Build.0 = Debug|ARM
 		{2B573A29-81BA-46ED-90B1-BA5F81870DD4}.Debug|ARM.Deploy.0 = Debug|ARM

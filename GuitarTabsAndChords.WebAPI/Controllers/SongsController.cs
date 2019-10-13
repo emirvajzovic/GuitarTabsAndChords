@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using GuitarTabsAndChords.WebAPI.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,6 +11,7 @@ namespace GuitarTabsAndChords.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class SongsController : ControllerBase
     {
         private readonly ISongsService _service;
@@ -38,6 +40,7 @@ namespace GuitarTabsAndChords.WebAPI.Controllers
         }
 
         [HttpPut("{Id}")]
+        [Authorize(Roles="Administrator")]
         public Model.Songs Update(int Id, [FromBody] Model.Requests.SongsInsertRequest request)
         {
             return _service.Update(Id, request);

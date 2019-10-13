@@ -59,5 +59,107 @@ namespace GuitarTabsAndChords.Mobile.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [Intro]
+        ///
+        ///
+        ///
+        ///
+        ///[Verse 1]
+        ///
+        ///
+        ///
+        ///
+        ///[Chorus]
+        ///
+        ///
+        ///
+        ///
+        ///[Verse 2]
+        ///
+        ///
+        ///
+        ///
+        ///[Chorus]
+        ///
+        ///
+        ///
+        ///
+        ///[Bridge]
+        ///
+        ///
+        ///
+        ///
+        ///[Chorus]
+        ///
+        ///
+        ///
+        ///
+        ///[Outro]
+        ///
+        ///
+        ///
+        ///
+        ///************************************
+        ///
+        ///| x   Dead note
+        ///| g   Grace note
+        ///| (n) Ghost note
+        ///| h   Hammer-on
+        ///| p   Pull-off
+        ///| r   Release
+        ///| &gt;   Accented note
+        ///| t   Tapping
+        ///| b   Bend
+        ///| br  Bend release
+        ///| pb  Pre-bend
+        ///| pbr Pre-bend release
+        ///| /   Slide up
+        ///| \   Slide down
+        ///| ~   Vibrato
+        ///| s   Slap
+        ///| P   Pop
+        ///| PM  Palm mute
+        ///| TR  Trill
+        ///| N   Tremolo
+        ///
+        /// [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string ChordTemplate {
+            get {
+                return ResourceManager.GetString("ChordTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 
+        ///
+        ///
+        ///.
+        /// </summary>
+        internal static string String1 {
+            get {
+                return ResourceManager.GetString("String1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [Intro]
+        ///
+        ///e|---------------------------------------------------------------------------|
+        ///B|---------------------------------------------------------------------------|
+        ///G|---------------------------------------------------------------------------|
+        ///D|---------------------------------------------------------------------------|
+        ///A|---------------------------------------------------------------------------|
+        ///E|---------------------------------------------------------------------------|
+        ///
+        ///e|----------------- [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string TabTemplate {
+            get {
+                return ResourceManager.GetString("TabTemplate", resourceCulture);
+            }
+        }
     }
 }

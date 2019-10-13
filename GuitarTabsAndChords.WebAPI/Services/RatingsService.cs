@@ -2,6 +2,7 @@
 using GuitarTabsAndChords.Model;
 using GuitarTabsAndChords.Model.Requests;
 using GuitarTabsAndChords.WebAPI.Database;
+using Microsoft.AspNetCore.Authorization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace GuitarTabsAndChords.WebAPI.Services
 {
-    public class RatingsService: IRatingsService
+    public class RatingsService : IRatingsService
     {
         private readonly GuitarTabsContext _context;
         private readonly IMapper _mapper;
