@@ -46,7 +46,8 @@
             </Grid>
 
             <Label Text="Songs" FontAttributes="Bold" FontSize="16"/>
-            
+            <Label Text="Nothing to see here, move along." IsVisible="{Binding NothingToSeeSongs}"/>
+
             <ListView 
                 ItemsSource="{Binding SongList}"
                 VerticalOptions="FillAndExpand"

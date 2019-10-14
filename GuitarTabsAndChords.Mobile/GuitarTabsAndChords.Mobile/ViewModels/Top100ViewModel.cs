@@ -37,34 +37,34 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
             if (item.Rating >= 4.25)
             {
                 if (item.Rating >= 4.75)
-                    item.Star5.Slika = "star_filled.png";
+                    item.Star5.Image = "star_filled.png";
                 else
-                    item.Star5.Slika = "star_half.png";
+                    item.Star5.Image = "star_half.png";
             }
             if (item.Rating >= 3.25)
             {
                 if (item.Rating >= 3.75)
-                    item.Star4.Slika = "star_filled.png";
+                    item.Star4.Image = "star_filled.png";
                 else
-                    item.Star4.Slika = "star_half.png";
+                    item.Star4.Image = "star_half.png";
             }
             if (item.Rating >= 2.25)
             {
                 if (item.Rating >= 2.75)
-                    item.Star3.Slika = "star_filled.png";
+                    item.Star3.Image = "star_filled.png";
                 else
-                    item.Star3.Slika = "star_half.png";
+                    item.Star3.Image = "star_half.png";
             }
             if (item.Rating >= 1.50)
             {
                 if (item.Rating >= 1.75)
-                    item.Star2.Slika = "star_filled.png";
+                    item.Star2.Image = "star_filled.png";
                 else
-                    item.Star2.Slika = "star_half.png";
+                    item.Star2.Image = "star_half.png";
             }
             if (item.Rating >= 1.00)
             {
-                item.Star1.Slika = "star_filled.png";
+                item.Star1.Image = "star_filled.png";
             }
         }
 

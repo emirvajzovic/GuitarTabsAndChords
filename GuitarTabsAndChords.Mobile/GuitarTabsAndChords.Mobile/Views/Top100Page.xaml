@@ -49,27 +49,27 @@
                                 <StackLayout Grid.Row="0" Grid.Column="2" Orientation="Horizontal">
                                     <Image                    
         BackgroundColor="Transparent"
-        Source="{Binding Star1.Slika}"
+        Source="{Binding Star1.Image}"
                             WidthRequest="32"
                             />
                                     <Image                    
         BackgroundColor="Transparent"
-        Source="{Binding Star2.Slika}" 
+        Source="{Binding Star2.Image}" 
                             WidthRequest="32"
                             />
                                     <Image                    
         BackgroundColor="Transparent"
-        Source="{Binding Star3.Slika}" 
+        Source="{Binding Star3.Image}" 
                             WidthRequest="32"
                             />
                                     <Image                    
         BackgroundColor="Transparent"
-        Source="{Binding Star4.Slika}" 
+        Source="{Binding Star4.Image}" 
                             WidthRequest="32"
                             />
                                     <Image                    
         BackgroundColor="Transparent"
-        Source="{Binding Star5.Slika}" 
+        Source="{Binding Star5.Image}" 
                             WidthRequest="32"
                             />
                                 </StackLayout>

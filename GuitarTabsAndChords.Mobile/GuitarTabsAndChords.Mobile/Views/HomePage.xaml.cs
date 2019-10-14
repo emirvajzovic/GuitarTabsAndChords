@@ -36,7 +36,7 @@ namespace GuitarTabsAndChords.Mobile.Views
             await Navigation.PushAsync(new NotationDetailsPage(context.Id));
         }
 
-        private void ListView_ItemTapped(object sender, ItemTappedEventArgs e)
+        private async void ListView_ItemTapped(object sender, ItemTappedEventArgs e)
         {
             if(e.Item != null)
             {
@@ -48,7 +48,7 @@ namespace GuitarTabsAndChords.Mobile.Views
                 else
                 {
                     Page instance = (Page)Activator.CreateInstance(menuItem.Page);
-                    Navigation.PushAsync(instance);
+                    await Navigation.PushAsync(instance);
                 }
             }
         }

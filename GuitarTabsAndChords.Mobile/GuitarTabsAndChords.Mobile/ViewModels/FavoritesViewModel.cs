@@ -19,6 +19,13 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
         private readonly APIService _serviceFavorites = new APIService("Favorites");
 
         public ICommand ToggleFavoriteCommand { get; set; }
+        private bool _nothingToSee = false;
+
+        public bool NothingToSee
+        {
+            get { return _nothingToSee; }
+            set { SetProperty(ref _nothingToSee, value); }
+        }
 
         public FavoritesViewModel()
         {
@@ -40,6 +47,8 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
                 FavoritesList.Clear();
 
                 var items = await _serviceFavorites.Get<List<Models.NotationFavoritesListItem>>(null);
+                NothingToSee = items.Count == 0;
+
                 foreach (var item in items)
                 {
                     FavoritesList.Add(item);

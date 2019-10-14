@@ -16,6 +16,7 @@
 
     <ContentPage.Content>
         <StackLayout>
+            <Label IsVisible="{Binding NothingToSee}" Text="Nothing to see here, move along."/>
             <ListView 
                 ItemsSource="{Binding FavoritesList}"
                 VerticalOptions="FillAndExpand"

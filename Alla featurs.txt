@@ -1,0 +1,22 @@
+ID|PRIO|DONE|TASK NAME
+[2] MED Recommender
+[3] MED 50% Add & Edit NotationCorrections (WinUI & UZP)
+[4] LO  Explore wszystkiego (Genres, Artists, Decades, Tabs, Chords)
+[6] LO  Validate WinUI -
+[7] LO  Finish WinUI design
+[8] LO  Popular Tabs & Chords on UZP HomePage - 10 of each in past 2 weeks by Views
+[11]LO  Showa approved only in UZP -
+[12]HI  Solidify chord and tab template -
+[-] -   -
+
+[New Task]
+[Mark Task as complete]
+
+Completed Tasks:
+
+[1] HI  100% ProfilePage (Profile, Email, Password, Slika, My Notations)
+[5] MED Add artist, album, song?
+[9] HI  Zarejestruj siê (Za³ó¿ konto)
+[10]LO  Autorizacja (WebAPI)
+[13]LO  Add default picture
+[14]LO  Add Nothing to see here text

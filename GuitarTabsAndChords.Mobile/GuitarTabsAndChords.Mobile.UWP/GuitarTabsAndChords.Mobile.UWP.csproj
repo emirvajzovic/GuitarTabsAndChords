@@ -7,8 +7,8 @@
     <ProjectGuid>{2B573A29-81BA-46ED-90B1-BA5F81870DD4}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>GuitarTabsAndChords.Mobile.UWP</RootNamespace>
-    <AssemblyName>GuitarTabsAndChords.Mobile.UWP</AssemblyName>
+    <RootNamespace>GuitarTabsAndChords</RootNamespace>
+    <AssemblyName>GuitarTabsAndChords</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion>10.0.18362.0</TargetPlatformVersion>
@@ -103,6 +103,7 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="arrow_right.png" />
     <Content Include="icon_browse.png" />
     <Content Include="icon_edit.png" />
     <Content Include="icon_home.png" />
@@ -110,6 +111,7 @@
     <Content Include="icon_recommended.png" />
     <Content Include="icon_star.png" />
     <Content Include="icon_user.png" />
+    <Content Include="logo.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LargeTile.scale-100.png" />
     <Content Include="Assets\LargeTile.scale-200.png" />

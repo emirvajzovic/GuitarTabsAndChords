@@ -13,5 +13,6 @@ namespace GuitarTabsAndChords.WebAPI.Services
         Albums GetById(int id);
         Albums Insert(AlbumsInsertRequest request);
         Albums Update(int id, AlbumsInsertRequest request);
+        List<int> GetDecades();
     }
 }

@@ -124,7 +124,7 @@ namespace GuitarTabsAndChords.Mobile
                 var stringBuilder = new StringBuilder();
                 foreach (var error in errors)
                 {
-                    stringBuilder.AppendLine($"{error.Key}, ${string.Join(",", error.Value)}");
+                    stringBuilder.AppendLine(string.Join(",", error.Value));
                 }
 
                 await Application.Current.MainPage.DisplayAlert("Error", stringBuilder.ToString(), "OK");
@@ -169,7 +169,7 @@ namespace GuitarTabsAndChords.Mobile
                 var stringBuilder = new StringBuilder();
                 foreach (var error in errors)
                 {
-                    stringBuilder.AppendLine($"{error.Key}, ${string.Join(",", error.Value)}");
+                    stringBuilder.AppendLine(string.Join(",", error.Value));
                 }
 
                 await Application.Current.MainPage.DisplayAlert("Error", stringBuilder.ToString(), "OK");

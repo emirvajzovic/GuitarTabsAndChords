@@ -102,35 +102,35 @@
                     <ImageButton                    
         Command="{Binding RateStarCommand}"
         BackgroundColor="Transparent"
-        Source="{Binding Star1.Slika}"
+        Source="{Binding Star1.Image}"
                             WidthRequest="32"
                             CommandParameter="1"
                             />
                     <ImageButton                    
         Command="{Binding RateStarCommand}"
         BackgroundColor="Transparent"
-        Source="{Binding Star2.Slika}" 
+        Source="{Binding Star2.Image}" 
                             WidthRequest="32"
                             CommandParameter="2"
                             />
                     <ImageButton                    
         Command="{Binding RateStarCommand}"
         BackgroundColor="Transparent"
-        Source="{Binding Star3.Slika}" 
+        Source="{Binding Star3.Image}" 
                             WidthRequest="32"
                             CommandParameter="3"
                             />
                     <ImageButton                    
         Command="{Binding RateStarCommand}"
         BackgroundColor="Transparent"
-        Source="{Binding Star4.Slika}" 
+        Source="{Binding Star4.Image}" 
                             WidthRequest="32"
                             CommandParameter="4"
                             />
                     <ImageButton                    
         Command="{Binding RateStarCommand}"
         BackgroundColor="Transparent"
-        Source="{Binding Star5.Slika}" 
+        Source="{Binding Star5.Image}" 
                             WidthRequest="32"
                             CommandParameter="5"
                             />

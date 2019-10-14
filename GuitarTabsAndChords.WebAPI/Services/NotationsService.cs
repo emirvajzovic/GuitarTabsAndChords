@@ -40,6 +40,8 @@ namespace GuitarTabsAndChords.WebAPI.Services
                 query = query.Where(x => x.Tuning == request.Tuning);
             if (request?.UserId != 0)
                 query = query.Where(x => x.UserId == request.UserId);
+            if (request?.Type != null)
+                query = query.Where(x => x.Type == request.Type.Value);
 
             if (!string.IsNullOrWhiteSpace(request?.SearchTerm))
                 query = query.Where(x => x.Song.Artist.Name.Contains(request.SearchTerm) || x.Song.Album.Name.Contains(request.SearchTerm) || x.Song.Name.Contains(request.SearchTerm) || x.User.Username.Contains(request.SearchTerm));

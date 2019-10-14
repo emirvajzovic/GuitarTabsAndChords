@@ -6,6 +6,6 @@ namespace GuitarTabsAndChords.Mobile.Models
 {
     public class Star
     {
-        public string Slika { get; set; } = "star_empty.png";
+        public string Image { get; set; } = "star_empty.png";
     }
 }

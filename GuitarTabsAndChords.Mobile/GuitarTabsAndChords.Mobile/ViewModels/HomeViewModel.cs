@@ -8,6 +8,7 @@ using Xamarin.Forms;
 using GuitarTabsAndChords.Mobile.Models;
 using GuitarTabsAndChords.Mobile.Views;
 using System.Collections.Generic;
+using System.IO;
 
 namespace GuitarTabsAndChords.Mobile.ViewModels
 {
@@ -54,8 +55,12 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
                 RecommendedList.Clear();
 
                 var items = await _serviceNotations.Get<List<Model.Notations>>(null);
-                foreach (var item in items)
+                foreach (var item in items.GetRange(0, Math.Min(10, items.Count)))
                 {
+                    if (item.Song.Album.AlbumCover.Length == 0)
+                    {
+                        item.Song.Album.AlbumCover = File.ReadAllBytes("logo.png");
+                    }
                     RecommendedList.Add(item);
                 }
             }

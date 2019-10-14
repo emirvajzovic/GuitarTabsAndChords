@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -44,6 +45,11 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
             if(User == null)
             {
                 User = await _serviceUsers.Get<Model.Requests.UsersUpdateRequest>(null, "MyProfile");
+
+                if (User.ProfilePicture.Length == 0)
+                {
+                    User.ProfilePicture = File.ReadAllBytes("logo.png");
+                }
                 Title = "Edit Profile - " + User.Username;
             }
             

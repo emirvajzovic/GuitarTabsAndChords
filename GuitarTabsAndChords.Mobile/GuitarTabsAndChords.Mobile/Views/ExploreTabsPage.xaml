@@ -4,16 +4,12 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="GuitarTabsAndChords.Mobile.Views.SongPage"
-             Title="{Binding Title}"
-             >
+             x:Class="GuitarTabsAndChords.Mobile.Views.ExploreTabsPage"
+             Title="{Binding Title}">
     <ContentPage.Content>
-        <StackLayout Padding="5">
-            <Label Text="Notations" FontAttributes="Bold" FontSize="16"/>
-            <Label Text="Nothing to see here, move along." IsVisible="{Binding NothingToSeeNotations}"/>
-
+        <StackLayout>
             <ListView 
-                ItemsSource="{Binding NotationList}"
+                ItemsSource="{Binding ItemList}"
                 VerticalOptions="FillAndExpand"
                 ItemTapped="ListView_ItemTapped"
                 ItemSelected="ListView_ItemSelected"
@@ -27,11 +23,11 @@
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
 
-                                <StackLayout Padding="0,10,0,0" Grid.Row="0" Grid.Column="0" VerticalOptions="FillAndExpand" HorizontalOptions="Fill" Orientation="Vertical">
+                                <StackLayout Grid.Row="0" Grid.Column="0" VerticalOptions="FillAndExpand" HorizontalOptions="Fill" Orientation="Vertical">
                                     <StackLayout HorizontalOptions="StartAndExpand" Orientation="Horizontal">
                                         <Label FontSize="14" FontAttributes="Bold" Text="{Binding Song.Name}"/>
                                     </StackLayout>
@@ -44,11 +40,7 @@
                                     </StackLayout>
 
                                 </StackLayout>
-                                <StackLayout Grid.Row="0" Grid.Column="1" Orientation="Horizontal" VerticalOptions="Center">
-                                    <Label Text="{Binding Views}"/>
-                                    <Label Text="views"/>
-                                </StackLayout>
-                                <StackLayout Grid.Row="0" Grid.Column="2" Orientation="Horizontal">
+                                <StackLayout Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
                                     <Image                    
         BackgroundColor="Transparent"
         Source="{Binding Star1.Image}"
@@ -75,14 +67,16 @@
                             WidthRequest="32"
                             />
                                 </StackLayout>
-
+                                <StackLayout Grid.Row="0" Grid.Column="2" VerticalOptions="CenterAndExpand" HorizontalOptions="Fill" Orientation="Horizontal">
+                                    <Label Text="{Binding Views}"/>
+                                    <Label Text="hits"/>
+                                </StackLayout>
                             </Grid>
 
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

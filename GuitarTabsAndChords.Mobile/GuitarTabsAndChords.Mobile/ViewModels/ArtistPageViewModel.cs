@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -22,6 +23,21 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
         {
             get { return _artist; }
             set { SetProperty(ref _artist, value); }
+        }
+        private bool _nothingToSeeNotations = false;
+
+        public bool NothingToSeeNotations
+        {
+            get { return _nothingToSeeNotations; }
+            set { SetProperty(ref _nothingToSeeNotations, value); }
+        }
+
+        private bool _nothingToSeeAlbums = false;
+
+        public bool NothingToSeeAlbums
+        {
+            get { return _nothingToSeeAlbums; }
+            set { SetProperty(ref _nothingToSeeAlbums, value); }
         }
 
         public ICommand InitCommand { get; set; }
@@ -57,6 +73,7 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
                 ArtistId = _artistId
             };
             var list = await _serviceNotations.Get<List<Models.NotationBrowseListItem>>(request);
+            NothingToSeeNotations = list.Count == 0;
             int counter = 0;
             foreach (var item in list.GetRange(0, Math.Min(list.Count, 5)))
             {
@@ -75,8 +92,13 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
                 ArtistId = _artistId
             };
             var list = await _serviceAlbums.Get<List<Model.Albums>>(request);
+            NothingToSeeAlbums = list.Count == 0;
             foreach (var item in list)
             {
+                if(item.AlbumCover.Length == 0)
+                {
+                    item.AlbumCover = File.ReadAllBytes("logo.png");
+                }
                 AlbumsList.Add(item);
             }
         }
@@ -85,34 +107,34 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
             if (item.Rating >= 4.25)
             {
                 if (item.Rating >= 4.75)
-                    item.Star5.Slika = "star_filled.png";
+                    item.Star5.Image = "star_filled.png";
                 else
-                    item.Star5.Slika = "star_half.png";
+                    item.Star5.Image = "star_half.png";
             }
             if (item.Rating >= 3.25)
             {
                 if (item.Rating >= 3.75)
-                    item.Star4.Slika = "star_filled.png";
+                    item.Star4.Image = "star_filled.png";
                 else
-                    item.Star4.Slika = "star_half.png";
+                    item.Star4.Image = "star_half.png";
             }
             if (item.Rating >= 2.25)
             {
                 if (item.Rating >= 2.75)
-                    item.Star3.Slika = "star_filled.png";
+                    item.Star3.Image = "star_filled.png";
                 else
-                    item.Star3.Slika = "star_half.png";
+                    item.Star3.Image = "star_half.png";
             }
             if (item.Rating >= 1.50)
             {
                 if (item.Rating >= 1.75)
-                    item.Star2.Slika = "star_filled.png";
+                    item.Star2.Image = "star_filled.png";
                 else
-                    item.Star2.Slika = "star_half.png";
+                    item.Star2.Image = "star_half.png";
             }
             if (item.Rating >= 1.00)
             {
-                item.Star1.Slika = "star_filled.png";
+                item.Star1.Image = "star_filled.png";
             }
         }
 

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -23,6 +24,12 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
             get { return _user; }
             set { SetProperty(ref _user, value); }
         }
+        private bool _nothingToSee = false;
+        public bool NothingToSee
+        {
+            get { return _nothingToSee; }
+            set { SetProperty(ref _nothingToSee, value); }
+        }
 
         public ObservableCollection<Models.NotationBrowseListItem> NotationList { get; set; } = new ObservableCollection<NotationBrowseListItem>();
 
@@ -41,6 +48,11 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
         private async Task LoadUser()
         {
             User = await _serviceUsers.GetById<Model.Users>(_userId);
+            if (User.ProfilePicture.Length == 0)
+            {
+                User.ProfilePicture = File.ReadAllBytes("logo.png");
+            }
+
             Title = "User Profile - " + User.Username;
             if(User.Id == APIService.CurrentUser.Id)
             {
@@ -61,6 +73,7 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
                 UserId = _userId
             };
             var list = await _serviceNotations.Get<List<Models.NotationBrowseListItem>>(request);
+            NothingToSee = list.Count == 0;
             foreach (var item in list)
             {
                 UpdateStarRating(item);
@@ -73,34 +86,34 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
             if (item.Rating >= 4.25)
             {
                 if (item.Rating >= 4.75)
-                    item.Star5.Slika = "star_filled.png";
+                    item.Star5.Image = "star_filled.png";
                 else
-                    item.Star5.Slika = "star_half.png";
+                    item.Star5.Image = "star_half.png";
             }
             if (item.Rating >= 3.25)
             {
                 if (item.Rating >= 3.75)
-                    item.Star4.Slika = "star_filled.png";
+                    item.Star4.Image = "star_filled.png";
                 else
-                    item.Star4.Slika = "star_half.png";
+                    item.Star4.Image = "star_half.png";
             }
             if (item.Rating >= 2.25)
             {
                 if (item.Rating >= 2.75)
-                    item.Star3.Slika = "star_filled.png";
+                    item.Star3.Image = "star_filled.png";
                 else
-                    item.Star3.Slika = "star_half.png";
+                    item.Star3.Image = "star_half.png";
             }
             if (item.Rating >= 1.50)
             {
                 if (item.Rating >= 1.75)
-                    item.Star2.Slika = "star_filled.png";
+                    item.Star2.Image = "star_filled.png";
                 else
-                    item.Star2.Slika = "star_half.png";
+                    item.Star2.Image = "star_half.png";
             }
             if (item.Rating >= 1.00)
             {
-                item.Star1.Slika = "star_filled.png";
+                item.Star1.Image = "star_filled.png";
             }
         }
 

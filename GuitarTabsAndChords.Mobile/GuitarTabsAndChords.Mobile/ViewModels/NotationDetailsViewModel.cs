@@ -132,8 +132,8 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
 
         private void UpdateRatingStars()
         {
-            var star_emptyinside = new Star { Slika = "star_empty.png" };
-            var Star_Filled = new Star { Slika = "star_filled.png" };
+            var star_emptyinside = new Star { Image = "star_empty.png" };
+            var Star_Filled = new Star { Image = "star_filled.png" };
 
             Star1 = star_emptyinside;
             Star2 = star_emptyinside;

@@ -1,8 +1,10 @@
 ﻿using GuitarTabsAndChords.Mobile.Models;
+using GuitarTabsAndChords.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -10,59 +12,38 @@ using Xamarin.Forms;
 
 namespace GuitarTabsAndChords.Mobile.ViewModels
 {
-    public class SongPageViewModel : BaseViewModel
+    public class ExploreChordsViewModel : BaseViewModel
     {
-        private readonly APIService _serviceSongs = new APIService("Songs");
         private readonly APIService _serviceNotations = new APIService("Notations");
 
-        private readonly int _songId;
-        private Model.Songs _song;
-        public Model.Songs Song
-        {
-            get { return _song; }
-            set { SetProperty(ref _song, value); }
-        }
-        private bool _nothingToSeeNotations = false;
+        public ICommand InitCommand { get; set; }
 
-        public bool NothingToSeeNotations
-        {
-            get { return _nothingToSeeNotations; }
-            set { SetProperty(ref _nothingToSeeNotations, value); }
-        }
+        public ObservableCollection<Models.NotationBrowseListItem> ItemList { get; set; } = new ObservableCollection<NotationBrowseListItem>();
 
-        public ObservableCollection<Models.NotationBrowseListItem> NotationList { get; set; } = new ObservableCollection<NotationBrowseListItem>();
-
-        public SongPageViewModel(int SongId)
+        public ExploreChordsViewModel()
         {
-            _songId = SongId;
+            Title = "Explore Tabs";
         }
 
         public async Task Init()
         {
-            await LoadSong();
             await LoadNotations();
-        }
-
-        private async Task LoadSong()
-        {
-            Song = await _serviceSongs.GetById<Model.Songs>(_songId);
-            Title = "Song details - " + Song.Name;
         }
 
         public async Task LoadNotations()
         {
-            NotationList.Clear();
+            ItemList.Clear();
 
             var request = new Model.Requests.NotationsSearchRequest
             {
-                SongId = _songId
+                Type = NotationType.Chord  
             };
             var list = await _serviceNotations.Get<List<Models.NotationBrowseListItem>>(request);
-            NothingToSeeNotations = list.Count == 0;
+
             foreach (var item in list)
             {
                 UpdateStarRating(item);
-                NotationList.Add(item);
+                ItemList.Add(item);
             }
         }
 

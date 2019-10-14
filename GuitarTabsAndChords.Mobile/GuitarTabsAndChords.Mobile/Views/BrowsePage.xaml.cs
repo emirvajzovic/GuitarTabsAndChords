@@ -24,8 +24,9 @@ namespace GuitarTabsAndChords.Mobile.Views
         {
             if (e.Item != null)
             {
-                Models.NotationBrowseListItem notation = e.Item as Models.NotationBrowseListItem;
-                await Navigation.PushAsync(new NotationDetailsPage(notation.Id));
+                Models.MenuItem menuItem = e.Item as Models.MenuItem;
+                Page instance = (Page)Activator.CreateInstance(menuItem.Page);
+                await Navigation.PushAsync(instance);
             }
         }
 
@@ -46,10 +47,10 @@ namespace GuitarTabsAndChords.Mobile.Views
 
         private void ListView_ItemTapped_1(object sender, ItemTappedEventArgs e)
         {
-            if(e.Item != null)
+            if (e.Item != null)
             {
                 Model.SearchResult item = e.Item as Model.SearchResult;
-                switch(item.ResultTypeName)
+                switch (item.ResultTypeName)
                 {
                     case "Song":
                         Navigation.PushAsync(new SongPage(item.Id));
