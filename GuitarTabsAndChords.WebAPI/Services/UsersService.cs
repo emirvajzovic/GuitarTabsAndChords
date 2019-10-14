@@ -2,6 +2,7 @@
 using GuitarTabsAndChords.Model;
 using GuitarTabsAndChords.Model.Requests;
 using GuitarTabsAndChords.WebAPI.Database;
+using GuitarTabsAndChords.WebAPI.Exceptions;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -55,7 +56,7 @@ namespace GuitarTabsAndChords.WebAPI.Services
             var entity = _mapper.Map<Database.Users>(request);
             if (request.Password != request.PasswordConfirmation)
             {
-                throw new Exception("Passwords do not match");
+                throw new UserException("Passwords do not match");
             }
 
             entity.PasswordSalt = GenerateSalt();
@@ -74,7 +75,7 @@ namespace GuitarTabsAndChords.WebAPI.Services
             var entity = _mapper.Map<Database.Users>(request);
             if (request.Password != request.PasswordConfirmation)
             {
-                throw new Exception("Passwords do not match");
+                throw new UserException("Passwords do not match");
             }
 
             entity.PasswordSalt = GenerateSalt();
@@ -98,7 +99,7 @@ namespace GuitarTabsAndChords.WebAPI.Services
             {
                 if (request.Password != request.PasswordConfirmation)
                 {
-                    throw new Exception("Passwords do not match.");
+                    throw new UserException("Passwords do not match.");
                 }
 
                 entity.PasswordSalt = GenerateSalt();

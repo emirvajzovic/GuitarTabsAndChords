@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="GuitarTabsAndChords.Mobile.Views.RegistrationPage"
+             Title="{Binding Title}">
+    <ContentPage.Content>
+        <StackLayout HorizontalOptions="FillAndExpand" Padding="10" VerticalOptions="CenterAndExpand">
+
+            <StackLayout Orientation="Vertical">
+                <Label Text="Username"/>
+                <Entry Text="{Binding User.Username}"/>
+            </StackLayout>
+            <StackLayout Orientation="Vertical">
+                <Label Text="Name"/>
+                <Entry Text="{Binding User.Name}"/>
+            </StackLayout>
+            <StackLayout Orientation="Vertical">
+                <Label Text="Last name"/>
+                <Entry Text="{Binding User.LastName}"/>
+            </StackLayout>
+            <StackLayout Orientation="Vertical">
+                <Label Text="Email"/>
+                <Entry Text="{Binding User.Email}"/>
+            </StackLayout>
+            <StackLayout Orientation="Vertical">
+                <Label Text="Password"/>
+                <Entry Text="{Binding User.Password}" IsPassword="True"/>
+            </StackLayout>
+            <StackLayout Orientation="Vertical">
+                <Label Text="Password confirmation"/>
+                <Entry Text="{Binding User.PasswordConfirmation}" IsPassword="True"/>
+            </StackLayout>
+
+            <Button Command="{Binding RegistrationCommand}"  HorizontalOptions="FillAndExpand" Text="Create account" IsEnabled="{Binding IsButtonEnabled}"></Button>
+
+            <Label TextColor="#2296f3" HorizontalTextAlignment="Center" HorizontalOptions="FillAndExpand" Text="Already have an account? Login" Margin="0,5,0,0">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer x:Name="LoginLabel" Tapped="LoginLabel_Tapped"/>
+                </Label.GestureRecognizers>
+            </Label>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

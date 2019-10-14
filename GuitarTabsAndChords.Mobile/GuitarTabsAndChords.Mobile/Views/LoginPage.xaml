@@ -15,6 +15,12 @@
 
             <Button Command="{Binding LoginCommand}"  HorizontalOptions="FillAndExpand" Text="Login"></Button>
             <Label IsVisible="{Binding IsBusy}" Text="..."></Label>
+
+            <Label TextColor="#2296f3" HorizontalTextAlignment="Center" HorizontalOptions="FillAndExpand" Text="Don't have an account? Register" Margin="0,5,0,0">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer x:Name="RegisterLabel" Tapped="RegisterLabel_Tapped"/>
+                </Label.GestureRecognizers>
+            </Label>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -7,17 +7,17 @@ using Xamarin.Forms.Xaml;
 namespace GuitarTabsAndChords.Mobile.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class LoginPage : ContentPage
+    public partial class RegistrationPage : ContentPage
     {
-        public LoginPage()
+        public RegistrationPage()
         {
             InitializeComponent();
-            BindingContext = new LoginViewModel();
+            BindingContext = new RegistrationViewModel();
         }
 
-        private void RegisterLabel_Tapped(object sender, EventArgs e)
+        private void LoginLabel_Tapped(object sender, EventArgs e)
         {
-            Application.Current.MainPage = new RegistrationPage();
+            Application.Current.MainPage = new LoginPage();
         }
     }
 }
