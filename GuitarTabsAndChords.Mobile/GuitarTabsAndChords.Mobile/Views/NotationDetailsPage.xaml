@@ -7,135 +7,138 @@
              x:Class="GuitarTabsAndChords.Mobile.Views.NotationDetailsPage"
              Title="{Binding Title}">
 
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Favorite" x:Name="FavoriteToolbarItem" Clicked="FavoriteToolbarItem_Clicked"/>
-    </ContentPage.ToolbarItems>
+  <ContentPage.ToolbarItems>
+    <ToolbarItem Text="Favorite" x:Name="FavoriteToolbarItem" Clicked="FavoriteToolbarItem_Clicked"/>
+  </ContentPage.ToolbarItems>
 
-    <ContentPage.Content>
-        <ScrollView Padding="5">
+  <ContentPage.Content>
+    <ScrollView Padding="5">
 
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
+      <Grid>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="Auto"/>
+          <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
 
-                <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Notation.Song.Name}" TextColor="#2296f3" FontSize="18" FontAttributes="Bold">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer x:Name="SongLabel" Tapped="SongLabel_Tapped"/>
-                    </Label.GestureRecognizers>
-                </Label>
-                <Label Grid.Row="1" Grid.Column="0" Text="Artist:" FontAttributes="Bold" />
-                <Label Grid.Row="1" Grid.Column="1" Text="{Binding Notation.Song.Artist.Name}" TextColor="#2296f3" FontAttributes="Bold">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer x:Name="ArtistLabel" Tapped="ArtistLabel_Tapped"/>
-                    </Label.GestureRecognizers>
-                </Label>
+        <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Notation.Song.Name}" TextColor="#2296f3" FontSize="18" FontAttributes="Bold">
+          <Label.GestureRecognizers>
+            <TapGestureRecognizer x:Name="SongLabel" Tapped="SongLabel_Tapped"/>
+          </Label.GestureRecognizers>
+        </Label>
+        <Label Grid.Row="1" Grid.Column="0" Text="Artist:" FontAttributes="Bold" />
+        <Label Grid.Row="1" Grid.Column="1" Text="{Binding Notation.Song.Artist.Name}" TextColor="#2296f3" FontAttributes="Bold">
+          <Label.GestureRecognizers>
+            <TapGestureRecognizer x:Name="ArtistLabel" Tapped="ArtistLabel_Tapped"/>
+          </Label.GestureRecognizers>
+        </Label>
 
-                <Label Grid.Row="2" Grid.Column="0" Text="Views: " FontAttributes="Bold" />
-                <Label Grid.Row="2" Grid.Column="1" Text="{Binding Notation.Views}"/>
+        <Label Grid.Row="2" Grid.Column="0" Text="Views: " FontAttributes="Bold" />
+        <Label Grid.Row="2" Grid.Column="1" Text="{Binding Notation.Views}"/>
 
-                <Label Grid.Row="3" Grid.Column="0" Text="Favorites: " FontAttributes="Bold" />
-                <Label Grid.Row="3" Grid.Column="1" Text="{Binding Notation.Favorites}" />
+        <Label Grid.Row="3" Grid.Column="0" Text="Favorites: " FontAttributes="Bold" />
+        <Label Grid.Row="3" Grid.Column="1" Text="{Binding Notation.Favorites}" />
 
-                <Label Grid.Row="4" Grid.Column="0" Text="Author: " FontAttributes="Bold" />
-                <Label Grid.Row="4" Grid.Column="1" Text="{Binding Notation.User.Username}" TextColor="#2296f3" FontAttributes="Bold">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer x:Name="UserLabel" Tapped="UserLabel_Tapped"/>
-                    </Label.GestureRecognizers>
-                </Label>
+        <Label Grid.Row="4" Grid.Column="0" Text="Author: " FontAttributes="Bold" />
+        <Label Grid.Row="4" Grid.Column="1" Text="{Binding Notation.User.Username}" TextColor="#2296f3" FontAttributes="Bold">
+          <Label.GestureRecognizers>
+            <TapGestureRecognizer x:Name="UserLabel" Tapped="UserLabel_Tapped"/>
+          </Label.GestureRecognizers>
+        </Label>
 
-                <Label Grid.Row="5" Grid.Column="0" Text="Last edit by: " FontAttributes="Bold" />
-                <StackLayout Grid.Row="5" Grid.Column="1" Orientation="Horizontal">
+        <Label Grid.Row="5" Grid.Column="0" Text="Last edit by: " FontAttributes="Bold" />
+        <StackLayout Grid.Row="5" Grid.Column="1" Orientation="Horizontal">
 
-                    <Label Text="{Binding Notation.LastEditor.Username}" TextColor="#2296f3" FontAttributes="Bold">
-                        <Label.GestureRecognizers>
-                            <TapGestureRecognizer x:Name="LastEditLabel" Tapped="LastEditLabel_Tapped"/>
-                        </Label.GestureRecognizers>
-                    </Label>
-                    <Label Text="{Binding LastEditInfo}"/>
+          <Label Text="{Binding Notation.LastEditor.Username}" TextColor="#2296f3" FontAttributes="Bold">
+            <Label.GestureRecognizers>
+              <TapGestureRecognizer x:Name="LastEditLabel" Tapped="LastEditLabel_Tapped"/>
+            </Label.GestureRecognizers>
+          </Label>
+          <Label Text="{Binding LastEditInfo}"/>
 
-                </StackLayout>
-                <Label Grid.Row="6" Grid.Column="0" Text="Tuning:" FontAttributes="Bold" />
-                <Label Grid.Row="7" Grid.Column="0" Text="{Binding Notation.Tuning}"/>
-                <Label Grid.Row="7" Grid.Column="1" Text="{Binding Notation.TuningDescription}"/>
+        </StackLayout>
+        <Label Grid.Row="6" Grid.Column="0" Text="Tuning:" FontAttributes="Bold" />
+        <Label Grid.Row="7" Grid.Column="0" Text="{Binding Notation.Tuning}"/>
+        <Label Grid.Row="7" Grid.Column="1" Text="{Binding Notation.TuningDescription}"/>
 
-                <BoxView Grid.Row="8" Grid.ColumnSpan="2" Color="Black" HeightRequest="1" HorizontalOptions="FillAndExpand"></BoxView>
+        <BoxView Grid.Row="8" Grid.ColumnSpan="2" Color="Black" HeightRequest="1" HorizontalOptions="FillAndExpand"></BoxView>
 
-                <Label Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2" TextColor="Black" Text="{Binding Notation.NotationContent}" >
-                    <Label.FontFamily>
-                        <OnPlatform x:TypeArguments="x:String">
-                            <On Platform="Android">monospace</On>
-                            <On Platform="iOS">Courier New</On>
-                            <On Platform="UWP">Lucida Console</On>
-                        </OnPlatform>
-                    </Label.FontFamily>
-                    <Label.FontSize>
-                        <OnPlatform x:TypeArguments="x:Double">
-                            <On Platform="Android">8.5</On>
-                            <On Platform="iOS">8.5</On>
-                            <On Platform="UWP">12</On>
-                        </OnPlatform>
-                    </Label.FontSize>
-                </Label>
+        <Label Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2" TextColor="Black" Text="{Binding Notation.NotationContent}" >
+          <Label.FontFamily>
+            <OnPlatform x:TypeArguments="x:String">
+              <On Platform="Android">monospace</On>
+              <On Platform="iOS">Courier New</On>
+              <On Platform="UWP">Lucida Console</On>
+            </OnPlatform>
+          </Label.FontFamily>
+          <Label.FontSize>
+            <OnPlatform x:TypeArguments="x:Double">
+              <On Platform="Android">8.5</On>
+              <On Platform="iOS">8.5</On>
+              <On Platform="UWP">12</On>
+            </OnPlatform>
+          </Label.FontSize>
+        </Label>
 
-                <Button Grid.Row="10" Grid.ColumnSpan="2" Text="Suggest correction"/>
 
-                <Label Grid.Row="11" Grid.Column="0" Grid.ColumnSpan="2" Text="Please rate this tab"/>
+        <Label Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="2" Text="Please rate this notation"/>
 
-                <StackLayout Grid.Row="12" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal">
-                    <ImageButton                    
+        <StackLayout Grid.Row="11" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal">
+          <ImageButton
         Command="{Binding RateStarCommand}"
         BackgroundColor="Transparent"
         Source="{Binding Star1.Image}"
-                            WidthRequest="32"
-                            CommandParameter="1"
+                  WidthRequest="32"
+                  CommandParameter="1"
                             />
-                    <ImageButton                    
+          <ImageButton
         Command="{Binding RateStarCommand}"
         BackgroundColor="Transparent"
-        Source="{Binding Star2.Image}" 
-                            WidthRequest="32"
-                            CommandParameter="2"
+        Source="{Binding Star2.Image}"
+                  WidthRequest="32"
+                  CommandParameter="2"
                             />
-                    <ImageButton                    
+          <ImageButton
         Command="{Binding RateStarCommand}"
         BackgroundColor="Transparent"
-        Source="{Binding Star3.Image}" 
-                            WidthRequest="32"
-                            CommandParameter="3"
+        Source="{Binding Star3.Image}"
+                  WidthRequest="32"
+                  CommandParameter="3"
                             />
-                    <ImageButton                    
+          <ImageButton
         Command="{Binding RateStarCommand}"
         BackgroundColor="Transparent"
-        Source="{Binding Star4.Image}" 
-                            WidthRequest="32"
-                            CommandParameter="4"
+        Source="{Binding Star4.Image}"
+                  WidthRequest="32"
+                  CommandParameter="4"
                             />
-                    <ImageButton                    
+          <ImageButton
         Command="{Binding RateStarCommand}"
         BackgroundColor="Transparent"
-        Source="{Binding Star5.Image}" 
-                            WidthRequest="32"
-                            CommandParameter="5"
+        Source="{Binding Star5.Image}"
+                  WidthRequest="32"
+                  CommandParameter="5"
                             />
-                </StackLayout>
-            </Grid>
-        </ScrollView>
-    </ContentPage.Content>
+        </StackLayout>
+
+        <Button Grid.Row="12" Grid.ColumnSpan="2" Text="Suggest correction"/>
+      </Grid>
+
+
+    </ScrollView>
+  </ContentPage.Content>
 </ContentPage>

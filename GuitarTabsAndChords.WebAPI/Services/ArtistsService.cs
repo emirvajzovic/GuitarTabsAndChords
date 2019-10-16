@@ -38,6 +38,8 @@ namespace GuitarTabsAndChords.WebAPI.Services
                     query = query.Where(x => (int)x.Status == request.Filter.Value);
             }
 
+            query = query.OrderBy(x => x.Name);
+
             var list = query.ToList();
 
             return _mapper.Map<List<Model.Artists>>(list);

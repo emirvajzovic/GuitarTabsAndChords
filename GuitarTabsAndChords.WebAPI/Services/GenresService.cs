@@ -38,9 +38,18 @@ namespace GuitarTabsAndChords.WebAPI.Services
                     query = query.Where(x => (int)x.Status == request.Filter.Value);
             }
 
+            query = query.OrderBy(x => x.Name);
+
             var list = query.ToList();
 
-            return _mapper.Map<List<Model.Genres>>(list);
+            var genresList = _mapper.Map<List<Model.Genres>>(list);
+
+            foreach (var item in genresList)
+            {
+                item.NumberOfSongs = _context.Songs.Count(x => x.GenreId == item.Id);
+            }
+
+            return genresList;
         }
 
         public Model.Genres GetById(int id)

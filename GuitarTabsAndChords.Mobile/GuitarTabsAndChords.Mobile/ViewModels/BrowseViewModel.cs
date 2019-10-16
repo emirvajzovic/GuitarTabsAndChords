@@ -66,17 +66,17 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
             MenuItems.Add(new Models.MenuItem
             {
                 Text = "Artists",
-                //Page = typeof(ExploreArtistsPage)
+                Page = typeof(ExploreArtistsPage)
             });
             MenuItems.Add(new Models.MenuItem
             {
                 Text = "Genres",
-                //Page = typeof(ExploreGenresPage)
+                Page = typeof(ExploreGenresPage)
             });
             MenuItems.Add(new Models.MenuItem
             {
                 Text = "Decades",
-                //Page = typeof(ExploreDecadesPage)
+                Page = typeof(ExploreDecadesPage)
             });
 
 

@@ -34,6 +34,15 @@
     <Compile Update="Views\AlbumPage.xaml.cs">
       <DependentUpon>AlbumPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\ExploreArtistsPage.xaml.cs">
+      <DependentUpon>ExploreArtistsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\ExploreDecadesPage.xaml.cs">
+      <DependentUpon>ExploreDecadesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\ExploreGenresPage.xaml.cs">
+      <DependentUpon>ExploreGenresPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\ExploreChordsPage.xaml.cs">
       <DependentUpon>ExploreChordsPage.xaml</DependentUpon>
     </Compile>
@@ -51,6 +60,9 @@
     </Compile>
     <Compile Update="Views\SongPage.xaml.cs">
       <DependentUpon>SongPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\ExploreGenreNotationsPage.xaml.cs">
+      <DependentUpon>ExploreGenreNotationsPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 
