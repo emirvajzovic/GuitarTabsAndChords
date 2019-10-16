@@ -40,7 +40,7 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
             {
                 ItemList.Add(new Decade
                 {
-                    Decade = item,
+                    DecadeInt = item,
                     Text = item + "s"
                 });
             }
