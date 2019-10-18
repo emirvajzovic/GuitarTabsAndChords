@@ -16,6 +16,6 @@ namespace GuitarTabsAndChords.WebAPI.Services
         List<Notations> GetThisWeekTop5();
         List<Notations> GetTop100();
         List<Notations> GetPopularNotations(NotationsSearchRequest request);
-
+        List<int> GetDecades();
     }
 }

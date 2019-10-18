@@ -14,7 +14,7 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
 {
     public class ExploreDecadesViewModel : BaseViewModel
     {
-        private readonly APIService _serviceAlbums = new APIService("Albums");
+        private readonly APIService _serviceNotations = new APIService("Notations");
 
         public ICommand InitCommand { get; set; }
 
@@ -22,7 +22,7 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
 
         public ExploreDecadesViewModel()
         {
-            Title = "Explore Genres";
+            Title = "Explore Decades";
         }
 
         public async Task Init()
@@ -34,7 +34,7 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
         {
             ItemList.Clear();
 
-            var list = await _serviceAlbums.Get<List<int>>(null, "GetDecades");
+            var list = await _serviceNotations.Get<List<int>>(null, "GetDecades");
 
             foreach (var item in list)
             {

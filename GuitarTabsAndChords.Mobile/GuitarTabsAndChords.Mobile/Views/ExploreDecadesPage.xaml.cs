@@ -8,26 +8,27 @@ using GuitarTabsAndChords.Model;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using GuitarTabsAndChords.Mobile.Models;
 
 namespace GuitarTabsAndChords.Mobile.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ExploreDecadesPage : ContentPage
     {
-        private readonly ExploreGenresViewModel VM;
+        private readonly ExploreDecadesViewModel VM;
 
         public ExploreDecadesPage()
         {
             InitializeComponent();
-            BindingContext = VM = new ExploreGenresViewModel();
+            BindingContext = VM = new ExploreDecadesViewModel();
         }
 
         private async void ListView_ItemTapped(object sender, ItemTappedEventArgs e)
         {
             if (e.Item != null)
             {
-                Genres genre = e.Item as Genres;
-                //await Navigation.PushAsync(new ExploreDecadeNotationsPage());
+                Decade decade = e.Item as Decade;
+                await Navigation.PushAsync(new ExploreDecadeNotationsPage(decade.DecadeInt));
             }
         }
 

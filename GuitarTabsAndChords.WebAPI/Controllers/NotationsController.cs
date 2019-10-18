@@ -64,5 +64,12 @@ namespace GuitarTabsAndChords.WebAPI.Controllers
         {
             return _service.GetPopularNotations(request);
         }
+
+        [HttpGet("GetDecades")]
+        public List<int> GetDecades()
+        {
+            return _service.GetDecades();
+        }
+
     }
 }

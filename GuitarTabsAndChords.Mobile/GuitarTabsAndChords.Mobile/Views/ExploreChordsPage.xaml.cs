@@ -35,13 +35,9 @@ namespace GuitarTabsAndChords.Mobile.Views
             ((ListView)sender).SelectedItem = null;
         }
 
-
-        protected async override void OnAppearing()
+        private async void Picker_SelectedIndexChanged(object sender, EventArgs e)
         {
-            base.OnAppearing();
-            await VM.Init();
+            await VM.LoadNotations();
         }
-
-
     }
 }

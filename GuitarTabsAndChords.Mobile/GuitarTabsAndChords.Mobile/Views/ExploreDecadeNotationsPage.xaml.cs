@@ -11,14 +11,19 @@ using Xamarin.Forms.Xaml;
 namespace GuitarTabsAndChords.Mobile.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ExploreTabsPage : ContentPage
+    public partial class ExploreDecadeNotationsPage : ContentPage
     {
-        private readonly ExploreTabsViewModel VM;
+        private readonly ExploreDecadeNotationsViewModel VM;
 
-        public ExploreTabsPage()
+        public ExploreDecadeNotationsPage(int Decade)
         {
             InitializeComponent();
-            BindingContext = VM = new ExploreTabsViewModel();
+            BindingContext = VM = new ExploreDecadeNotationsViewModel(Decade);
+        }
+
+        private void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            ((ListView)sender).SelectedItem = null;
         }
 
         private async void ListView_ItemTapped(object sender, ItemTappedEventArgs e)
@@ -30,15 +35,9 @@ namespace GuitarTabsAndChords.Mobile.Views
             }
         }
 
-        private void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
-        {
-            ((ListView)sender).SelectedItem = null;
-        }
-
         private async void Picker_SelectedIndexChanged(object sender, EventArgs e)
         {
             await VM.LoadNotations();
         }
     }
 }
-

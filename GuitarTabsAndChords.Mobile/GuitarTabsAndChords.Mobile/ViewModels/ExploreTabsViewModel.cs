@@ -1,4 +1,5 @@
 ﻿using GuitarTabsAndChords.Mobile.Models;
+using GuitarTabsAndChords.Mobile.Services;
 using GuitarTabsAndChords.Model;
 using System;
 using System.Collections.Generic;
@@ -18,11 +19,25 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
 
         public ICommand InitCommand { get; set; }
 
-        public ObservableCollection<Models.NotationBrowseListItem> ItemList { get; set; } = new ObservableCollection<NotationBrowseListItem>();
+        public ObservableCollection<NotationBrowseListItem> ItemList { get; set; } = new ObservableCollection<NotationBrowseListItem>();
+        public ObservableCollection<NotationSortPickerItem> NotationSortList { get; set; }
+
+        private NotationSortPickerItem _sortingMode;
+        public NotationSortPickerItem SortingMode
+        {
+            get { return _sortingMode; }
+            set { SetProperty(ref _sortingMode, value); }
+        }
 
         public ExploreTabsViewModel()
         {
             Title = "Explore Tabs";
+            NotationSortList = new ObservableCollection<NotationSortPickerItem>(NotationSortHelper.GetSortPickerItems());
+            foreach (var item in NotationSortList)
+            {
+                if (item.Value == NotationSort.RECENTLY_ADDED)
+                    SortingMode = item;
+            }
         }
 
         public async Task Init()
@@ -37,7 +52,8 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
             var request = new Model.Requests.NotationsSearchRequest
             {
                 Type = NotationType.Tab,
-                Filter = (int)ReviewStatus.Approved
+                Filter = (int)ReviewStatus.Approved,
+                Sort = SortingMode.Value
             };
             var list = await _serviceNotations.Get<List<Models.NotationBrowseListItem>>(request);
 

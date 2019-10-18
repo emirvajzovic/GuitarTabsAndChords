@@ -40,6 +40,9 @@
     <Compile Update="Views\ExploreDecadesPage.xaml.cs">
       <DependentUpon>ExploreDecadesPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\ExploreDecadeNotationsPage.xaml.cs">
+      <DependentUpon>ExploreDecadeNotationsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\ExploreGenresPage.xaml.cs">
       <DependentUpon>ExploreGenresPage.xaml</DependentUpon>
     </Compile>

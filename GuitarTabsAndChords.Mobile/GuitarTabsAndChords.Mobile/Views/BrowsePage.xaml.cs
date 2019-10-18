@@ -20,7 +20,7 @@ namespace GuitarTabsAndChords.Mobile.Views
             InitializeComponent();
             BindingContext = VM = new BrowseViewModel(Navigation);
         }
-        private async void ListView_ItemTapped(object sender, ItemTappedEventArgs e)
+        private async void MenuItemList_ItemTapped(object sender, ItemTappedEventArgs e)
         {
             if (e.Item != null)
             {
@@ -45,7 +45,7 @@ namespace GuitarTabsAndChords.Mobile.Views
             await VM.Search();
         }
 
-        private void ListView_ItemTapped_1(object sender, ItemTappedEventArgs e)
+        private void SearchResultListView_ItemTapped_(object sender, ItemTappedEventArgs e)
         {
             if (e.Item != null)
             {
@@ -64,6 +64,15 @@ namespace GuitarTabsAndChords.Mobile.Views
                     default:
                         break;
                 }
+            }
+        }
+
+        private async void TopHitsListView_ItemTapped(object sender, ItemTappedEventArgs e)
+        {
+            if (e.Item != null)
+            {
+                Models.NotationBrowseListItem notation = e.Item as Models.NotationBrowseListItem;
+                await Navigation.PushAsync(new NotationDetailsPage(notation.Id));
             }
         }
     }

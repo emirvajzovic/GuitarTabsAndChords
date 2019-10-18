@@ -26,11 +26,6 @@ namespace GuitarTabsAndChords.WebAPI.Controllers
         {
             return _service.Get(request);
         }
-        [HttpGet("GetDecades")]
-        public List<int> GetDecades()
-        {
-            return _service.GetDecades();
-        }
 
         [HttpGet("{Id}")]
         public Model.Albums GetById(int Id)

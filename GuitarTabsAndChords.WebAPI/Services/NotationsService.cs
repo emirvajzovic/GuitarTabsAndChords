@@ -42,6 +42,16 @@ namespace GuitarTabsAndChords.WebAPI.Services
                 query = query.Where(x => x.UserId == request.UserId);
             if (request?.Type != null)
                 query = query.Where(x => x.Type == request.Type.Value);
+            if (request?.Decade != 0)
+                query = query.Where(x =>
+                    (x.Song.Year != 0
+                        ? (x.Song.Year >= request.Decade / 10 * 10 && x.Song.Year <= request.Decade / 10 * 10 + 9)
+                        : (x.Song.Album.Year != 0
+                                ? (x.Song.Album.Year >= request.Decade / 10 * 10 && x.Song.Album.Year <= request.Decade / 10 * 10 + 9)
+                                : false
+                        )
+                    )
+                );
 
             if (!string.IsNullOrWhiteSpace(request?.SearchTerm))
                 query = query.Where(x => x.Song.Artist.Name.Contains(request.SearchTerm) || x.Song.Album.Name.Contains(request.SearchTerm) || x.Song.Name.Contains(request.SearchTerm) || x.User.Username.Contains(request.SearchTerm));
@@ -64,6 +74,37 @@ namespace GuitarTabsAndChords.WebAPI.Services
             if (request?.ArtistId != 0)
             {
                 query = query.OrderByDescending(x => _context.NotationViews.Where(nv => nv.NotationId == x.Id).Count());
+            }
+            else
+            {
+                if (request?.Sort != null)
+                {
+                    switch (request?.Sort)
+                    {
+                        case NotationSort.RECENTLY_ADDED:
+                            query = query.OrderByDescending(x => x.DateAdded);
+                            break;
+                        case NotationSort.SONG_ASC:
+                            query = query.OrderBy(x => x.Song.Name);
+                            break;
+                        case NotationSort.SONG_DESC:
+                            query = query.OrderByDescending(x => x.Song.Name);
+                            break;
+                        case NotationSort.ARTIST_ASC:
+                            query = query.OrderBy(x => x.Song.Artist.Name);
+                            break;
+                        case NotationSort.ARTIST_DESC:
+                            query = query.OrderByDescending(x => x.Song.Artist.Name);
+                            break;
+                        case NotationSort.RATING:
+                            query = query.OrderByDescending(notation => _context.Ratings
+                                .Where(rating => rating.NotationId == notation.Id)
+                                .Average(rating => (double?)rating.Rating) ?? 0);
+                            break;
+                        default:
+                            break;
+                    }
+                }
             }
 
             var list = query.ToList();
@@ -243,5 +284,15 @@ namespace GuitarTabsAndChords.WebAPI.Services
             return _mapper.Map<List<Model.Notations>>(list);
         }
 
+        public List<int> GetDecades()
+        {
+            return _context.Notations
+                .Where(x => x.Song.Year >= 1930 || x.Song.Album.Year >= 1930)
+                .Where(x => x.Status == ReviewStatus.Approved)
+                .Select(x => (x.Song.Year != 0 ? x.Song.Year / 10 * 10 : x.Song.Album.Year / 10 * 10))
+                .Distinct()
+                .OrderByDescending(x => x)
+                .ToList();
+        }
     }
 }

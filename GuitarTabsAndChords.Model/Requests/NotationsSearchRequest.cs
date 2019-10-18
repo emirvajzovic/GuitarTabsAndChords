@@ -15,5 +15,7 @@ namespace GuitarTabsAndChords.Model.Requests
         public string Tuning { get; set; }
         public int UserId { get; set; }
         public NotationType? Type { get; set; }
+        public int Decade { get; set; }
+        public NotationSort? Sort { get; set; }
     }
 }

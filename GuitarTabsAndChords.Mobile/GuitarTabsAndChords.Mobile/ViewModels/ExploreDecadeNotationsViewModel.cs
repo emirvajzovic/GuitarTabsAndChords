@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -13,15 +12,13 @@ using Xamarin.Forms;
 
 namespace GuitarTabsAndChords.Mobile.ViewModels
 {
-    public class ExploreChordsViewModel : BaseViewModel
+    public class ExploreDecadeNotationsViewModel : BaseViewModel
     {
         private readonly APIService _serviceNotations = new APIService("Notations");
+        private readonly int _decade;
 
-        public ICommand InitCommand { get; set; }
-
-        public ObservableCollection<Models.NotationBrowseListItem> ItemList { get; set; } = new ObservableCollection<NotationBrowseListItem>();
+        public ObservableCollection<Models.NotationBrowseListItem> NotationList { get; set; } = new ObservableCollection<NotationBrowseListItem>();
         public ObservableCollection<NotationSortPickerItem> NotationSortList { get; set; }
-
         private NotationSortPickerItem _sortingMode;
         public NotationSortPickerItem SortingMode
         {
@@ -29,9 +26,10 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
             set { SetProperty(ref _sortingMode, value); }
         }
 
-        public ExploreChordsViewModel()
+        public ExploreDecadeNotationsViewModel(int Decade)
         {
-            Title = "Explore Tabs";
+            _decade = Decade;
+            Title = $"Explore {_decade}";
             NotationSortList = new ObservableCollection<NotationSortPickerItem>(NotationSortHelper.GetSortPickerItems());
             foreach (var item in NotationSortList)
             {
@@ -40,27 +38,23 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
             }
         }
 
-        public async Task Init()
-        {
-            await LoadNotations();
-        }
 
         public async Task LoadNotations()
         {
-            ItemList.Clear();
+            NotationList.Clear();
 
             var request = new Model.Requests.NotationsSearchRequest
             {
-                Type = NotationType.Chord,
+                Decade = _decade,
                 Filter = (int)ReviewStatus.Approved,
                 Sort = SortingMode.Value
             };
-            var list = await _serviceNotations.Get<List<Models.NotationBrowseListItem>>(request);
 
+            var list = await _serviceNotations.Get<List<Models.NotationBrowseListItem>>(request);
             foreach (var item in list)
             {
                 UpdateStarRating(item);
-                ItemList.Add(item);
+                NotationList.Add(item);
             }
         }
 
