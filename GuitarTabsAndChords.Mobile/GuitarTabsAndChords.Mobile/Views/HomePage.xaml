@@ -56,7 +56,7 @@
                                    HeightRequest="200"
                                    
                                    SelectionMode="None" 
-                                   ItemsSource="{Binding RecommendedList}">
+                                   ItemsSource="{Binding PopularTabsList}">
                     <syncfusion:SfListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
@@ -87,7 +87,7 @@
                                    HeightRequest="200"
                                    
                                    SelectionMode="None" 
-                                   ItemsSource="{Binding RecommendedList}">
+                                   ItemsSource="{Binding PopularChordsList}">
                     <syncfusion:SfListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>

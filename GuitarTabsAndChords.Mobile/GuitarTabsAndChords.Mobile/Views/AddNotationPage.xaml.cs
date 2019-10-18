@@ -96,5 +96,18 @@ namespace GuitarTabsAndChords.Mobile.Views
             Model.Songs song = cmb.SelectedValue as Model.Songs;
             VM.SongId = song.Id;
         }
+
+        private void InsertTemplateButton_Clicked(object sender, EventArgs e)
+        {
+            var NotationType = VM.Notation.Type;
+            if (NotationType == Model.NotationType.Tab)
+            {
+                NotationContent.Text = Properties.Resources.TabTemplate + NotationContent.Text;
+            }
+            if (NotationType == Model.NotationType.Chord)
+            {
+                NotationContent.Text = Properties.Resources.ChordTemplate + NotationContent.Text;
+            }
+        }
     }
 }

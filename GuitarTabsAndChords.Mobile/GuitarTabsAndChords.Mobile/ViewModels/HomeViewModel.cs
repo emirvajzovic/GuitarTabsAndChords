@@ -15,6 +15,8 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
     public class HomeViewModel : BaseViewModel
     {
         public ObservableCollection<Model.Notations> RecommendedList { get; set; }
+        public ObservableCollection<Model.Notations> PopularTabsList { get; set; }
+        public ObservableCollection<Model.Notations> PopularChordsList { get; set; }
         public List<Models.MenuItem> MenuItems { get; set; } = new List<Models.MenuItem>();
 
         private readonly APIService _serviceNotations = new APIService("Notations");
@@ -23,6 +25,8 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
         {
             Title = "Home";
             RecommendedList = new ObservableCollection<Model.Notations>();
+            PopularTabsList = new ObservableCollection<Model.Notations>();
+            PopularChordsList = new ObservableCollection<Model.Notations>();
             MenuItems.Add(new Models.MenuItem
             {
                 Image = "star_empty.png",
@@ -45,32 +49,61 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
 
         public async Task LoadItems()
         {
-            if (IsBusy)
-                return;
+            await LoadRecommendedList();
 
-            IsBusy = true;
+            await LoadPopularTabs();
 
-            try
+            await LoadPopularChords();
+        }
+
+        private async Task LoadRecommendedList()
+        {
+            RecommendedList.Clear();
+
+            var items = await _serviceNotations.Get<List<Model.Notations>>(null);
+            foreach (var item in items.GetRange(0, Math.Min(10, items.Count)))
             {
-                RecommendedList.Clear();
-
-                var items = await _serviceNotations.Get<List<Model.Notations>>(null);
-                foreach (var item in items.GetRange(0, Math.Min(10, items.Count)))
+                if (item.Song.Album.AlbumCover.Length == 0)
                 {
-                    if (item.Song.Album.AlbumCover.Length == 0)
-                    {
-                        item.Song.Album.AlbumCover = File.ReadAllBytes("logo.png");
-                    }
-                    RecommendedList.Add(item);
+                    item.Song.Album.AlbumCover = File.ReadAllBytes("logo.png");
                 }
+                RecommendedList.Add(item);
             }
-            catch (Exception ex)
+        }
+
+        private async Task LoadPopularChords()
+        {
+            PopularChordsList.Clear();
+            var chordsRequest = new Model.Requests.NotationsSearchRequest
             {
-                Debug.WriteLine(ex);
+                Type = Model.NotationType.Chord
+            };
+            var chords = await _serviceNotations.Get<List<Model.Notations>>(chordsRequest, "PopularNotations");
+            foreach (var item in chords.GetRange(0, Math.Min(10, chords.Count)))
+            {
+                if (item.Song.Album.AlbumCover.Length == 0)
+                {
+                    item.Song.Album.AlbumCover = File.ReadAllBytes("logo.png");
+                }
+                PopularChordsList.Add(item);
             }
-            finally
+        }
+
+        private async Task LoadPopularTabs()
+        {
+            PopularTabsList.Clear();
+            var tabsRequest = new Model.Requests.NotationsSearchRequest
             {
-                IsBusy = false;
+                Type = Model.NotationType.Tab
+            };
+            var tabs = await _serviceNotations.Get<List<Model.Notations>>(tabsRequest, "PopularNotations");
+            foreach (var item in tabs.GetRange(0, Math.Min(10, tabs.Count)))
+            {
+                if (item.Song.Album.AlbumCover.Length == 0)
+                {
+                    item.Song.Album.AlbumCover = File.ReadAllBytes("logo.png");
+                }
+                PopularTabsList.Add(item);
             }
         }
     }

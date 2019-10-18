@@ -25,13 +25,16 @@ namespace GuitarTabsAndChords.Mobile
 
         public string getApiURL()
         {
-            string local = "http://localhost:16/api";
-            string API = "http://192.168.1.16:16/api";
+            int port = 16;
+            //int port = 59058;
+
+            string local = $"http://localhost:{port}/api";
+            string lan_address = $"http://192.168.1.16:{port}/api";
 
             if (Device.RuntimePlatform == Device.UWP)
                 return local;
             else
-                return API;
+                return lan_address;
         }
 
 

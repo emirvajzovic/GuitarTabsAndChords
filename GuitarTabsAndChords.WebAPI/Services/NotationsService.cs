@@ -215,5 +215,33 @@ namespace GuitarTabsAndChords.WebAPI.Services
 
             return notationList;
         }
+
+
+        public List<Model.Notations> GetPopularNotations(NotationsSearchRequest request)
+        {
+            var query = _context.Notations.AsQueryable();
+
+            query = query.Where(x => x.Status == ReviewStatus.Approved);
+            if (request.Type != null)
+                query = query.Where(x => x.Type == request.Type);
+
+            query = query
+                .Include(x => x.Song.Album)
+                .Include(x => x.Song.Artist)
+                .Include(x => x.Song.Genre)
+                .Include(x => x.User);
+
+            query = query.OrderByDescending(x => _context
+                    .NotationViews
+                    .Where(views => views.Timestamp >= DateTime.Now.AddDays(-14))
+                    .Count(views => views.NotationId == x.Id)
+                ).Take(10);
+
+
+            var list = query.ToList();
+
+            return _mapper.Map<List<Model.Notations>>(list);
+        }
+
     }
 }

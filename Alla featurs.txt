@@ -13,13 +13,11 @@ Completed Tasks:
 
 [1] HI  100% ProfilePage (Profile, Email, Password, Slika, My Notations)
 [5] MED Add artist, album, song?
-[9] HI  Zarejestruj siê (Za³ó¿ konto)
-[10]LO  Autorizacja (WebAPI)
-[13]LO  Add default picture
-[14]LO  Add Nothing to see here text
-
-Szef musi kommitowaæ:
 [6] LO  Validate WinUI -
 [8] LO  Popular Tabs & Chords on UZP HomePage - 10 of each in past 2 weeks by Views
+[9] HI  Zarejestruj siê (Za³ó¿ konto)
+[10]LO  Autorizacja (WebAPI)
 [11]LO  Showa approved only in UZP -
 [12]HI  Solidify chord and tab template - note to szef: chuju fixuj insertBefore
+[13]LO  Add default picture
+[14]LO  Add Nothing to see here text

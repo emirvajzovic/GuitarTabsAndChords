@@ -15,5 +15,7 @@ namespace GuitarTabsAndChords.WebAPI.Services
         Notations Update(int id, NotationsInsertRequest request);
         List<Notations> GetThisWeekTop5();
         List<Notations> GetTop100();
+        List<Notations> GetPopularNotations(NotationsSearchRequest request);
+
     }
 }

@@ -53,8 +53,13 @@ namespace GuitarTabsAndChords.WebAPI.Services
 
         public List<int> GetDecades()
         {
-            return _context.Songs.Where(x => x.Year >= 1930).Select(x => x.Year / 10 * 10)
-                .Distinct().OrderByDescending(x => x).ToList();
+            return _context.Songs
+                .Where(x => x.Year >= 1930)
+                .Where(x=>x.Status == ReviewStatus.Approved)
+                .Select(x => x.Year / 10 * 10)
+                .Distinct()
+                .OrderByDescending(x => x)
+                .ToList();
         }
 
         public Model.Albums GetById(int id)

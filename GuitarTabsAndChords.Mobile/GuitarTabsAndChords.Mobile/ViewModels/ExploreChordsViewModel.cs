@@ -36,7 +36,8 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
 
             var request = new Model.Requests.NotationsSearchRequest
             {
-                Type = NotationType.Chord  
+                Type = NotationType.Chord,
+                Filter = (int)ReviewStatus.Approved
             };
             var list = await _serviceNotations.Get<List<Models.NotationBrowseListItem>>(request);
 

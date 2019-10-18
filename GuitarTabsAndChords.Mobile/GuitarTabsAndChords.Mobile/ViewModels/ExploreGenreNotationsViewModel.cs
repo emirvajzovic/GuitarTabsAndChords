@@ -1,4 +1,5 @@
 ﻿using GuitarTabsAndChords.Mobile.Models;
+using GuitarTabsAndChords.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -35,7 +36,8 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
 
             var request = new Model.Requests.NotationsSearchRequest
             {
-                GenreId = _genreId
+                GenreId = _genreId,
+                Filter = (int)ReviewStatus.Approved
             };
 
             var list = await _serviceNotations.Get<List<Models.NotationBrowseListItem>>(request);

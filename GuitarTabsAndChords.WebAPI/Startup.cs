@@ -72,6 +72,7 @@ namespace GuitarTabsAndChords.WebAPI
                .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
 
             var connection = Configuration.GetConnectionString("lokalni");
+            //var connection = Configuration.GetConnectionString("localDB");
             services.AddDbContext<GuitarTabsContext>(options => options.UseSqlServer(connection));
         }
 

@@ -28,8 +28,9 @@
                 <Label FontAttributes="Bold" FontSize="16" Text="Tuning description"/>
                 <Entry Text="{Binding Notation.TuningDescription}"/>
 
+                <Button Text="Insert Notation Template" Clicked="InsertTemplateButton_Clicked"/>
                 <Label FontAttributes="Bold" FontSize="16" Text="Content"/>
-                <Editor Text="{Binding Notation.NotationContent}" HeightRequest="600" IsSpellCheckEnabled="false">
+                <Editor Text="{Binding Notation.NotationContent}" x:Name="NotationContent" HeightRequest="600" IsSpellCheckEnabled="false">
                     <Editor.FontFamily>
                         <OnPlatform x:TypeArguments="x:String">
                             <On Platform="Android">monospace</On>

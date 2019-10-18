@@ -1,4 +1,5 @@
 ﻿using GuitarTabsAndChords.Mobile.Models;
+using GuitarTabsAndChords.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -70,7 +71,8 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
 
             var request = new Model.Requests.NotationsSearchRequest
             {
-                ArtistId = _artistId
+                ArtistId = _artistId,
+                Filter = (int)ReviewStatus.Approved
             };
             var list = await _serviceNotations.Get<List<Models.NotationBrowseListItem>>(request);
             NothingToSeeNotations = list.Count == 0;
@@ -89,7 +91,8 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
 
             var request = new Model.Requests.AlbumsSearchRequest
             {
-                ArtistId = _artistId
+                ArtistId = _artistId,
+                Filter = (int)ReviewStatus.Approved
             };
             var list = await _serviceAlbums.Get<List<Model.Albums>>(request);
             NothingToSeeAlbums = list.Count == 0;

@@ -58,5 +58,11 @@ namespace GuitarTabsAndChords.WebAPI.Controllers
         {
             return _service.GetTop100();
         }
+        [HttpGet("PopularNotations")]
+        [Authorize(Roles="User")]
+        public List<Model.Notations> GetPopularNotations([FromQuery] Model.Requests.NotationsSearchRequest request)
+        {
+            return _service.GetPopularNotations(request);
+        }
     }
 }
