@@ -7,7 +7,7 @@
              x:Class="GuitarTabsAndChords.Mobile.Views.ExploreGenresPage"
              Title="{Binding Title}">
     <ContentPage.Content>
-        <StackLayout>
+      <StackLayout Padding="5">
             <ListView 
                 ItemsSource="{Binding ItemList}"
                 VerticalOptions="FillAndExpand"

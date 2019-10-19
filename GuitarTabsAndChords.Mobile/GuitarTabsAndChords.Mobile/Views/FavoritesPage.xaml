@@ -15,7 +15,7 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout Padding="5">
             <Label IsVisible="{Binding NothingToSee}" Text="Nothing to see here, move along."/>
             <ListView 
                 ItemsSource="{Binding FavoritesList}"

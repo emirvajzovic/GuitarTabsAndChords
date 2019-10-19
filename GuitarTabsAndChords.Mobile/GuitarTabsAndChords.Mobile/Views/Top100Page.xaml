@@ -8,7 +8,7 @@
              Title="{Binding Title}"
              >
     <ContentPage.Content>
-        <StackLayout>
+      <StackLayout Padding="5">
 
             <ListView 
                 ItemsSource="{Binding Top100List}"
