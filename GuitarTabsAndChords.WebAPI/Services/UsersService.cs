@@ -58,6 +58,14 @@ namespace GuitarTabsAndChords.WebAPI.Services
             {
                 throw new UserException("Passwords do not match");
             }
+            if (CheckUsernameExists(request.Username))
+            {
+                throw new UserException("Username is already taken.");
+            }
+            if (CheckEmailExists(request.Email))
+            {
+                throw new UserException("Email is already taken.");
+            }
 
             entity.PasswordSalt = GenerateSalt();
             entity.PasswordHash = GenerateHash(entity.PasswordSalt, request.Password);
@@ -76,6 +84,14 @@ namespace GuitarTabsAndChords.WebAPI.Services
             if (request.Password != request.PasswordConfirmation)
             {
                 throw new UserException("Passwords do not match");
+            }
+            if (CheckUsernameExists(request.Username))
+            {
+                throw new UserException("Username is already taken.");
+            }
+            if (CheckEmailExists(request.Email))
+            {
+                throw new UserException("Email is already taken.");
             }
 
             entity.PasswordSalt = GenerateSalt();
@@ -104,6 +120,14 @@ namespace GuitarTabsAndChords.WebAPI.Services
 
                 entity.PasswordSalt = GenerateSalt();
                 entity.PasswordHash = GenerateHash(entity.PasswordSalt, request.Password);
+            }
+            if(entity.Username != request.Username && CheckUsernameExists(request.Username))
+            {
+                throw new UserException("Username is already taken.");
+            }
+            if(entity.Email != request.Email && CheckEmailExists(request.Email))
+            {
+                throw new UserException("Email is already taken.");
             }
 
             _mapper.Map(request, entity);
@@ -175,6 +199,15 @@ namespace GuitarTabsAndChords.WebAPI.Services
         public Model.Users GetCurrentUser()
         {
             return _currentUser;
+        }
+
+        public bool CheckUsernameExists(string username)
+        {
+            return _context.Users.Any(x => x.Username == username);
+        }
+        public bool CheckEmailExists(string email)
+        {
+            return _context.Users.Any(x => x.Email == email);
         }
     }
 }

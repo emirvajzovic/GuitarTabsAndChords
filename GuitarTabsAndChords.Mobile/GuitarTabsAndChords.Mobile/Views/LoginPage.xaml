@@ -7,20 +7,33 @@
              x:Class="GuitarTabsAndChords.Mobile.Views.LoginPage"
              Title="{Binding Title}">
     <ContentPage.Content>
-        <StackLayout HorizontalOptions="FillAndExpand" Padding="10" VerticalOptions="CenterAndExpand">
+        <ScrollView>
+            <StackLayout Orientation="Vertical">
 
-            <Entry Placeholder="Username" x:Name="Username" Text="{Binding Username}"></Entry>
+                <StackLayout VerticalOptions="Start" HorizontalOptions="Fill">
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
+                        <ContentView Padding="0,40,0,40" VerticalOptions="FillAndExpand">
+                            <Image Source="main_logo.png" VerticalOptions="Center" HeightRequest="265" />
+                        </ContentView>
+                    </StackLayout>
+                </StackLayout>
 
-            <Entry Placeholder="Password" Text="{Binding Password}" IsPassword="True"></Entry>
+                <StackLayout HorizontalOptions="FillAndExpand" Padding="10" VerticalOptions="StartAndExpand">
 
-            <Button Command="{Binding LoginCommand}"  HorizontalOptions="FillAndExpand" Text="Login"></Button>
-            <Label IsVisible="{Binding IsBusy}" Text="..."></Label>
+                    <Entry Placeholder="Username" x:Name="Username" Text="{Binding Username}"></Entry>
 
-            <Label TextColor="#2296f3" HorizontalTextAlignment="Center" HorizontalOptions="FillAndExpand" Text="Don't have an account? Register" Margin="0,5,0,0">
-                <Label.GestureRecognizers>
-                    <TapGestureRecognizer x:Name="RegisterLabel" Tapped="RegisterLabel_Tapped"/>
-                </Label.GestureRecognizers>
-            </Label>
-        </StackLayout>
+                    <Entry Placeholder="Password" Text="{Binding Password}" IsPassword="True"></Entry>
+
+                    <Button Command="{Binding LoginCommand}"  HorizontalOptions="FillAndExpand" Text="Login"></Button>
+                    <Label IsVisible="{Binding IsBusy}" Text="..."></Label>
+
+                    <Label TextColor="#2296f3" HorizontalTextAlignment="Center" HorizontalOptions="FillAndExpand" Text="Don't have an account? Register" Margin="0,5,0,0">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer x:Name="RegisterLabel" Tapped="RegisterLabel_Tapped"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

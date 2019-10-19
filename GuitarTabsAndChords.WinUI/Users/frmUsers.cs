@@ -54,18 +54,16 @@ namespace GuitarTabsAndChords.WinUI
         private async void btnAddUser_Click(object sender, EventArgs e)
         {
             var frm = new frmUserDetails();
-            frm.ShowDialog();
-
-            await loadUsers();
+            if (frm.ShowDialog() == DialogResult.OK)
+                await loadUsers();
         }
 
         private async void DgvUsers_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             int id = int.Parse(dgvUsers.SelectedRows[0].Cells["Id"].Value.ToString());
             var frm = new frmUserDetails(id);
-            frm.ShowDialog();
-
-            await loadUsers();
+            if(frm.ShowDialog() == DialogResult.OK)
+                await loadUsers();
         }
     }
 }

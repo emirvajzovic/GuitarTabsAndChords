@@ -43,17 +43,24 @@
             // 
             // btnMusic
             // 
-            this.btnMusic.Location = new System.Drawing.Point(313, 147);
+            this.btnMusic.BackColor = System.Drawing.Color.Transparent;
+            this.btnMusic.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnMusic.BackgroundImage")));
+            this.btnMusic.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnMusic.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnMusic.FlatAppearance.BorderSize = 0;
+            this.btnMusic.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnMusic.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnMusic.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMusic.Location = new System.Drawing.Point(231, 141);
             this.btnMusic.Name = "btnMusic";
-            this.btnMusic.Size = new System.Drawing.Size(138, 103);
+            this.btnMusic.Size = new System.Drawing.Size(202, 113);
             this.btnMusic.TabIndex = 1;
-            this.btnMusic.Text = "Music";
-            this.btnMusic.UseVisualStyleBackColor = true;
+            this.btnMusic.UseVisualStyleBackColor = false;
             this.btnMusic.Click += new System.EventHandler(this.btnMusic_Click);
             // 
             // btnArtists
             // 
-            this.btnArtists.Location = new System.Drawing.Point(342, 185);
+            this.btnArtists.Location = new System.Drawing.Point(347, 185);
             this.btnArtists.Name = "btnArtists";
             this.btnArtists.Size = new System.Drawing.Size(75, 23);
             this.btnArtists.TabIndex = 2;
@@ -64,7 +71,7 @@
             // 
             // btnGenres
             // 
-            this.btnGenres.Location = new System.Drawing.Point(242, 185);
+            this.btnGenres.Location = new System.Drawing.Point(247, 185);
             this.btnGenres.Name = "btnGenres";
             this.btnGenres.Size = new System.Drawing.Size(75, 23);
             this.btnGenres.TabIndex = 3;
@@ -75,7 +82,7 @@
             // 
             // btnSongs
             // 
-            this.btnSongs.Location = new System.Drawing.Point(538, 185);
+            this.btnSongs.Location = new System.Drawing.Point(543, 185);
             this.btnSongs.Name = "btnSongs";
             this.btnSongs.Size = new System.Drawing.Size(75, 23);
             this.btnSongs.TabIndex = 4;
@@ -86,7 +93,7 @@
             // 
             // btnAlbums
             // 
-            this.btnAlbums.Location = new System.Drawing.Point(446, 185);
+            this.btnAlbums.Location = new System.Drawing.Point(451, 185);
             this.btnAlbums.Name = "btnAlbums";
             this.btnAlbums.Size = new System.Drawing.Size(75, 23);
             this.btnAlbums.TabIndex = 5;
@@ -97,12 +104,19 @@
             // 
             // btnNotations
             // 
-            this.btnNotations.Location = new System.Drawing.Point(490, 147);
+            this.btnNotations.BackColor = System.Drawing.Color.Transparent;
+            this.btnNotations.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnNotations.BackgroundImage")));
+            this.btnNotations.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnNotations.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnNotations.FlatAppearance.BorderSize = 0;
+            this.btnNotations.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnNotations.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnNotations.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNotations.Location = new System.Drawing.Point(439, 141);
             this.btnNotations.Name = "btnNotations";
-            this.btnNotations.Size = new System.Drawing.Size(138, 103);
+            this.btnNotations.Size = new System.Drawing.Size(202, 113);
             this.btnNotations.TabIndex = 6;
-            this.btnNotations.Text = "Notations";
-            this.btnNotations.UseVisualStyleBackColor = true;
+            this.btnNotations.UseVisualStyleBackColor = false;
             this.btnNotations.Click += new System.EventHandler(this.BtnNotations_Click);
             // 
             // btnBack
@@ -121,9 +135,12 @@
             this.btnUsers.BackColor = System.Drawing.Color.Transparent;
             this.btnUsers.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnUsers.BackgroundImage")));
             this.btnUsers.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnUsers.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnUsers.FlatAppearance.BorderSize = 0;
+            this.btnUsers.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnUsers.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnUsers.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnUsers.Location = new System.Drawing.Point(80, 144);
+            this.btnUsers.Location = new System.Drawing.Point(23, 141);
             this.btnUsers.Margin = new System.Windows.Forms.Padding(0);
             this.btnUsers.Name = "btnUsers";
             this.btnUsers.Size = new System.Drawing.Size(202, 113);
@@ -143,12 +160,19 @@
             // 
             // btnNotationCorrections
             // 
-            this.btnNotationCorrections.Location = new System.Drawing.Point(659, 147);
+            this.btnNotationCorrections.BackColor = System.Drawing.Color.Transparent;
+            this.btnNotationCorrections.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnNotationCorrections.BackgroundImage")));
+            this.btnNotationCorrections.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnNotationCorrections.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnNotationCorrections.FlatAppearance.BorderSize = 0;
+            this.btnNotationCorrections.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnNotationCorrections.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnNotationCorrections.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNotationCorrections.Location = new System.Drawing.Point(647, 141);
             this.btnNotationCorrections.Name = "btnNotationCorrections";
-            this.btnNotationCorrections.Size = new System.Drawing.Size(138, 103);
+            this.btnNotationCorrections.Size = new System.Drawing.Size(202, 113);
             this.btnNotationCorrections.TabIndex = 9;
-            this.btnNotationCorrections.Text = "Notation Corrections";
-            this.btnNotationCorrections.UseVisualStyleBackColor = true;
+            this.btnNotationCorrections.UseVisualStyleBackColor = false;
             this.btnNotationCorrections.Click += new System.EventHandler(this.btnNotationCorrections_Click);
             // 
             // frmIndex
@@ -157,14 +181,14 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
             this.ClientSize = new System.Drawing.Size(870, 450);
+            this.Controls.Add(this.btnAlbums);
+            this.Controls.Add(this.btnSongs);
+            this.Controls.Add(this.btnArtists);
             this.Controls.Add(this.btnNotationCorrections);
             this.Controls.Add(this.btnLogout);
             this.Controls.Add(this.btnBack);
             this.Controls.Add(this.btnNotations);
-            this.Controls.Add(this.btnAlbums);
-            this.Controls.Add(this.btnSongs);
             this.Controls.Add(this.btnGenres);
-            this.Controls.Add(this.btnArtists);
             this.Controls.Add(this.btnMusic);
             this.Controls.Add(this.btnUsers);
             this.Name = "frmIndex";

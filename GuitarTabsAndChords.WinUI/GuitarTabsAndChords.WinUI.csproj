@@ -254,9 +254,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\DefaultProfilePicture.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\DefaultAlbumArt.png" />
   </ItemGroup>
   <ItemGroup>
@@ -270,6 +267,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\DefaultProfilePicture.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

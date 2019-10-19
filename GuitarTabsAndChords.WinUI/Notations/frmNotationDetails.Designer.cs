@@ -128,7 +128,7 @@
             // txtTuning
             // 
             this.txtTuning.Location = new System.Drawing.Point(110, 81);
-            this.txtTuning.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtTuning.Margin = new System.Windows.Forms.Padding(2);
             this.txtTuning.Name = "txtTuning";
             this.txtTuning.Size = new System.Drawing.Size(173, 20);
             this.txtTuning.TabIndex = 71;
@@ -137,7 +137,7 @@
             // txtTuningDescription
             // 
             this.txtTuningDescription.Location = new System.Drawing.Point(110, 109);
-            this.txtTuningDescription.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtTuningDescription.Margin = new System.Windows.Forms.Padding(2);
             this.txtTuningDescription.Name = "txtTuningDescription";
             this.txtTuningDescription.Size = new System.Drawing.Size(173, 20);
             this.txtTuningDescription.TabIndex = 73;
@@ -158,7 +158,7 @@
             this.txtContent.AcceptsReturn = true;
             this.txtContent.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.txtContent.Location = new System.Drawing.Point(15, 154);
-            this.txtContent.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtContent.Margin = new System.Windows.Forms.Padding(2);
             this.txtContent.Multiline = true;
             this.txtContent.Name = "txtContent";
             this.txtContent.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
@@ -186,7 +186,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
-            this.ClientSize = new System.Drawing.Size(515, 609);
+            this.ClientSize = new System.Drawing.Size(515, 675);
             this.Controls.Add(this.txtContent);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.txtTuningDescription);

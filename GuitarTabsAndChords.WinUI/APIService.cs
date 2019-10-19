@@ -109,10 +109,10 @@ namespace GuitarTabsAndChords.WinUI
                     var stringBuilder = new StringBuilder();
                     foreach (var error in errors)
                     {
-                        stringBuilder.AppendLine($"{error.Key}, ${string.Join(",", error.Value)}");
+                        stringBuilder.AppendLine(string.Join(",", error.Value));
                     }
 
-                    MessageBox.Show(stringBuilder.ToString(), "Greška", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(stringBuilder.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 return default(T);
             }
@@ -155,10 +155,10 @@ namespace GuitarTabsAndChords.WinUI
                     var stringBuilder = new StringBuilder();
                     foreach (var error in errors)
                     {
-                        stringBuilder.AppendLine($"{error.Key}, ${string.Join(",", error.Value)}");
+                        stringBuilder.AppendLine(string.Join(",", error.Value));
                     }
 
-                    MessageBox.Show(stringBuilder.ToString(), "Greška", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(stringBuilder.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 return default(T);
             }

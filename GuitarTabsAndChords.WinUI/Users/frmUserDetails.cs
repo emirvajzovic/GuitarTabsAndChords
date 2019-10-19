@@ -73,7 +73,7 @@ namespace GuitarTabsAndChords.WinUI
                 if (entity != null)
                 {
                     MessageBox.Show("Admin added");
-                    Close();
+                    DialogResult = DialogResult.OK;
                 }
             }
             else
@@ -82,8 +82,8 @@ namespace GuitarTabsAndChords.WinUI
 
                 if (entity != null)
                 {
-                    MessageBox.Show("Admin updated");
-                    Close();
+                    MessageBox.Show("User updated");
+                    DialogResult = DialogResult.OK;
                 }
             }
 

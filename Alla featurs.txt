@@ -1,12 +1,5 @@
 ID|PRIO|DONE|TASK NAME
 [2] MED Recommender
-[7] LO  Finish WinUI design
-[15]HI  Solidify logo for UZP
-
-[-] -   -
-
-[New Task]
-[Mark Task as complete]
 
 Completed Tasks:
 
@@ -14,7 +7,8 @@ Completed Tasks:
 [3] MED 100% Add & Edit NotationCorrections (WinUI)
 [4] LO  Explore wszystkiego (Genres, Artists, Decades, Tabs, Chords)
 [5] MED Add artist, album, song?
-[6] LO  Validate WinUI -
+[6] LO  Validate WinUI
+[7] LO  Finish WinUI design
 [8] LO  Popular Tabs & Chords on UZP HomePage - 10 of each in past 2 weeks by Views
 [9] HI  Zarejestruj siê (Za³ó¿ konto)
 [10]LO  Autorizacja (WebAPI)
@@ -22,3 +16,4 @@ Completed Tasks:
 [12]HI  Solidify chord and tab template - note to szef: chuju fixuj insertBefore
 [13]LO  Add default picture
 [14]LO  Add Nothing to see here text
+[15]HI  Solidify logo for UWP
