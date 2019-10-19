@@ -21,7 +21,7 @@ namespace GuitarTabsAndChords.WinUI
         {
             btnGenres.Visible = btnArtists.Visible = btnSongs.Visible = btnAlbums.Visible = btnBack.Visible = true;
 
-            btnMusic.Visible = btnUsers.Visible = btnNotations.Visible = false;
+            btnMusic.Visible = btnUsers.Visible = btnNotations.Visible = btnNotationCorrections.Visible = false;
 
         }
 
@@ -29,7 +29,7 @@ namespace GuitarTabsAndChords.WinUI
         {
             btnGenres.Visible = btnArtists.Visible = btnSongs.Visible = btnAlbums.Visible = btnBack.Visible = false;
 
-            btnMusic.Visible = btnUsers.Visible = btnNotations.Visible = true;
+            btnMusic.Visible = btnUsers.Visible = btnNotations.Visible = btnNotationCorrections.Visible = true;
         }
 
         private void btnUsers_Click(object sender, EventArgs e)
@@ -68,6 +68,12 @@ namespace GuitarTabsAndChords.WinUI
             frm.ShowDialog();
         }
 
+        private void btnNotationCorrections_Click(object sender, EventArgs e)
+        {
+            var frm = new frmNotationCorrections();
+            frm.ShowDialog();
+        }
+
         private void BtnLogout_Click(object sender, EventArgs e)
         {
             APIService.Username = null;
@@ -80,5 +86,6 @@ namespace GuitarTabsAndChords.WinUI
                 Close();
             }
         }
+
     }
 }

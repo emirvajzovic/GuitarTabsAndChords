@@ -93,6 +93,18 @@
     <Compile Include="Notations\frmNotations.Designer.cs">
       <DependentUpon>frmNotations.cs</DependentUpon>
     </Compile>
+    <Compile Include="NotationsCorrections\frmNotationCorrectionDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NotationsCorrections\frmNotationCorrectionDetails.Designer.cs">
+      <DependentUpon>frmNotationCorrectionDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NotationsCorrections\frmNotationCorrections.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NotationsCorrections\frmNotationCorrections.Designer.cs">
+      <DependentUpon>frmNotationCorrections.cs</DependentUpon>
+    </Compile>
     <Compile Include="Songs\frmSongDetails.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -171,6 +183,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Notations\frmNotations.resx">
       <DependentUpon>frmNotations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NotationsCorrections\frmNotationCorrectionDetails.resx">
+      <DependentUpon>frmNotationCorrectionDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NotationsCorrections\frmNotationCorrections.resx">
+      <DependentUpon>frmNotationCorrections.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Songs\frmSongDetails.resx">
       <DependentUpon>frmSongDetails.cs</DependentUpon>

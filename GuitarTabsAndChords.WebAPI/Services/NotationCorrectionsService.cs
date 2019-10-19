@@ -84,7 +84,7 @@ namespace GuitarTabsAndChords.WebAPI.Services
                 entity.Status = ReviewStatus.Approved;
 
                 var notation = _context.Notations.Find(entity.NotationId);
-                notation.NotationContent = entity.NotationContent;
+                notation.NotationContent = request.NotationContent;
                 notation.LastEditorId = entity.UserId;
                 notation.LastEditted = DateTime.Now;
 

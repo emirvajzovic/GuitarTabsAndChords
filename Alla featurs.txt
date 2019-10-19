@@ -1,6 +1,5 @@
 ID|PRIO|DONE|TASK NAME
 [2] MED Recommender
-[3] MED 75% Add & Edit NotationCorrections (WinUI)
 [7] LO  Finish WinUI design
 [15]HI  Solidify logo for UZP
 
@@ -12,6 +11,7 @@ ID|PRIO|DONE|TASK NAME
 Completed Tasks:
 
 [1] HI  100% ProfilePage (Profile, Email, Password, Slika, My Notations)
+[3] MED 100% Add & Edit NotationCorrections (WinUI)
 [4] LO  Explore wszystkiego (Genres, Artists, Decades, Tabs, Chords)
 [5] MED Add artist, album, song?
 [6] LO  Validate WinUI -

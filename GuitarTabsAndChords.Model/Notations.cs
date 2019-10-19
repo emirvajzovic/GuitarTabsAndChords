@@ -25,6 +25,11 @@ namespace GuitarTabsAndChords.Model
         public int Views { get; set; }
         public int Favorites { get; set; }
         public double Rating { get; set; }
+
+        public override string ToString()
+        {
+            return Song.Name;
+        }
     }
 
     public enum NotationType { Tab, Chord }
