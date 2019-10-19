@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.btnSave = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.btnReject = new System.Windows.Forms.Button();
@@ -40,14 +41,15 @@
             this.lblNotationType = new System.Windows.Forms.Label();
             this.lblTuning = new System.Windows.Forms.Label();
             this.lblTuningDescription = new System.Windows.Forms.Label();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(345, 780);
-            this.btnSave.Margin = new System.Windows.Forms.Padding(4);
+            this.btnSave.Location = new System.Drawing.Point(259, 634);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(100, 28);
+            this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 4;
             this.btnSave.Text = "Approve";
             this.btnSave.UseVisualStyleBackColor = true;
@@ -57,19 +59,17 @@
             // 
             this.label3.AutoSize = true;
             this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(16, 32);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Location = new System.Drawing.Point(12, 26);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(40, 16);
+            this.label3.Size = new System.Drawing.Size(32, 13);
             this.label3.TabIndex = 18;
             this.label3.Text = "Song";
             // 
             // btnReject
             // 
-            this.btnReject.Location = new System.Drawing.Point(215, 780);
-            this.btnReject.Margin = new System.Windows.Forms.Padding(4);
+            this.btnReject.Location = new System.Drawing.Point(161, 634);
             this.btnReject.Name = "btnReject";
-            this.btnReject.Size = new System.Drawing.Size(100, 28);
+            this.btnReject.Size = new System.Drawing.Size(75, 23);
             this.btnReject.TabIndex = 66;
             this.btnReject.Text = "Reject";
             this.btnReject.UseVisualStyleBackColor = true;
@@ -79,10 +79,9 @@
             // 
             this.label1.AutoSize = true;
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(16, 68);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(12, 55);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(87, 16);
+            this.label1.Size = new System.Drawing.Size(70, 13);
             this.label1.TabIndex = 68;
             this.label1.Text = "Notation type";
             // 
@@ -90,10 +89,9 @@
             // 
             this.label2.AutoSize = true;
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(17, 103);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(13, 84);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(49, 16);
+            this.label2.Size = new System.Drawing.Size(40, 13);
             this.label2.TabIndex = 70;
             this.label2.Text = "Tuning";
             // 
@@ -101,10 +99,9 @@
             // 
             this.label4.AutoSize = true;
             this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(17, 137);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Location = new System.Drawing.Point(13, 111);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(118, 16);
+            this.label4.Size = new System.Drawing.Size(94, 13);
             this.label4.TabIndex = 72;
             this.label4.Text = "Tuning description";
             // 
@@ -112,22 +109,23 @@
             // 
             this.txtContent.AcceptsReturn = true;
             this.txtContent.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.txtContent.Location = new System.Drawing.Point(20, 190);
+            this.txtContent.Location = new System.Drawing.Point(15, 154);
+            this.txtContent.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtContent.Multiline = true;
             this.txtContent.Name = "txtContent";
             this.txtContent.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtContent.Size = new System.Drawing.Size(655, 575);
+            this.txtContent.Size = new System.Drawing.Size(492, 468);
             this.txtContent.TabIndex = 1;
             this.txtContent.WordWrap = false;
+            this.txtContent.Validating += new System.ComponentModel.CancelEventHandler(this.txtContent_Validating);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(17, 170);
-            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label5.Location = new System.Drawing.Point(13, 138);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(106, 16);
+            this.label5.Size = new System.Drawing.Size(87, 13);
             this.label5.TabIndex = 74;
             this.label5.Text = "Notation Content";
             // 
@@ -135,48 +133,48 @@
             // 
             this.lblSong.AutoSize = true;
             this.lblSong.ForeColor = System.Drawing.Color.White;
-            this.lblSong.Location = new System.Drawing.Point(143, 32);
-            this.lblSong.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblSong.Location = new System.Drawing.Point(107, 26);
             this.lblSong.Name = "lblSong";
-            this.lblSong.Size = new System.Drawing.Size(0, 16);
+            this.lblSong.Size = new System.Drawing.Size(0, 13);
             this.lblSong.TabIndex = 75;
             // 
             // lblNotationType
             // 
             this.lblNotationType.AutoSize = true;
             this.lblNotationType.ForeColor = System.Drawing.Color.White;
-            this.lblNotationType.Location = new System.Drawing.Point(143, 68);
-            this.lblNotationType.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblNotationType.Location = new System.Drawing.Point(107, 55);
             this.lblNotationType.Name = "lblNotationType";
-            this.lblNotationType.Size = new System.Drawing.Size(0, 16);
+            this.lblNotationType.Size = new System.Drawing.Size(0, 13);
             this.lblNotationType.TabIndex = 76;
             // 
             // lblTuning
             // 
             this.lblTuning.AutoSize = true;
             this.lblTuning.ForeColor = System.Drawing.Color.White;
-            this.lblTuning.Location = new System.Drawing.Point(143, 103);
-            this.lblTuning.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblTuning.Location = new System.Drawing.Point(107, 84);
             this.lblTuning.Name = "lblTuning";
-            this.lblTuning.Size = new System.Drawing.Size(0, 16);
+            this.lblTuning.Size = new System.Drawing.Size(0, 13);
             this.lblTuning.TabIndex = 77;
             // 
             // lblTuningDescription
             // 
             this.lblTuningDescription.AutoSize = true;
             this.lblTuningDescription.ForeColor = System.Drawing.Color.White;
-            this.lblTuningDescription.Location = new System.Drawing.Point(143, 137);
-            this.lblTuningDescription.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblTuningDescription.Location = new System.Drawing.Point(107, 111);
             this.lblTuningDescription.Name = "lblTuningDescription";
-            this.lblTuningDescription.Size = new System.Drawing.Size(0, 16);
+            this.lblTuningDescription.Size = new System.Drawing.Size(0, 13);
             this.lblTuningDescription.TabIndex = 78;
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
             // 
             // frmNotationCorrectionDetails
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
-            this.ClientSize = new System.Drawing.Size(687, 830);
+            this.ClientSize = new System.Drawing.Size(515, 609);
             this.Controls.Add(this.lblTuningDescription);
             this.Controls.Add(this.lblTuning);
             this.Controls.Add(this.lblNotationType);
@@ -189,12 +187,12 @@
             this.Controls.Add(this.btnReject);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.btnSave);
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmNotationCorrectionDetails";
             this.Text = "Notation correction details";
             this.Load += new System.EventHandler(this.frmNotationCorrectionDetails_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -213,5 +211,6 @@
         private System.Windows.Forms.Label lblNotationType;
         private System.Windows.Forms.Label lblTuning;
         private System.Windows.Forms.Label lblTuningDescription;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

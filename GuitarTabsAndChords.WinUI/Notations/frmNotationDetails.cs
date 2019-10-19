@@ -99,6 +99,9 @@ namespace GuitarTabsAndChords.WinUI
 
         private async void BtnSave_Click(object sender, EventArgs e)
         {
+            if (!ValidateChildren())
+                return;
+
             request.NotationContent = txtContent.Text;
             request.Tuning = txtTuning.Text;
             request.TuningDescription = txtTuningDescription.Text;
@@ -145,6 +148,9 @@ namespace GuitarTabsAndChords.WinUI
 
         private async void BtnReject_Click(object sender, EventArgs e)
         {
+            if (!ValidateChildren())
+                return;
+
             request.NotationContent = txtContent.Text;
             request.Tuning = txtTuning.Text;
             request.TuningDescription = txtTuningDescription.Text;
@@ -165,6 +171,48 @@ namespace GuitarTabsAndChords.WinUI
         private void LoadNotationTypes()
         {
             cmbNotationType.DataSource = Enum.GetValues(typeof(NotationType));
+        }
+
+        private void txtTuning_Validating(object sender, CancelEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtTuning.Text))
+            {
+                errorProvider1.SetError(txtTuning, "This field is required.");
+            }
+            else
+            {
+                errorProvider1.SetError(txtTuning, null);
+                return;
+            }
+            e.Cancel = true;
+        }
+
+        private void txtTuningDescription_Validating(object sender, CancelEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtTuningDescription.Text))
+            {
+                errorProvider1.SetError(txtTuningDescription, "This field is required.");
+            }
+            else
+            {
+                errorProvider1.SetError(txtTuningDescription, null);
+                return;
+            }
+            e.Cancel = true;
+        }
+
+        private void txtContent_Validating(object sender, CancelEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtContent.Text))
+            {
+                errorProvider1.SetError(txtContent, "This field is required.");
+            }
+            else
+            {
+                errorProvider1.SetError(txtContent, null);
+                return;
+            }
+            e.Cancel = true;
         }
     }
 }

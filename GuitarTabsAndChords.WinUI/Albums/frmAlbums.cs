@@ -37,10 +37,10 @@ namespace GuitarTabsAndChords.WinUI
 
         private async void TxtSearch_KeyUp(object sender, KeyEventArgs e)
         {
-            await loadAlbums();
+            await LoadAlbums();
         }
 
-        private async Task loadAlbums()
+        private async Task LoadAlbums()
         {
             var request = new Model.Requests.AlbumsSearchRequest
             {
@@ -68,7 +68,7 @@ namespace GuitarTabsAndChords.WinUI
             var frm = new frmAlbumDetails();
             frm.ShowDialog();
 
-            await loadAlbums();
+            await LoadAlbums();
         }
 
         private async void DgvAlbums_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -77,12 +77,12 @@ namespace GuitarTabsAndChords.WinUI
             var frm = new frmAlbumDetails(id);
             frm.ShowDialog();
 
-            await loadAlbums();
+            await LoadAlbums();
         }
 
         private async void CmbStatusFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
-            await loadAlbums();
+            await LoadAlbums();
         }
     }
 }

@@ -46,6 +46,9 @@ namespace GuitarTabsAndChords.WinUI
 
         private async void BtnSave_Click(object sender, EventArgs e)
         {
+            if (!ValidateChildren())
+                return;
+
             request.Name = txtName.Text;
             request.Status = Model.ReviewStatus.Approved;
 
@@ -74,6 +77,9 @@ namespace GuitarTabsAndChords.WinUI
 
         private async void BtnReject_Click(object sender, EventArgs e)
         {
+            if (!ValidateChildren())
+                return;
+
             request.Name = txtName.Text;
             request.Status = Model.ReviewStatus.Rejected;
 
@@ -84,6 +90,20 @@ namespace GuitarTabsAndChords.WinUI
                 MessageBox.Show("Artist rejected");
                 DialogResult = DialogResult.OK;
             }
+        }
+
+        private void txtName_Validating(object sender, CancelEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtName.Text))
+            {
+                errorProvider1.SetError(txtName, "This field is required.");
+            }
+            else
+            {
+                errorProvider1.SetError(txtName, null);
+                return;
+            }
+            e.Cancel = true;
         }
     }
 }

@@ -112,6 +112,9 @@ namespace GuitarTabsAndChords.WinUI
 
         private async void BtnSave_Click(object sender, EventArgs e)
         {
+            if (!ValidateChildren())
+                return;
+
             request.Name = txtName.Text;
             request.Year = int.Parse(txtYear.Text);
             request.ArtistId = (cmbArtist.SelectedItem as Model.Artists).Id;
@@ -172,6 +175,9 @@ namespace GuitarTabsAndChords.WinUI
 
         private async void BtnReject_Click(object sender, EventArgs e)
         {
+            if (!ValidateChildren())
+                return;
+
             request.Name = txtName.Text;
             request.Year = int.Parse(txtYear.Text);
             request.ArtistId = (cmbArtist.SelectedItem as Model.Artists).Id;
@@ -184,6 +190,40 @@ namespace GuitarTabsAndChords.WinUI
                 MessageBox.Show("Album rejected");
                 DialogResult = DialogResult.OK;
             }
+        }
+
+        private void txtName_Validating(object sender, CancelEventArgs e)
+        {
+            if(string.IsNullOrWhiteSpace(txtName.Text))
+            {
+                errorProvider1.SetError(txtName, "This field is required.");
+            }
+            else
+            {
+                errorProvider1.SetError(txtName, null);
+                return;
+            }
+            e.Cancel = true;
+        }
+
+        private void txtYear_Validating(object sender, CancelEventArgs e)
+        {
+            int minYear = 1930;
+
+            if (string.IsNullOrWhiteSpace(txtYear.Text))
+            {
+                errorProvider1.SetError(txtYear, "This field is required.");
+            }
+            else if(!int.TryParse(txtYear.Text, out int year) || year < minYear || year > DateTime.Now.Year)
+            {
+                errorProvider1.SetError(txtYear, "You need to enter a number between " + minYear + " and " + DateTime.Now.Year + ".");
+            }
+            else
+            {
+                errorProvider1.SetError(txtYear, null);
+                return;
+            }
+            e.Cancel = true;
         }
     }
 }

@@ -49,6 +49,9 @@ namespace GuitarTabsAndChords.WinUI
 
         private async void BtnSave_Click(object sender, EventArgs e)
         {
+            if (!ValidateChildren())
+                return;
+
             request.NotationContent = txtContent.Text;
             request.Approved = true;
 
@@ -63,6 +66,9 @@ namespace GuitarTabsAndChords.WinUI
         }
         private async void BtnReject_Click(object sender, EventArgs e)
         {
+            if (!ValidateChildren())
+                return;
+
             request.Approved = false;
 
             entity = await _serviceNotationCorrections.Update<Model.NotationCorrections>(_id, request);
@@ -74,5 +80,18 @@ namespace GuitarTabsAndChords.WinUI
             }
         }
 
+        private void txtContent_Validating(object sender, CancelEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtContent.Text))
+            {
+                errorProvider1.SetError(txtContent, "This field is required.");
+            }
+            else
+            {
+                errorProvider1.SetError(txtContent, null);
+                return;
+            }
+            e.Cancel = true;
+        }
     }
 }

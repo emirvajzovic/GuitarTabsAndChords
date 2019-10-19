@@ -28,11 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.txtName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnSave = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.btnReject = new System.Windows.Forms.Button();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // txtName
@@ -41,6 +44,7 @@
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(173, 20);
             this.txtName.TabIndex = 0;
+            this.txtName.Validating += new System.ComponentModel.CancelEventHandler(this.txtName_Validating);
             // 
             // label1
             // 
@@ -77,6 +81,10 @@
             this.btnReject.Visible = false;
             this.btnReject.Click += new System.EventHandler(this.BtnReject_Click);
             // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
             // frmGenreDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -92,6 +100,7 @@
             this.Name = "frmGenreDetails";
             this.Text = "Genre details";
             this.Load += new System.EventHandler(this.frmGenreDetails_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -104,5 +113,6 @@
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Button btnReject;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }
