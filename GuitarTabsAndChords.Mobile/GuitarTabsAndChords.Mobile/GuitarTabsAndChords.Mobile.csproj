@@ -34,6 +34,9 @@
     <Compile Update="Views\AlbumPage.xaml.cs">
       <DependentUpon>AlbumPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\RecommendedPage.xaml.cs">
+      <DependentUpon>RecommendedPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\ExploreArtistsPage.xaml.cs">
       <DependentUpon>ExploreArtistsPage.xaml</DependentUpon>
     </Compile>

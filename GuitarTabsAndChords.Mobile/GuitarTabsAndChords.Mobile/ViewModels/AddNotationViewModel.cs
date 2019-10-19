@@ -11,7 +11,7 @@ using Xamarin.Forms;
 
 namespace GuitarTabsAndChords.Mobile.ViewModels
 {
-    public class AddNotationPageViewModel : BaseViewModel
+    public class AddNotationViewModel : BaseViewModel
     {
         private readonly APIService _serviceNotations = new APIService("Notations");
         private readonly APIService _serviceSongs = new APIService("Songs");
@@ -52,7 +52,7 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
         public string AlbumName { get; set; }
         public string ArtistName { get; set; }
 
-        public AddNotationPageViewModel(INavigation navigation)
+        public AddNotationViewModel(INavigation navigation)
         {
             Title = "Add notation";
             Notation = new Notations();

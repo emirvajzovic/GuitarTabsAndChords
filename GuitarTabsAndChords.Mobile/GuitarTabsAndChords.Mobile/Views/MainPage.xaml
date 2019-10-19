@@ -58,7 +58,7 @@
                 </OnPlatform>
             </NavigationPage.Icon>
             <x:Arguments>
-                <views:AboutPage />
+                <views:RecommendedPage />
             </x:Arguments>
         </NavigationPage>
     </TabbedPage.Children>

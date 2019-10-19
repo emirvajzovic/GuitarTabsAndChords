@@ -61,6 +61,7 @@ namespace GuitarTabsAndChords.WebAPI
             services.AddScoped<IRatingsService, RatingsService>();
             services.AddScoped<IFavoritesService, FavoritesService>();
             services.AddScoped<ISearchService, SearchService>();
+            services.AddScoped<IRecommenderService, RecommenderService>();
 
             services.AddSwaggerGen(c =>
             {

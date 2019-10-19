@@ -14,17 +14,18 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
 {
     public class HomeViewModel : BaseViewModel
     {
-        public ObservableCollection<Model.Notations> RecommendedList { get; set; }
+        public ObservableCollection<Models.NotationBrowseListItem> RecommendedList { get; set; }
         public ObservableCollection<Model.Notations> PopularTabsList { get; set; }
         public ObservableCollection<Model.Notations> PopularChordsList { get; set; }
         public List<Models.MenuItem> MenuItems { get; set; } = new List<Models.MenuItem>();
 
         private readonly APIService _serviceNotations = new APIService("Notations");
+        private readonly APIService _serviceRecommender = new APIService("Recommender");
 
         public HomeViewModel()
         {
             Title = "Home";
-            RecommendedList = new ObservableCollection<Model.Notations>();
+            RecommendedList = new ObservableCollection<Models.NotationBrowseListItem>();
             PopularTabsList = new ObservableCollection<Model.Notations>();
             PopularChordsList = new ObservableCollection<Model.Notations>();
             MenuItems.Add(new Models.MenuItem
@@ -60,8 +61,8 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
         {
             RecommendedList.Clear();
 
-            var items = await _serviceNotations.Get<List<Model.Notations>>(null);
-            foreach (var item in items.GetRange(0, Math.Min(10, items.Count)))
+            var items = await _serviceRecommender.Get<List<Models.NotationBrowseListItem>>(null, "GetRecommendedNotations");
+            foreach (var item in items.GetRange(0, Math.Min(5, items.Count)))
             {
                 if (item.Song.Album.AlbumCover.Length == 0)
                 {

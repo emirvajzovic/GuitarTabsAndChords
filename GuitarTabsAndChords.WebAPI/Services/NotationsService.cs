@@ -201,6 +201,7 @@ namespace GuitarTabsAndChords.WebAPI.Services
 
             query = query
                 .Include(x => x.Song.Artist)
+                .Include(x => x.Song.Album)
                 .Include(x => x.Song.Genre)
                 .Include(x => x.User);
 

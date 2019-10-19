@@ -14,13 +14,13 @@ namespace GuitarTabsAndChords.Mobile.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AddNotationPage : ContentPage
     {
-        private readonly AddNotationPageViewModel VM;
+        private readonly AddNotationViewModel VM;
 
 
         public AddNotationPage()
         {
             InitializeComponent();
-            BindingContext = VM = new AddNotationPageViewModel(Navigation);
+            BindingContext = VM = new AddNotationViewModel(Navigation);
         }
 
         protected async override void OnAppearing()

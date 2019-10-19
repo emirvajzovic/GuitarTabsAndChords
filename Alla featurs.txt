@@ -1,9 +1,9 @@
 ID|PRIO|DONE|TASK NAME
-[2] MED Recommender
 
 Completed Tasks:
 
 [1] HI  100% ProfilePage (Profile, Email, Password, Slika, My Notations)
+[2] MED Recommender
 [3] MED 100% Add & Edit NotationCorrections (WinUI)
 [4] LO  Explore wszystkiego (Genres, Artists, Decades, Tabs, Chords)
 [5] MED Add artist, album, song?
