@@ -18,7 +18,7 @@ namespace GuitarTabsAndChords.Mobile.Views
         public NotationDetailsPage(int NotationId)
         {
             InitializeComponent();
-            BindingContext = VM = new NotationDetailsViewModel(NotationId, FavoriteToolbarItem);
+            BindingContext = VM = new NotationDetailsViewModel(NotationId, FavoriteToolbarItem, Navigation);
         }
 
         private void FavoriteToolbarItem_Clicked(object sender, EventArgs e)

@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="GuitarTabsAndChords.Mobile.Views.NotationSuggestCorrectionPage"
+             Title="{Binding Title}">
+
+    <ContentPage.Content>
+        <ScrollView Padding="5">
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Notation.Song.Name}" TextColor="#2296f3" FontSize="18" FontAttributes="Bold"/>
+                <Label Grid.Row="1" Grid.Column="0" Text="Artist:" FontAttributes="Bold" />
+                <Label Grid.Row="1" Grid.Column="1" Text="{Binding Notation.Song.Artist.Name}"/>
+
+                <Label Grid.Row="2" Grid.Column="0" Text="Views: " FontAttributes="Bold" />
+                <Label Grid.Row="2" Grid.Column="1" Text="{Binding Notation.Views}"/>
+
+                <Label Grid.Row="3" Grid.Column="0" Text="Favorites: " FontAttributes="Bold" />
+                <Label Grid.Row="3" Grid.Column="1" Text="{Binding Notation.Favorites}" />
+
+                <Label Grid.Row="4" Grid.Column="0" Text="Author: " FontAttributes="Bold" />
+                <Label Grid.Row="4" Grid.Column="1" Text="{Binding Notation.User.Username}"/>
+
+                <Label Grid.Row="5" Grid.Column="0" Text="Last edit by: " FontAttributes="Bold" />
+                <StackLayout Grid.Row="5" Grid.Column="1" Orientation="Horizontal">
+
+                    <Label Text="{Binding Notation.LastEditor.Username}"/>
+                    <Label Text="{Binding LastEditInfo}"/>
+
+                </StackLayout>
+                <Label Grid.Row="6" Grid.Column="0" Text="Tuning:" FontAttributes="Bold" />
+                <Label Grid.Row="7" Grid.Column="0" Text="{Binding Notation.Tuning}"/>
+                <Label Grid.Row="7" Grid.Column="1" Text="{Binding Notation.TuningDescription}"/>
+
+                <BoxView Grid.Row="8" Grid.ColumnSpan="2" Color="Black" HeightRequest="1" HorizontalOptions="FillAndExpand"></BoxView>
+
+                <Editor Grid.Row="9" Grid.ColumnSpan="2" Text="{Binding Notation.NotationContent}" x:Name="NotationContent" HeightRequest="600" IsSpellCheckEnabled="false">
+                    <Editor.FontFamily>
+                        <OnPlatform x:TypeArguments="x:String">
+                            <On Platform="Android">monospace</On>
+                            <On Platform="iOS">Courier New</On>
+                            <On Platform="UWP">Lucida Console</On>
+                        </OnPlatform>
+                    </Editor.FontFamily>
+                    <Editor.FontSize>
+                        <OnPlatform x:TypeArguments="x:Double">
+                            <On Platform="Android">8.5</On>
+                            <On Platform="iOS">8.5</On>
+                            <On Platform="UWP">12</On>
+                        </OnPlatform>
+                    </Editor.FontSize>
+                </Editor>
+
+                <Button Grid.Row="10" Grid.ColumnSpan="2" Text="Suggest this correction" Command="{Binding SuggestCorrectionCommand}"/>
+
+
+            </Grid>
+
+
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

@@ -28,6 +28,8 @@ namespace GuitarTabsAndChords.WebAPI.Mapper
             CreateMap<Database.Users, Model.Requests.UsersInsertRequest>().ReverseMap();
             CreateMap<Database.Users, Model.Requests.UsersUpdateRequest>().ReverseMap();
             CreateMap<Database.Notations, Model.Requests.NotationsInsertRequest>().ReverseMap();
+            CreateMap<Database.NotationCorrections, Model.Requests.NotationCorrectionsInsertRequest>().ReverseMap();
+            CreateMap<Database.NotationCorrections, Model.Requests.NotationCorrectionsUpdateRequest>().ReverseMap();
             CreateMap<Database.Ratings, Model.Requests.RatingsInsertRequest>().ReverseMap();
             CreateMap<Database.Favorites, Model.Requests.FavoritesInsertRequest>().ReverseMap();
         }

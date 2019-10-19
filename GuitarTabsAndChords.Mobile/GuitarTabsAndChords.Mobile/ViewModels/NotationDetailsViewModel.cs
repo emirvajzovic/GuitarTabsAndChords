@@ -1,4 +1,5 @@
 ﻿using GuitarTabsAndChords.Mobile.Models;
+using GuitarTabsAndChords.Mobile.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -10,7 +11,7 @@ using Xamarin.Forms;
 
 namespace GuitarTabsAndChords.Mobile.ViewModels
 {
-    public class NotationDetailsViewModel: BaseViewModel
+    public class NotationDetailsViewModel : BaseViewModel
     {
         private readonly APIService _serviceNotations = new APIService("Notations");
         private readonly APIService _serviceRatings = new APIService("Ratings");
@@ -34,8 +35,11 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
 
         private Command InitCommand;
         public ICommand RateStarCommand { get; set; }
+        public ICommand SuggestCorrectionCommand { get; set; }
 
         private ToolbarItem _favoriteToolbarItem;
+        private readonly INavigation Navigation;
+
         public bool HasFavoritedNotation { get; set; } = false;
 
 
@@ -76,15 +80,16 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
 
         #endregion
 
-        public NotationDetailsViewModel(int NotationId, ToolbarItem favoriteToolbarItem)
+        public NotationDetailsViewModel(int NotationId, ToolbarItem favoriteToolbarItem, INavigation navigation)
         {
             _notationId = NotationId;
             _favoriteToolbarItem = favoriteToolbarItem;
-
+            Navigation = navigation;
             InitCommand = new Command(async () => await Init());
             InitCommand.Execute(null);
 
             RateStarCommand = new Command<string>(async (Rating) => await RateStar(Rating));
+            SuggestCorrectionCommand = new Command(async () => await SuggestCorrection());
 
             Star1 = new Star();
             Star2 = new Star();
@@ -93,6 +98,11 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
             Star5 = new Star();
 
             _favoriteToolbarItem.IconImageSource = ImageSource.FromFile("star_empty.png");
+        }
+
+        private async Task SuggestCorrection()
+        {
+            await Navigation.PushAsync(new NotationSuggestCorrectionPage(_notationId));
         }
 
         private async Task Init()

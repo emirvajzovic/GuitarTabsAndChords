@@ -52,6 +52,9 @@
     <Compile Update="Views\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\NotationSuggestCorrectionPage.xaml.cs">
+      <DependentUpon>NotationSuggestCorrectionPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\NotationDetailsPage.xaml.cs">
       <DependentUpon>NotationDetailsPage.xaml</DependentUpon>
     </Compile>

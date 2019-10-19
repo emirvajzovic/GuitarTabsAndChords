@@ -57,6 +57,7 @@ namespace GuitarTabsAndChords.WebAPI
             services.AddScoped<IGenresService, GenresService>();
             services.AddScoped<IUsersService, UsersService>();
             services.AddScoped<INotationsService, NotationsService>();
+            services.AddScoped<INotationCorrectionsService, NotationCorrectionsService>();
             services.AddScoped<IRatingsService, RatingsService>();
             services.AddScoped<IFavoritesService, FavoritesService>();
             services.AddScoped<ISearchService, SearchService>();

@@ -1,6 +1,6 @@
 ID|PRIO|DONE|TASK NAME
 [2] MED Recommender
-[3] MED 50% Add & Edit NotationCorrections (WinUI & UZP)
+[3] MED 75% Add & Edit NotationCorrections (WinUI)
 [7] LO  Finish WinUI design
 [15]HI  Solidify logo for UZP
 

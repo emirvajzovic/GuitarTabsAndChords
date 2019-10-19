@@ -135,7 +135,7 @@
                             />
         </StackLayout>
 
-        <Button Grid.Row="12" Grid.ColumnSpan="2" Text="Suggest correction"/>
+        <Button Grid.Row="12" Grid.ColumnSpan="2" Text="Suggest correction" Command="{Binding SuggestCorrectionCommand}"/>
       </Grid>
 
 
