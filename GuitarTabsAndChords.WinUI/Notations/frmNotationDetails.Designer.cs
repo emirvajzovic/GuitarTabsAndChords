@@ -51,7 +51,7 @@
             this.btnSave.Location = new System.Drawing.Point(259, 634);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
-            this.btnSave.TabIndex = 4;
+            this.btnSave.TabIndex = 7;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.BtnSave_Click);
@@ -63,7 +63,7 @@
             this.cmbSong.Location = new System.Drawing.Point(110, 23);
             this.cmbSong.Name = "cmbSong";
             this.cmbSong.Size = new System.Drawing.Size(173, 21);
-            this.cmbSong.TabIndex = 2;
+            this.cmbSong.TabIndex = 1;
             // 
             // label3
             // 
@@ -80,7 +80,7 @@
             this.btnAddSong.Location = new System.Drawing.Point(288, 23);
             this.btnAddSong.Name = "btnAddSong";
             this.btnAddSong.Size = new System.Drawing.Size(21, 21);
-            this.btnAddSong.TabIndex = 23;
+            this.btnAddSong.TabIndex = 2;
             this.btnAddSong.Text = "+";
             this.btnAddSong.UseVisualStyleBackColor = true;
             this.btnAddSong.Click += new System.EventHandler(this.BtnAddSong_Click);
@@ -90,7 +90,7 @@
             this.btnReject.Location = new System.Drawing.Point(161, 634);
             this.btnReject.Name = "btnReject";
             this.btnReject.Size = new System.Drawing.Size(75, 23);
-            this.btnReject.TabIndex = 66;
+            this.btnReject.TabIndex = 8;
             this.btnReject.Text = "Reject";
             this.btnReject.UseVisualStyleBackColor = true;
             this.btnReject.Visible = false;
@@ -113,7 +113,7 @@
             this.cmbNotationType.Location = new System.Drawing.Point(110, 52);
             this.cmbNotationType.Name = "cmbNotationType";
             this.cmbNotationType.Size = new System.Drawing.Size(173, 21);
-            this.cmbNotationType.TabIndex = 67;
+            this.cmbNotationType.TabIndex = 3;
             // 
             // label2
             // 
@@ -131,7 +131,7 @@
             this.txtTuning.Margin = new System.Windows.Forms.Padding(2);
             this.txtTuning.Name = "txtTuning";
             this.txtTuning.Size = new System.Drawing.Size(173, 20);
-            this.txtTuning.TabIndex = 71;
+            this.txtTuning.TabIndex = 4;
             this.txtTuning.Validating += new System.ComponentModel.CancelEventHandler(this.txtTuning_Validating);
             // 
             // txtTuningDescription
@@ -140,7 +140,7 @@
             this.txtTuningDescription.Margin = new System.Windows.Forms.Padding(2);
             this.txtTuningDescription.Name = "txtTuningDescription";
             this.txtTuningDescription.Size = new System.Drawing.Size(173, 20);
-            this.txtTuningDescription.TabIndex = 73;
+            this.txtTuningDescription.TabIndex = 5;
             this.txtTuningDescription.Validating += new System.ComponentModel.CancelEventHandler(this.txtTuningDescription_Validating);
             // 
             // label4
@@ -163,7 +163,7 @@
             this.txtContent.Name = "txtContent";
             this.txtContent.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtContent.Size = new System.Drawing.Size(492, 468);
-            this.txtContent.TabIndex = 1;
+            this.txtContent.TabIndex = 6;
             this.txtContent.WordWrap = false;
             this.txtContent.Validating += new System.ComponentModel.CancelEventHandler(this.txtContent_Validating);
             // 
@@ -186,7 +186,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
-            this.ClientSize = new System.Drawing.Size(515, 675);
+            this.ClientSize = new System.Drawing.Size(526, 675);
             this.Controls.Add(this.txtContent);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.txtTuningDescription);

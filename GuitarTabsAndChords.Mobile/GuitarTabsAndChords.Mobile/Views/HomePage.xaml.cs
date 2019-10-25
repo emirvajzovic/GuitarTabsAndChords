@@ -31,7 +31,7 @@ namespace GuitarTabsAndChords.Mobile.Views
         private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
         {
             var element = sender as StackLayout;
-            var context = element.BindingContext as Model.Notations;
+            var context = element.BindingContext as Models.NotationBrowseListItem;
 
             await Navigation.PushAsync(new NotationDetailsPage(context.Id));
         }

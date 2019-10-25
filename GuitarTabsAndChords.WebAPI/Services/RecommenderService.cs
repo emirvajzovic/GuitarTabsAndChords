@@ -125,6 +125,11 @@ namespace GuitarTabsAndChords.WebAPI.Services
 
             var ListOfAllNotations = _context.Notations
                                         .Where(x => x.Status == Model.ReviewStatus.Approved)
+                                        .Include(m => m.Song).ThenInclude(x=>x.Genre)
+                                        .Include(m => m.Song).ThenInclude(x => x.Artist)
+                                        .Include(m => m.Song).ThenInclude(x=>x.Album)
+                                        .Include(m => m.LastEditor)
+                                        .Include(m => m.User)
                                         .OrderBy(media => Guid.NewGuid()).Take(ResultsLimit).ToList();
 
             var list2 = _mapper.Map<List<Model.Notations>>(ListOfAllNotations);
