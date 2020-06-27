@@ -1,4 +1,5 @@
 ﻿using GuitarTabsAndChords.Mobile.Models;
+using GuitarTabsAndChords.Mobile.Services;
 using GuitarTabsAndChords.Mobile.Views;
 using System;
 using System.Collections.Generic;
@@ -207,6 +208,8 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
                 {
                     _favoriteToolbarItem.IconImageSource = ImageSource.FromFile("star_empty.png");
                     HasFavoritedNotation = false;
+
+                    NotationStorageHelper.Remove(_notationId);
                 }
             }
             else
@@ -220,6 +223,8 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
                 {
                     _favoriteToolbarItem.IconImageSource = ImageSource.FromFile("star_filled.png");
                     HasFavoritedNotation = true;
+
+                    NotationStorageHelper.Add(Notation);
                 }
             }
         }

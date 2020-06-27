@@ -9,6 +9,9 @@ using GuitarTabsAndChords.Mobile.Models;
 using GuitarTabsAndChords.Mobile.Views;
 using System.Collections.Generic;
 using System.Windows.Input;
+using Xamarin.Essentials;
+using GuitarTabsAndChords.Mobile.Services;
+using Newtonsoft.Json;
 
 namespace GuitarTabsAndChords.Mobile.ViewModels
 {
@@ -72,6 +75,7 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
                 if (success)
                 {
                     favorite.IsFavorite = false;
+                    NotationStorageHelper.Remove(favorite.NotationId);
                 }
             }
             else
@@ -84,6 +88,8 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
                 if (entity != null)
                 {
                     favorite.IsFavorite = true;
+
+                    NotationStorageHelper.Add(favorite.Notation);
                 }
             }
 

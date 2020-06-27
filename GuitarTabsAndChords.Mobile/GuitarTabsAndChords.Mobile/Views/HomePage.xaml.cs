@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -25,7 +25,17 @@ namespace GuitarTabsAndChords.Mobile.Views
         {
             base.OnAppearing();
 
-            await VM.LoadItems();
+            VM.HasConnectivity = (Connectivity.NetworkAccess >= NetworkAccess.Local);
+            VM.NoConnectivity = !VM.HasConnectivity;
+
+            if(VM.NoConnectivity)
+            {
+                await VM.LoadOfflineItems();
+            }
+            else
+                await VM.LoadItems();
+
+            VM.PopulateMenuList();
         }
 
         private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
@@ -43,6 +53,8 @@ namespace GuitarTabsAndChords.Mobile.Views
                 Models.MenuItem menuItem = e.Item as Models.MenuItem;
                 if(menuItem.Page == null)
                 {
+                    SecureStorage.Remove("username");
+                    SecureStorage.Remove("password");
                     Application.Current.MainPage = new LoginPage();
                 }
                 else

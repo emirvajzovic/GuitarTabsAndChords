@@ -9,6 +9,8 @@ using GuitarTabsAndChords.Mobile.Models;
 using GuitarTabsAndChords.Mobile.Views;
 using System.Collections.Generic;
 using System.IO;
+using Xamarin.Essentials;
+using GuitarTabsAndChords.Mobile.Services;
 
 namespace GuitarTabsAndChords.Mobile.ViewModels
 {
@@ -17,10 +19,13 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
         public ObservableCollection<Model.Notations> RecommendedList { get; set; }
         public ObservableCollection<Model.Notations> PopularTabsList { get; set; }
         public ObservableCollection<Model.Notations> PopularChordsList { get; set; }
-        public List<Models.MenuItem> MenuItems { get; set; } = new List<Models.MenuItem>();
+        public ObservableCollection<Model.Notations> SavedNotationsList { get; set; }
+        public ObservableCollection<Models.MenuItem> MenuItems { get; set; } = new ObservableCollection<Models.MenuItem>();
 
         private readonly APIService _serviceNotations = new APIService("Notations");
         private readonly APIService _serviceRecommender = new APIService("Recommender");
+
+
 
         public HomeViewModel()
         {
@@ -28,18 +33,28 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
             RecommendedList = new ObservableCollection<Model.Notations>();
             PopularTabsList = new ObservableCollection<Model.Notations>();
             PopularChordsList = new ObservableCollection<Model.Notations>();
-            MenuItems.Add(new Models.MenuItem
+            SavedNotationsList = new ObservableCollection<Model.Notations>();
+        }
+
+        public void PopulateMenuList()
+        {
+            MenuItems.Clear();
+            if (HasConnectivity)
             {
-                Image = "star_empty.png",
-                Text = "Top 100",
-                Page = typeof(Top100Page)
-            });
-            MenuItems.Add(new Models.MenuItem
-            {
-                Image = "icon_user.png",
-                Text = "Profile",
-                Page = typeof(ProfilePage)
-            });
+                MenuItems.Add(new Models.MenuItem
+                {
+                    Image = "star_empty.png",
+                    Text = "Top 100",
+                    Page = typeof(Top100Page)
+                });
+                MenuItems.Add(new Models.MenuItem
+                {
+                    Image = "icon_user.png",
+                    Text = "Profile",
+                    Page = typeof(ProfilePage)
+                });
+            }
+
             MenuItems.Add(new Models.MenuItem
             {
                 Image = "icon_logout.png",
@@ -56,7 +71,16 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
 
             await LoadPopularChords();
         }
+        public async Task LoadOfflineItems()
+        {
+            SavedNotationsList.Clear();
 
+            var list = await NotationStorageHelper.GetAll();
+            foreach (var item in list)
+            {
+                SavedNotationsList.Add(item);
+            }
+        }
         private async Task LoadRecommendedList()
         {
             RecommendedList.Clear();

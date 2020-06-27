@@ -49,7 +49,7 @@ namespace GuitarTabsAndChords.Mobile.Views
         }
         private async void EditProfile_Clicked(object sender, EventArgs e)
         {
-            if (VM.User.Id == APIService.CurrentUser.Id)
+            if (VM.User.Id == (await APIService.GetCurrentUser()).Id)
                 await Navigation.PushAsync(new EditProfilePage());
             else
                 await Application.Current.MainPage.DisplayAlert("Error", "You are not authorized to edit this profile.", "OK");

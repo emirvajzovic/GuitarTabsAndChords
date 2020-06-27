@@ -7,6 +7,7 @@ using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace GuitarTabsAndChords.Mobile.ViewModels
@@ -15,7 +16,7 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
     {
         private readonly APIService _serviceUsers = new APIService("Users");
 
-        private readonly int _userId;
+        private int _userId;
 
         private Model.Requests.UsersUpdateRequest _user;
 
@@ -30,19 +31,19 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
 
         public EditProfilePageViewModel()
         {
-            _userId = APIService.CurrentUser.Id;
             SaveProfileCommand = new Command(async () => await SaveProfile());
         }
 
         public async Task Init()
         {
+            _userId = (await APIService.GetCurrentUser()).Id;
             await LoadUser();
 
         }
 
         private async Task LoadUser()
         {
-            if(User == null)
+            if (User == null)
             {
                 User = await _serviceUsers.Get<Model.Requests.UsersUpdateRequest>(null, "MyProfile");
 
@@ -52,12 +53,12 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
                 }
                 Title = "Edit Profile - " + User.Username;
             }
-            
+
         }
 
         private async Task SaveProfile()
         {
-            var entity = await _serviceUsers.Update<Model.Users>(APIService.CurrentUser.Id, User);
+            var entity = await _serviceUsers.Update<Model.Users>((await APIService.GetCurrentUser()).Id, User);
             if (entity != null)
             {
                 APIService.Username = User.Username;
@@ -65,6 +66,10 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
                 {
                     APIService.Password = User.Password;
                 }
+
+                await SecureStorage.SetAsync("username", APIService.Username);
+                await SecureStorage.SetAsync("password", APIService.Password);
+
                 await Application.Current.MainPage.DisplayAlert("Success", "The profile was successfully saved.", "OK");
             }
         }

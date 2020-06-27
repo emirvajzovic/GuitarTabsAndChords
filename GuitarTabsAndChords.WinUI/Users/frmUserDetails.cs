@@ -36,6 +36,10 @@ namespace GuitarTabsAndChords.WinUI
                     txtEmail.Text = entity.Email;
                     txtFirstName.Text = entity.Name;
                     txtLastName.Text = entity.LastName;
+                    if(entity.DateOfBirth.Date.Year < 1900)
+                    {
+                        entity.DateOfBirth = new DateTime(1900, 1, 1);
+                    }
                     dtpDateOfBirth.Value = entity.DateOfBirth.Date;
                     if(entity.ProfilePicture.Length > 0)
                     {

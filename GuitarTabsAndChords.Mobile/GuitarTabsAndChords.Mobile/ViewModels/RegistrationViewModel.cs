@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace GuitarTabsAndChords.Mobile.ViewModels
@@ -38,6 +39,12 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
 
         async Task Register()
         {
+            if (Connectivity.NetworkAccess < NetworkAccess.Local)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", "You need to be connected to the Internet.", "OK");
+                return;
+            }
+
             IsButtonEnabled = false;
 
             try
@@ -49,6 +56,9 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
                 APIService.Username = User.Username;
                 APIService.Password = User.Password;
                 APIService.CurrentUser = await _serviceUsers.Get<Model.Users>(null, "MyProfile");
+
+                await SecureStorage.SetAsync("username", APIService.Username);
+                await SecureStorage.SetAsync("password", APIService.Password);
 
 #pragma warning disable CS0612 // Type or member is obsolete
                 Application.Current.MainPage = new MainPage();

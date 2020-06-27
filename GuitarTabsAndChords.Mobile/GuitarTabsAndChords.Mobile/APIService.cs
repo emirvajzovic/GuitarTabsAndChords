@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Flurl.Http;
 using GuitarTabsAndChords.Model;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace GuitarTabsAndChords.Mobile
@@ -25,8 +26,8 @@ namespace GuitarTabsAndChords.Mobile
 
         public string getApiURL()
         {
-            int port = 16;
-            //int port = 59058;
+            //int port = 16;
+            int port = 59058;
 
             string local = $"http://localhost:{port}/api";
             string lan_address = $"http://192.168.1.16:{port}/api";
@@ -69,6 +70,27 @@ namespace GuitarTabsAndChords.Mobile
                 }
                 throw;
             }
+        }
+
+        public static async Task<Users> GetCurrentUser()
+        {
+            if (CurrentUser != null)
+                return CurrentUser;
+
+            if(!string.IsNullOrEmpty(APIService.Username) && !string.IsNullOrEmpty(APIService.Password) && Connectivity.NetworkAccess >= NetworkAccess.Local)
+            {
+                APIService _service = new APIService("Users");
+                CurrentUser = await _service.Get<Model.Users>(null, "MyProfile");
+
+                if (CurrentUser != null)
+                {
+                    return CurrentUser;
+                }
+            }
+
+            await Application.Current.MainPage.DisplayAlert("Failure", "Failed to retrieve user profile.", "OK");
+
+            return default;
         }
 
         public async Task<T> GetById<T>(object id, string action = null)

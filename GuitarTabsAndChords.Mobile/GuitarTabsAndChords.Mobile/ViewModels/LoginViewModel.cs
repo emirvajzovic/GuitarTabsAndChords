@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace GuitarTabsAndChords.Mobile.ViewModels
@@ -35,6 +36,12 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
 
         async Task Login()
         {
+            if(Connectivity.NetworkAccess < NetworkAccess.Local)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", "You need to be connected to the Internet.", "OK");
+                return;
+            }
+
             IsBusy = true;
             APIService.Username = Username;
             APIService.Password = Password;
@@ -43,11 +50,15 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
             {
                 APIService.CurrentUser = await _service.Get<Model.Users>(null, "MyProfile");
 
-                if(APIService.CurrentUser.Role.Name != "User")
+                if((await APIService.GetCurrentUser()).Role.Name != "User")
                 {
                     await Application.Current.MainPage.DisplayAlert("Error", "Error logging in.", "OK");
                     return;
                 }
+
+
+                await SecureStorage.SetAsync("username", Username);
+                await SecureStorage.SetAsync("password", Password);
 
 #pragma warning disable CS0612 // Type or member is obsolete
                 Application.Current.MainPage = new MainPage();

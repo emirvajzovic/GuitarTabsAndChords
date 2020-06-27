@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -24,6 +24,10 @@ namespace GuitarTabsAndChords.Mobile.Views
         protected async override void OnAppearing()
         {
             base.OnAppearing();
+
+            VM.HasConnectivity = (Connectivity.NetworkAccess >= NetworkAccess.Local);
+            VM.NoConnectivity = !VM.HasConnectivity;
+
             await VM.LoadRecommended();
         }
 

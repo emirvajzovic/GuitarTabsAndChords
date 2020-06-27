@@ -17,7 +17,7 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
         private readonly APIService _serviceUsers = new APIService("Users");
         private readonly APIService _serviceNotations = new APIService("Notations");
 
-        private readonly int _userId;
+        private int _userId;
         private readonly ToolbarItem _editProfileToolbarItem;
         private Model.Users _user;
         public Model.Users User
@@ -25,6 +25,7 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
             get { return _user; }
             set { SetProperty(ref _user, value); }
         }
+        public int UserId { get; set; }
         private bool _nothingToSee = false;
         public bool NothingToSee
         {
@@ -36,12 +37,13 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
 
         public ProfilePageViewModel(int UserId, ToolbarItem editProfileToolbarItem)
         {
-            _userId = UserId != 0 ? UserId : APIService.CurrentUser.Id;
+            this.UserId = UserId;
             _editProfileToolbarItem = editProfileToolbarItem;
         }
 
         public async Task Init()
         {
+            _userId = UserId != 0 ? UserId : (await APIService.GetCurrentUser()).Id;
             await LoadUser();
             await LoadNotations();
         }
@@ -55,7 +57,7 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
             }
 
             Title = "User Profile - " + User.Username;
-            if(User.Id == APIService.CurrentUser.Id)
+            if (User.Id == (await APIService.GetCurrentUser()).Id)
             {
                 _editProfileToolbarItem.IconImageSource = ImageSource.FromFile("icon_edit.png");
             }
