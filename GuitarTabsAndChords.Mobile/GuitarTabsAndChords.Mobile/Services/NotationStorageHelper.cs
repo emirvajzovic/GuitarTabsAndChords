@@ -40,7 +40,7 @@ namespace GuitarTabsAndChords.Mobile.Services
             }
         }
 
-        public async static void Add(Notations notation)
+        public async static Task Add(Notations notation)
         {
             string stored_notations = await SecureStorage.GetAsync("Notations");
             if (string.IsNullOrWhiteSpace(stored_notations))
@@ -105,7 +105,7 @@ namespace GuitarTabsAndChords.Mobile.Services
             return temp;
         }
 
-        public static Model.Notations Get(int notationId)
+        public static Notations Get(int notationId)
         {
             string fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Notation_" + notationId + ".dat");
             if (File.Exists(fileName))

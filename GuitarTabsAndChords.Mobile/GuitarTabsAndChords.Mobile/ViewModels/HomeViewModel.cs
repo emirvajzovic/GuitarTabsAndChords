@@ -70,17 +70,10 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
             await LoadPopularTabs();
 
             await LoadPopularChords();
-        }
-        public async Task LoadOfflineItems()
-        {
-            SavedNotationsList.Clear();
 
-            var list = await NotationStorageHelper.GetAll();
-            foreach (var item in list)
-            {
-                SavedNotationsList.Add(item);
-            }
+            await LoadSavedItems();
         }
+
         private async Task LoadRecommendedList()
         {
             RecommendedList.Clear();
@@ -129,6 +122,20 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
                     item.Song.Album.AlbumCover = File.ReadAllBytes("logo.png");
                 }
                 PopularTabsList.Add(item);
+            }
+        }
+
+        private async Task LoadSavedItems()
+        {
+            SavedNotationsList.Clear();
+            var notations = await NotationStorageHelper.GetAll();
+            foreach (var item in notations)
+            {
+                if (item.Song.Album.AlbumCover.Length == 0)
+                {
+                    item.Song.Album.AlbumCover = File.ReadAllBytes("logo.png");
+                }
+                SavedNotationsList.Add(item);
             }
         }
     }

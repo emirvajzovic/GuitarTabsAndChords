@@ -35,6 +35,8 @@ namespace GuitarTabsAndChords.WebAPI.Services
 
             query = query.Include(x => x.Notation.User);
             query = query.Include(x => x.Notation.Song.Artist);
+            query = query.Include(x => x.Notation.Song.Album);
+            query = query.Include(x => x.Notation.Song.Genre);
 
             var list = query.ToList();
 

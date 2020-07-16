@@ -1,39 +1,35 @@
-﻿using System;
+﻿using GuitarTabsAndChords.Mobile.Models;
+using GuitarTabsAndChords.Mobile.Services;
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Text;
 using System.Threading.Tasks;
-
-using Xamarin.Forms;
-
-using GuitarTabsAndChords.Mobile.Models;
-using GuitarTabsAndChords.Mobile.Views;
-using System.Collections.Generic;
 using System.Windows.Input;
-using Xamarin.Essentials;
-using GuitarTabsAndChords.Mobile.Services;
-using Newtonsoft.Json;
+using Xamarin.Forms;
 
 namespace GuitarTabsAndChords.Mobile.ViewModels
 {
-    public class FavoritesViewModel : BaseViewModel
+    class SavedPageViewModel : BaseViewModel
     {
-        public ObservableCollection<Models.NotationFavoritesListItem> FavoritesList { get; set; }
+        public ObservableCollection<Model.Notations> SavedList { get; set; }
 
         private readonly APIService _serviceFavorites = new APIService("Favorites");
 
         public ICommand ToggleFavoriteCommand { get; set; }
-        private bool _nothingToSee = false;
 
+        private bool _nothingToSee = false;
         public bool NothingToSee
         {
             get { return _nothingToSee; }
             set { SetProperty(ref _nothingToSee, value); }
         }
 
-        public FavoritesViewModel()
+        public SavedPageViewModel()
         {
-            Title = "My Favorites";
-            FavoritesList = new ObservableCollection<Models.NotationFavoritesListItem>();
+            Title = "Saved Notations";
+            SavedList = new ObservableCollection<Model.Notations>();
 
             ToggleFavoriteCommand = new Command<Models.NotationFavoritesListItem>(async (favorite) => await ToggleFavorite(favorite));
         }
@@ -47,22 +43,15 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
 
             try
             {
-                FavoritesList.Clear();
+                SavedList.Clear();
 
-                List<NotationFavoritesListItem> list = new List<NotationFavoritesListItem>();
+                var notationList = await NotationStorageHelper.GetAll();
 
-                if (!HasConnectivity)
+                NothingToSee = notationList.Count == 0;
+
+                foreach (var item in notationList)
                 {
-                    await Application.Current.MainPage.DisplayAlert("No internet connection", "You must be connected to the internet to see this.", "OK");
-                }
-
-                list = await _serviceFavorites.Get<List<NotationFavoritesListItem>>(null);
-
-                NothingToSee = list.Count == 0;
-
-                foreach (var item in list)
-                {
-                    FavoritesList.Add(item);
+                    SavedList.Add(item);
                 }
             }
             catch (Exception ex)
@@ -92,21 +81,6 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
                     NotationId = favorite.NotationId
                 };
             }
-
-            List<Models.NotationFavoritesListItem> TempList = new List<NotationFavoritesListItem>();
-            foreach (var item in FavoritesList)
-            {
-                TempList.Add(item);
-            }
-
-            FavoritesList.Clear();
-
-            foreach (var item in TempList)
-            {
-                FavoritesList.Add(item);
-            }
-
-
         }
     }
 }

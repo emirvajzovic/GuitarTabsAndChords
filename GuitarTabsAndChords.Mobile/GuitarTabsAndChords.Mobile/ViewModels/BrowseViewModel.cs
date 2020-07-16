@@ -129,6 +129,13 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
 
             IsBusy = true;
 
+            if (!HasConnectivity)
+            {
+             await Application.Current.MainPage.DisplayAlert("No internet connection", "You must be connected to the internet to see this.", "OK");
+
+                return;
+            }
+
             try
             {
                 ThisWeekTop5List.Clear();

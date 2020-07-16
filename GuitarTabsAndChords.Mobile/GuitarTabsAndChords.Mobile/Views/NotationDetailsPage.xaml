@@ -8,6 +8,7 @@
              Title="{Binding Title}">
 
   <ContentPage.ToolbarItems>
+    <ToolbarItem Text="Download" x:Name="DownloadToolbarItem" Clicked="DownloadToolbarItem_Clicked"/>
     <ToolbarItem Text="Favorite" x:Name="FavoriteToolbarItem" Clicked="FavoriteToolbarItem_Clicked"/>
   </ContentPage.ToolbarItems>
 
@@ -35,13 +36,13 @@
           <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Notation.Song.Name}" TextColor="#2296f3" FontSize="18" FontAttributes="Bold">
+                <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Notation.Song.Name}" TextColor="{Binding LinkColor}" FontSize="18" FontAttributes="Bold">
           <Label.GestureRecognizers>
             <TapGestureRecognizer x:Name="SongLabel" Tapped="SongLabel_Tapped"/>
           </Label.GestureRecognizers>
         </Label>
         <Label Grid.Row="1" Grid.Column="0" Text="Artist:" FontAttributes="Bold" />
-        <Label Grid.Row="1" Grid.Column="1" Text="{Binding Notation.Song.Artist.Name}" TextColor="#2296f3" FontAttributes="Bold">
+        <Label Grid.Row="1" Grid.Column="1" Text="{Binding Notation.Song.Artist.Name}" TextColor="{Binding LinkColor}" FontAttributes="Bold">
           <Label.GestureRecognizers>
             <TapGestureRecognizer x:Name="ArtistLabel" Tapped="ArtistLabel_Tapped"/>
           </Label.GestureRecognizers>
@@ -54,7 +55,7 @@
         <Label Grid.Row="3" Grid.Column="1" Text="{Binding Notation.Favorites}" />
 
         <Label Grid.Row="4" Grid.Column="0" Text="Author: " FontAttributes="Bold" />
-        <Label Grid.Row="4" Grid.Column="1" Text="{Binding Notation.User.Username}" TextColor="#2296f3" FontAttributes="Bold">
+        <Label Grid.Row="4" Grid.Column="1" Text="{Binding Notation.User.Username}" TextColor="{Binding LinkColor}" FontAttributes="Bold">
           <Label.GestureRecognizers>
             <TapGestureRecognizer x:Name="UserLabel" Tapped="UserLabel_Tapped"/>
           </Label.GestureRecognizers>
@@ -63,7 +64,7 @@
         <Label Grid.Row="5" Grid.Column="0" Text="Last edit by: " FontAttributes="Bold" />
         <StackLayout Grid.Row="5" Grid.Column="1" Orientation="Horizontal">
 
-          <Label Text="{Binding Notation.LastEditor.Username}" TextColor="#2296f3" FontAttributes="Bold">
+          <Label Text="{Binding Notation.LastEditor.Username}" TextColor="{Binding LinkColor}" FontAttributes="Bold">
             <Label.GestureRecognizers>
               <TapGestureRecognizer x:Name="LastEditLabel" Tapped="LastEditLabel_Tapped"/>
             </Label.GestureRecognizers>
@@ -95,9 +96,9 @@
         </Label>
 
 
-        <Label Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="2" Text="Please rate this notation"/>
+                <Label Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="2" Text="Please rate this notation" IsVisible="{Binding HasConnectivity}"/>
 
-        <StackLayout Grid.Row="11" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal">
+                <StackLayout Grid.Row="11" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" IsVisible="{Binding HasConnectivity}">
           <ImageButton
         Command="{Binding RateStarCommand}"
         BackgroundColor="Transparent"
@@ -135,7 +136,7 @@
                             />
         </StackLayout>
 
-        <Button Grid.Row="12" Grid.ColumnSpan="2" Text="Suggest correction" Command="{Binding SuggestCorrectionCommand}"/>
+        <Button IsVisible="{Binding HasConnectivity}" Grid.Row="12" Grid.ColumnSpan="2" Text="Suggest correction" Command="{Binding SuggestCorrectionCommand}"/>
       </Grid>
 
 

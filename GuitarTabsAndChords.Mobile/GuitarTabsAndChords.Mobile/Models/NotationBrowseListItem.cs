@@ -7,7 +7,7 @@ namespace GuitarTabsAndChords.Mobile.Models
 {
     public class NotationBrowseListItem
     {
-        NotationBrowseListItem()
+        public NotationBrowseListItem()
         {
             Star1 = new Star();
             Star2 = new Star();

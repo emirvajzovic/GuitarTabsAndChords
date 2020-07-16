@@ -1,4 +1,6 @@
-﻿using GuitarTabsAndChords.Mobile.Views;
+﻿using GuitarTabsAndChords.Mobile.Models;
+using GuitarTabsAndChords.Mobile.Services;
+using GuitarTabsAndChords.Mobile.Views;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,6 +14,7 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
     public class LoginViewModel : BaseViewModel
     {
         private readonly APIService _service = new APIService("Users");
+        private readonly APIService _serviceFavorites = new APIService("Favorites");
 
         public LoginViewModel()
         {
@@ -36,7 +39,7 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
 
         async Task Login()
         {
-            if(Connectivity.NetworkAccess < NetworkAccess.Local)
+            if (Connectivity.NetworkAccess < NetworkAccess.Local)
             {
                 await Application.Current.MainPage.DisplayAlert("Error", "You need to be connected to the Internet.", "OK");
                 return;
@@ -50,7 +53,7 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
             {
                 APIService.CurrentUser = await _service.Get<Model.Users>(null, "MyProfile");
 
-                if((await APIService.GetCurrentUser()).Role.Name != "User")
+                if ((await APIService.GetCurrentUser()).Role.Name != "User")
                 {
                     await Application.Current.MainPage.DisplayAlert("Error", "Error logging in.", "OK");
                     return;

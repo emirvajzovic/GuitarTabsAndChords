@@ -27,6 +27,13 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
         {
             NotationList.Clear();
 
+            if (!HasConnectivity)
+            {
+                await Application.Current.MainPage.DisplayAlert("No internet connection", "You must be connected to the internet to see this.", "OK");
+
+                return;
+            }
+
             var list = await _serviceRecommender.Get<List<Models.NotationBrowseListItem>>(null, "GetRecommendedNotations");
 
             foreach (var item in list)

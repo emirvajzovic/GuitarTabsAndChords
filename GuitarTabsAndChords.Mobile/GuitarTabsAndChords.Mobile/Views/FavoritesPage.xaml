@@ -16,14 +16,15 @@
 
     <ContentPage.Content>
         <StackLayout Padding="5">
-            <StackLayout IsVisible="{Binding HasConnectivity}">
-                <Label IsVisible="{Binding NothingToSee}" Text="Nothing to see here, move along."/>
+            <StackLayout>
+                
+                <Label Text="Content not available, please connect to the Internet." IsVisible="{Binding NoConnectivity}" FontAttributes="Bold" FontSize="20" />
+
                 <ListView 
                 ItemsSource="{Binding FavoritesList}"
                 VerticalOptions="FillAndExpand"
                 ItemTapped="ListView_ItemTapped"
-                ItemSelected="ListView_ItemSelected"
-                >
+                ItemSelected="ListView_ItemSelected">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
@@ -62,9 +63,6 @@
                     </ListView.ItemTemplate>
                 </ListView>
             </StackLayout>
-
-            <Label Text="Content not available, please connect to the Internet." IsVisible="{Binding NoConnectivity}" FontAttributes="Bold" FontSize="20" />
-
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

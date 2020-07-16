@@ -1,4 +1,5 @@
-﻿using GuitarTabsAndChords.Mobile.ViewModels;
+﻿using GuitarTabsAndChords.Mobile.Services;
+using GuitarTabsAndChords.Mobile.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,12 +29,7 @@ namespace GuitarTabsAndChords.Mobile.Views
             VM.HasConnectivity = (Connectivity.NetworkAccess >= NetworkAccess.Local);
             VM.NoConnectivity = !VM.HasConnectivity;
 
-            if(VM.NoConnectivity)
-            {
-                await VM.LoadOfflineItems();
-            }
-            else
-                await VM.LoadItems();
+            await VM.LoadItems();
 
             VM.PopulateMenuList();
         }
@@ -55,6 +51,7 @@ namespace GuitarTabsAndChords.Mobile.Views
                 {
                     SecureStorage.Remove("username");
                     SecureStorage.Remove("password");
+                    NotationStorageHelper.RemoveAll();
                     Application.Current.MainPage = new LoginPage();
                 }
                 else

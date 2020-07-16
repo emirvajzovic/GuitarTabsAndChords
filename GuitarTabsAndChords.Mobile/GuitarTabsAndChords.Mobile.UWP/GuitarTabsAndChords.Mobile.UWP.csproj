@@ -105,10 +105,13 @@
   <ItemGroup>
     <Content Include="arrow_right.png" />
     <Content Include="icon_browse.png" />
+    <Content Include="icon_download.png" />
+    <Content Include="icon_downloaded.png" />
     <Content Include="icon_edit.png" />
     <Content Include="icon_home.png" />
     <Content Include="icon_logout.png" />
     <Content Include="icon_recommended.png" />
+    <Content Include="icon_saved.png" />
     <Content Include="icon_star.png" />
     <Content Include="icon_user.png" />
     <Content Include="logo.png" />

@@ -33,12 +33,20 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
             set { SetProperty(ref _lastEditInfo, value); }
         }
 
+        private Color _linkColor;
+
+        public Color LinkColor
+        {
+            get { this.LinkColor = HasConnectivity ? Color.FromHex("#2296f3") : Color.Black ; return _linkColor; }
+            set { SetProperty(ref _linkColor, value); }
+        }
 
         private Command InitCommand;
         public ICommand RateStarCommand { get; set; }
         public ICommand SuggestCorrectionCommand { get; set; }
 
         private ToolbarItem _favoriteToolbarItem;
+        private ToolbarItem _downloadToolbarItem;
         private readonly INavigation Navigation;
 
         public bool HasFavoritedNotation { get; set; } = false;
@@ -81,10 +89,11 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
 
         #endregion
 
-        public NotationDetailsViewModel(int NotationId, ToolbarItem favoriteToolbarItem, INavigation navigation)
+        public NotationDetailsViewModel(int NotationId, ToolbarItem favoriteToolbarItem, ToolbarItem downloadToolbarItem, INavigation navigation)
         {
             _notationId = NotationId;
             _favoriteToolbarItem = favoriteToolbarItem;
+            _downloadToolbarItem = downloadToolbarItem;
             Navigation = navigation;
             InitCommand = new Command(async () => await Init());
             InitCommand.Execute(null);
@@ -99,6 +108,7 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
             Star5 = new Star();
 
             _favoriteToolbarItem.IconImageSource = ImageSource.FromFile("star_empty.png");
+            _downloadToolbarItem.IconImageSource = ImageSource.FromFile("icon_download.png");
         }
 
         private async Task SuggestCorrection()
@@ -114,13 +124,31 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
 
             await LoadFavoriteButton();
 
+            LoadDownloadButton();
+
             UpdateRatingStars();
         }
 
 
         private async Task LoadNotation()
         {
-            Notation = await _serviceNotations.GetById<Model.Notations>(_notationId);
+            if(HasConnectivity)
+            {
+                Notation = await _serviceNotations.GetById<Model.Notations>(_notationId);
+            }
+            else
+            {
+                Notation = NotationStorageHelper.Get(_notationId);
+                if(Notation == null)
+                {
+                    await Application.Current.MainPage.DisplayAlert("Error", "Could not load notation.", "OK");
+#pragma warning disable CS0612 // Type or member is obsolete
+                    Application.Current.MainPage = new MainPage();
+#pragma warning restore CS0612 // Type or member is obsolete
+                    return;
+                }
+            }
+
             LastEditInfo = "on " + Notation.LastEditted.ToShortDateString();
             Title = Notation.Type.ToString() + "s";
         }
@@ -128,6 +156,9 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
         #region star rating
         private async Task LoadExistingRating()
         {
+            if (!HasConnectivity)
+                return;
+
             var request = new Model.Requests.RatingsSearchRequest
             {
                 NotationId = _notationId
@@ -190,6 +221,13 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
         #region favorite
         private async Task LoadFavoriteButton()
         {
+            if(!HasConnectivity)
+            {
+                _favoriteToolbarItem.IconImageSource = ImageSource.FromFile("star_filled.png");
+                HasFavoritedNotation = true;
+                return;
+            }
+
             var entity = await _serviceFavorites.GetById<Model.Favorites>(_notationId);
 
             if (entity != null)
@@ -197,6 +235,38 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
                 _favoriteToolbarItem.IconImageSource = ImageSource.FromFile("star_filled.png");
                 HasFavoritedNotation = true;
             }
+        }
+
+        private void LoadDownloadButton()
+        {
+            var notation = NotationStorageHelper.Get(_notationId);
+
+            if (notation != null)
+            {
+                _downloadToolbarItem.IconImageSource = ImageSource.FromFile("icon_downloaded.png");
+            }
+            else
+            {
+                _downloadToolbarItem.IconImageSource = ImageSource.FromFile("icon_download.png");
+            }
+        }
+
+        public async void DownloadNotation()
+        {
+            var notation = NotationStorageHelper.Get(_notationId);
+
+            if (notation != null)
+            {
+                NotationStorageHelper.Remove(_notationId);
+                _downloadToolbarItem.IconImageSource = ImageSource.FromFile("icon_download.png");
+                await Application.Current.MainPage.DisplayAlert("Success", "Notation has been deleted from the device.", "OK");
+            }
+            else
+            {
+                await NotationStorageHelper.Add(_notation);
+                _downloadToolbarItem.IconImageSource = ImageSource.FromFile("icon_downloaded.png");
+                await Application.Current.MainPage.DisplayAlert("Success", "Notation successfully saved.", "OK");
+            }            
         }
 
         public async void ToggleFavoriteNotation()
@@ -223,8 +293,6 @@ namespace GuitarTabsAndChords.Mobile.ViewModels
                 {
                     _favoriteToolbarItem.IconImageSource = ImageSource.FromFile("star_filled.png");
                     HasFavoritedNotation = true;
-
-                    NotationStorageHelper.Add(Notation);
                 }
             }
         }

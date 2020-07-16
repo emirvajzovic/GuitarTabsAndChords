@@ -10,7 +10,7 @@
 
     <TabbedPage.Children >
         <NavigationPage Title="Home">
-          
+
             <NavigationPage.Icon>
                 <OnPlatform x:TypeArguments="FileImageSource">
                     <On Platform="iOS" Value="icon_home.png"/>
@@ -22,7 +22,7 @@
                 <views:HomePage />
             </x:Arguments>
         </NavigationPage>
-        
+
         <NavigationPage Title="Favorites">
             <NavigationPage.Icon>
                 <OnPlatform x:TypeArguments="FileImageSource">
@@ -35,7 +35,7 @@
                 <views:FavoritesPage />
             </x:Arguments>
         </NavigationPage>
-        
+
         <NavigationPage Title="Browse">
             <NavigationPage.Icon>
                 <OnPlatform x:TypeArguments="FileImageSource">
@@ -48,7 +48,7 @@
                 <views:BrowsePage />
             </x:Arguments>
         </NavigationPage>
-        
+
         <NavigationPage Title="Recommended">
             <NavigationPage.Icon>
                 <OnPlatform x:TypeArguments="FileImageSource">
@@ -61,6 +61,18 @@
                 <views:RecommendedPage />
             </x:Arguments>
         </NavigationPage>
+
+        <NavigationPage Title="Saved">
+            <NavigationPage.Icon>
+                <OnPlatform x:TypeArguments="FileImageSource">
+                    <On Platform="iOS" Value="icon_download.png"/>
+                    <On Platform="Android" Value="icon_download.png"/>
+                    <On Platform="UWP" Value="icon_saved.png"/>
+                </OnPlatform>
+            </NavigationPage.Icon>
+            <x:Arguments>
+                <views:SavedPage />
+            </x:Arguments>
+        </NavigationPage>
     </TabbedPage.Children>
-    
 </TabbedPage>
